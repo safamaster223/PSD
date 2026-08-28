@@ -1,0 +1,10 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+  - file: 01_business_understanding
+    title: Business Understanding
+  - file: 02_data_understanding
+    title: Analisis dan Interpretasi
