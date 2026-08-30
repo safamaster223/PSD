@@ -39,7 +39,7 @@ Semua file tersimpan di folder `data/downloads/`.
 
 - **sidoarjo.geojson** — batas administrasi Kabupaten Sidoarjo dalam format GeoJSON; dipakai sebagai area of interest saat mengambil data satelit.
 
-<a href="data/downloads/sidoarjo.geojson" download
+<a href="https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo.geojson" download
    style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> Unduh sidoarjo.geojson</a>
 
 ### Hasil Pengukuran Satelit per Polutan
@@ -53,22 +53,22 @@ Masing-masing berisi deret waktu harian: satu kolom tanggal dan satu kolom konse
 - **sidoarjo_O3.csv** — Ozon permukaan — polutan sekunder yang terbentuk oleh sinar matahari.
 - **sidoarjo_CH4.csv** — Metana — gas rumah kaca dari aktivitas pertanian dan industri.
 
-<a href="data/downloads/sidoarjo_pollutants_data/sidoarjo_NO2.csv" download
+<a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_NO2.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_NO2.csv)" download
    style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_NO2.csv</a>
 
-<a href="data/downloads/sidoarjo_pollutants_data/sidoarjo_CO.csv" download
+<a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_CO.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_CO.csv)" download
    style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_CO.csv</a>
 
-<a href="data/downloads/sidoarjo_pollutants_data/sidoarjo_HCHO.csv" download
+<a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_HCHO.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_HCHO.csv)" download
    style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_HCHO.csv</a>
 
-<a href="data/downloads/sidoarjo_pollutants_data/sidoarjo_SO2.csv" download
+<a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_SO2.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_SO2.csv)" download
    style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_SO2.csv</a>
 
-<a href="data/downloads/sidoarjo_pollutants_data/sidoarjo_O3.csv" download
+<a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_O3.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_O3.csv)" download
    style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_O3.csv</a>
 
-<a href="data/downloads/sidoarjo_pollutants_data/sidoarjo_CH4.csv" download
+<a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_CH4.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_CH4.csv)" download
    style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_CH4.csv</a>
 
 ### Data Gabungan & Versi Tren
@@ -76,8 +76,8 @@ Masing-masing berisi deret waktu harian: satu kolom tanggal dan satu kolom konse
 - **sidoarjo_pollutants.csv** — keenam polutan digabung dalam satu tabel dengan indeks tanggal yang sama (data harian mentah).
 - **sidoarjo_pollutants_rolling30.csv** — versi rolling mean 30 hari dari tabel gabungan; kurvanya lebih halus sehingga tren jangka panjang lebih mudah dibaca.
 
-<a href="data/downloads/sidoarjo_pollutants_data/sidoarjo_pollutants.csv" download
+<a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_pollutants.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_pollutants.csv)" download
    style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_pollutants.csv</a>
 
-<a href="data/downloads/sidoarjo_pollutants_data/sidoarjo_pollutants_rolling30.csv" download
+<a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_pollutants_rolling30.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_pollutants_rolling30.csv)" download
    style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_pollutants_rolling30.csv</a>
