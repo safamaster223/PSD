@@ -51,7 +51,7 @@ Sesuai dengan kurikulum mata kuliah, proyek ini mengikuti standar industri **CRI
 *   **Library Analisis:** Pandas, NumPy, GeoPandas
 *   **Visualisasi:** Matplotlib, Seaborn, Folium
 *   **Dokumentasi:** Jupyter Book
-*   **Version Control:** GitHub ([https://safamaster223.github.io/PSD/intro.html](https://safamaster223.github.io/PSD/intro.html))
+*   **Version Control:** GitHub ([github.com/Rahardian-Ananta/PSD](https://github.com/Rahardian-Ananta/PSD))
 
 ---
 

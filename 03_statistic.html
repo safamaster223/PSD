@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Business Understanding &#8212; My sample book</title>
+    <title>Analisis Statistik Deskriptif &#8212; My sample book</title>
   
   
   
@@ -60,12 +60,13 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '01_business_understanding';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_statistic';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Data Understanding" href="02_data_understanding.html" />
-    <link rel="prev" title="Introduction" href="intro.html" />
+    <link rel="prev" title="Data Understanding" href="02_data_understanding.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -220,9 +221,9 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Business Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_business_understanding.html">Business Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_data_understanding.html">Analisis dan Interpretasi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_statistic.html">Analisis Statistik Deskriptif</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis Statistik Deskriptif</a></li>
 </ul>
 
     </div>
@@ -299,7 +300,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F01_business_understanding.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F03_statistic.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -329,7 +330,7 @@
       
       
       
-      <li><a href="_sources/01_business_understanding.md" target="_blank"
+      <li><a href="_sources/03_statistic.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -405,7 +406,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Business Understanding</h1>
+    <h1>Analisis Statistik Deskriptif</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -416,13 +417,14 @@
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-bisnis">Tujuan Bisnis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polutan-yang-dianalisis">Polutan yang Dianalisis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-kerja">Alur Kerja</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unduh-data-analisis">Unduh Data Analisis</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batas-wilayah">Batas Wilayah</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-pengukuran-satelit-per-polutan">Hasil Pengukuran Satelit per Polutan</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-gabungan-versi-tren">Data Gabungan &amp; Versi Tren</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitur-statistik-dan-cara-menghitungnya">Fitur Statistik dan Cara Menghitungnya</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-min-maximum-max">1. Minimum (Min) &amp; Maximum (Max)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-rata-rata">2. Mean (Rata-rata)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#median-nilai-tengah">3. Median (Nilai Tengah)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-varians">4. Variance (Varians)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-deviation-standar-deviasi">5. Standard Deviation (Standar Deviasi)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skewness-kemencengan">6. Skewness (Kemencengan)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kurtosis-keruncingan">7. Kurtosis (Keruncingan)</a></li>
 </ul>
 </li>
 </ul>
@@ -436,85 +438,101 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="business-understanding">
-<h1>Business Understanding<a class="headerlink" href="#business-understanding" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-statistik-deskriptif">
+<h1>Analisis Statistik Deskriptif<a class="headerlink" href="#analisis-statistik-deskriptif" title="Link to this heading">#</a></h1>
 <section id="latar-belakang">
 <h2>Latar Belakang<a class="headerlink" href="#latar-belakang" title="Link to this heading">#</a></h2>
-<p>Kualitas udara adalah salah satu penentu kesehatan masyarakat. Kabupaten Sidoarjo, Jawa Timur, merupakan wilayah padat aktivitas industri dan lalu lintas yang memerlukan pemantauan kualitas udara secara berkelanjutan. Namun, stasiun pemantauan di darat memiliki keterbatasan jumlah dan cakupan spasial.</p>
-<p><strong>Bagaimana cara memantau dan menganalisis konsentrasi polutan udara di seluruh wilayah Sidoarjo secara komprehensif?</strong></p>
+<p>Setelah melakukan pengumpulan data (<em>Data Understanding</em>) dan interpretasi awal terhadap konsentrasi polutan di Kabupaten Sidoarjo menggunakan data satelit Sentinel-5P TROPOMI, langkah selanjutnya adalah melakukan analisis statistik deskriptif. Analisis ini bertujuan untuk memahami karakteristik, sebaran, dan anomali dari data <em>time series</em> polutan (NO₂, CO, HCHO, SO₂, O₃, dan CH₄) yang telah kita kumpulkan.</p>
+<p>Dalam proses ini, kita menggunakan platform <strong>KNIME Analytics</strong> yang terhubung dengan basis data <strong>PostgreSQL (Aiven)</strong>. Data <em>time series</em> yang sebelumnya telah digabungkan (<code class="docutils literal notranslate"><span class="pre">sidoarjo_pollutants.csv</span></code>) diunggah ke dalam basis data, kemudian ditarik kembali ke KNIME untuk dihitung nilai statistiknya menggunakan <em>node</em> <strong>Statistics</strong>.</p>
 </section>
-<section id="tujuan-bisnis">
-<h2>Tujuan Bisnis<a class="headerlink" href="#tujuan-bisnis" title="Link to this heading">#</a></h2>
-<p>Alih-alih mengandalkan stasiun pemantauan di darat, kita memanfaatkan data satelit <strong>Sentinel-5P TROPOMI</strong> dari Copernicus Data Space Ecosystem. Satelit ini mengukur gas-gas polutan di atmosfer dari orbit, sehingga kita bisa mendapatkan gambaran kualitas udara di atas seluruh wilayah kabupaten.</p>
-</section>
-<section id="polutan-yang-dianalisis">
-<h2>Polutan yang Dianalisis<a class="headerlink" href="#polutan-yang-dianalisis" title="Link to this heading">#</a></h2>
-<p>Polutan yang dianalisis cukup beragam, dan masing-masing punya cerita sendiri:</p>
+<section id="fitur-statistik-dan-cara-menghitungnya">
+<h2>Fitur Statistik dan Cara Menghitungnya<a class="headerlink" href="#fitur-statistik-dan-cara-menghitungnya" title="Link to this heading">#</a></h2>
+<p><em>Node</em> Statistics pada KNIME menghasilkan berbagai metrik deskriptif. Berikut adalah penjelasan, rumus matematis, dan contoh perhitungan konseptual untuk setiap fitur yang dihasilkan.</p>
+<section id="minimum-min-maximum-max">
+<h3>1. Minimum (Min) &amp; Maximum (Max)<a class="headerlink" href="#minimum-min-maximum-max" title="Link to this heading">#</a></h3>
+<p><strong>Penjelasan:</strong>
+Nilai terkecil (Minimum) dan terbesar (Maximum) dalam suatu himpunan data. Metrik ini sangat berguna untuk mengetahui rentang (<em>range</em>) ekstrem dari konsentrasi polutan, misalnya untuk mengidentifikasi hari dengan tingkat polusi terendah dan tertinggi dalam satu tahun.</p>
+<p><strong>Rumus:</strong></p>
 <ul class="simple">
-<li><p><strong>NO₂ (Nitrogen Dioxide)</strong> adalah gas yang terutama keluar dari knalpot kendaraan dan cerobong pabrik. Semakin ramai lalu lintas dan industri, semakin tinggi NO₂.</p></li>
-<li><p><strong>CO (Carbon Monoxide)</strong> muncul dari pembakaran tidak sempurna bahan bakar, misalnya mesin kendaraan atau pembakaran biomassa.</p></li>
-<li><p><strong>HCHO (Formaldehida)</strong> adalah indikator senyawa organik yang banyak dilepaskan industri maupun vegetasi, dan sering disebut sebagai “benih” pembentuk polusi udara lain.</p></li>
-<li><p><strong>SO₂ (Sulfur Dioxide)</strong> umumnya berasal dari pembakaran bahan bakar yang mengandung belerang di industri dan pembangkit listrik.</p></li>
-<li><p><strong>O₃ (Ozon)</strong> di permukaan tanah bukanlah ozon pelindung di langit, melainkan polutan yang terbentuk ketika sinar matahari bereaksi dengan gas-gas lain — biasanya meningkat saat cuaca cerah.</p></li>
-<li><p><strong>CH₄ (Metana)</strong> adalah gas rumah kaca yang berasal dari aktivitas pertanian, kebocoran jaringan gas, dan pengolahan limbah.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Min = \min(x_1, x_2, ..., x_n)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Max = \max(x_1, x_2, ..., x_n)\)</span></p></li>
+</ul>
+<p><strong>Contoh Perhitungan:</strong>
+Misalkan kita memiliki 5 sampel data konsentrasi NO₂ harian (dalam mol/m²): <span class="math notranslate nohighlight">\(X = [0.0001, 0.0003, 0.0002, 0.0005, 0.0004]\)</span></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Min = 0.0001\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Max = 0.0005\)</span></p></li>
 </ul>
 </section>
-<section id="alur-kerja">
-<h2>Alur Kerja<a class="headerlink" href="#alur-kerja" title="Link to this heading">#</a></h2>
-<p>Alur kerja analisis ini sederhana:</p>
-<ol class="arabic simple">
-<li><p>Siapkan batas wilayah Sidoarjo (GeoJSON)</p></li>
-<li><p>Ambil data satelit satu tahun terakhir untuk tiap polutan</p></li>
-<li><p>Rapikan dan gabungkan datanya</p></li>
-<li><p>Visualisasikan trennya</p></li>
-<li><p>Simpan hasilnya</p></li>
-</ol>
+<section id="mean-rata-rata">
+<h3>2. Mean (Rata-rata)<a class="headerlink" href="#mean-rata-rata" title="Link to this heading">#</a></h3>
+<p><strong>Penjelasan:</strong>
+Rata-rata aritmatika dari seluruh nilai dalam himpunan data. Mean menunjukkan titik pusat gravitasi dari distribusi data polutan selama periode pengamatan.</p>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\( \mu = \frac{\sum_{i=1}^{n} x_i}{n} \)</span><span class="math notranslate nohighlight">\(
+*(Dimana \)</span>\sum x_i<span class="math notranslate nohighlight">\( adalah total jumlah data, dan \)</span>n$ adalah banyaknya data)*</p>
+<p><strong>Contoh Perhitungan:</strong>
+Menggunakan data <span class="math notranslate nohighlight">\(X\)</span> di atas:
+$<span class="math notranslate nohighlight">\( \mu = \frac{0.0001 + 0.0003 + 0.0002 + 0.0005 + 0.0004}{5} = \frac{0.0015}{5} = 0.0003 \)</span>$</p>
 </section>
-<section id="unduh-data-analisis">
-<h2>Unduh Data Analisis<a class="headerlink" href="#unduh-data-analisis" title="Link to this heading">#</a></h2>
-<p>Semua file tersimpan di folder <code class="docutils literal notranslate"><span class="pre">data/downloads/</span></code>.</p>
-<section id="batas-wilayah">
-<h3>Batas Wilayah<a class="headerlink" href="#batas-wilayah" title="Link to this heading">#</a></h3>
+<section id="median-nilai-tengah">
+<h3>3. Median (Nilai Tengah)<a class="headerlink" href="#median-nilai-tengah" title="Link to this heading">#</a></h3>
+<p><strong>Penjelasan:</strong>
+Nilai tengah dari himpunan data yang telah diurutkan dari terkecil hingga terbesar. Median lebih kebal terhadap nilai ekstrem (<em>outlier</em>) dibandingkan Mean. Jika ada satu hari dengan polusi sangat tinggi akibat kebakaran, nilai Mean akan melonjak, tetapi Median akan tetap stabil.</p>
+<p><strong>Rumus:</strong></p>
 <ul class="simple">
-<li><p><strong>sidoarjo.geojson</strong> — batas administrasi Kabupaten Sidoarjo dalam format GeoJSON; dipakai sebagai area of interest saat mengambil data satelit.</p></li>
+<li><p>Jika <span class="math notranslate nohighlight">\(n\)</span> ganjil: Nilai pada posisi ke-<span class="math notranslate nohighlight">\(\frac{n+1}{2}\)</span></p></li>
+<li><p>Jika <span class="math notranslate nohighlight">\(n\)</span> genap: Rata-rata dari dua nilai di tengah.</p></li>
 </ul>
-<p><a href="https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo.geojson" download
-   style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> Unduh sidoarjo.geojson</a></p>
+<p><strong>Contoh Perhitungan:</strong>
+Data terurut: <span class="math notranslate nohighlight">\(0.0001, 0.0002, 0.0003, 0.0004, 0.0005\)</span> (<span class="math notranslate nohighlight">\(n=5\)</span>, ganjil)
+Posisi median = <span class="math notranslate nohighlight">\(\frac{5+1}{2} = 3\)</span>.
+Nilai pada posisi ke-3 adalah <span class="math notranslate nohighlight">\(0.0003\)</span>.</p>
 </section>
-<section id="hasil-pengukuran-satelit-per-polutan">
-<h3>Hasil Pengukuran Satelit per Polutan<a class="headerlink" href="#hasil-pengukuran-satelit-per-polutan" title="Link to this heading">#</a></h3>
-<p>Masing-masing berisi deret waktu harian: satu kolom tanggal dan satu kolom konsentrasi polutan (mol/m²) hasil rata-rata spasial di seluruh Sidoarjo:</p>
-<ul class="simple">
-<li><p><strong>sidoarjo_NO2.csv</strong> — Nitrogen Dioxide — indikator emisi kendaraan dan industri.</p></li>
-<li><p><strong>sidoarjo_CO.csv</strong> — Carbon Monoxide — hasil pembakaran tidak sempurna bahan bakar.</p></li>
-<li><p><strong>sidoarjo_HCHO.csv</strong> — Formaldehyde — penanda senyawa organik volatil (VOC).</p></li>
-<li><p><strong>sidoarjo_SO2.csv</strong> — Sulfur Dioxide — emisi industri/pembangkit listrik.</p></li>
-<li><p><strong>sidoarjo_O3.csv</strong> — Ozon permukaan — polutan sekunder yang terbentuk oleh sinar matahari.</p></li>
-<li><p><strong>sidoarjo_CH4.csv</strong> — Metana — gas rumah kaca dari aktivitas pertanian dan industri.</p></li>
-</ul>
-<p><a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_NO2.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_NO2.csv)" download
-   style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_NO2.csv</a></p>
-<p><a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_CO.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_CO.csv)" download
-   style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_CO.csv</a></p>
-<p><a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_HCHO.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_HCHO.csv)" download
-   style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_HCHO.csv</a></p>
-<p><a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_SO2.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_SO2.csv)" download
-   style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_SO2.csv</a></p>
-<p><a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_O3.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_O3.csv)" download
-   style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_O3.csv</a></p>
-<p><a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_CH4.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_CH4.csv)" download
-   style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_CH4.csv</a></p>
+<section id="variance-varians">
+<h3>4. Variance (Varians)<a class="headerlink" href="#variance-varians" title="Link to this heading">#</a></h3>
+<p><strong>Penjelasan:</strong>
+Varians mengukur seberapa jauh data tersebar dari nilai rata-ratanya. KNIME menggunakan rumus Varians Sampel (<em>Sample Variance</em>). Semakin besar varians, semakin fluktuatif tingkat polusi di Sidoarjo.</p>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\( s^2 = \frac{\sum_{i=1}^{n} (x_i - \mu)^2}{n - 1} \)</span>$</p>
+<p><strong>Contoh Perhitungan:</strong>
+$<span class="math notranslate nohighlight">\( s^2 = \frac{(0.0001-0.0003)^2 + (0.0003-0.0003)^2 + ... + (0.0004-0.0003)^2}{5 - 1} \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\( s^2 = \frac{0.00000004 + 0 + 0.00000001 + 0.00000004 + 0.00000001}{4} = 0.000000025 \)</span>$</p>
 </section>
-<section id="data-gabungan-versi-tren">
-<h3>Data Gabungan &amp; Versi Tren<a class="headerlink" href="#data-gabungan-versi-tren" title="Link to this heading">#</a></h3>
+<section id="standard-deviation-standar-deviasi">
+<h3>5. Standard Deviation (Standar Deviasi)<a class="headerlink" href="#standard-deviation-standar-deviasi" title="Link to this heading">#</a></h3>
+<p><strong>Penjelasan:</strong>
+Akar kuadrat dari varians. Standar deviasi menunjukkan rata-rata penyimpangan setiap titik data dari nilai Mean. Metrik ini lebih mudah diinterpretasikan karena memiliki satuan yang sama dengan data aslinya (mol/m²).</p>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\( s = \sqrt{s^2} \)</span>$</p>
+<p><strong>Contoh Perhitungan:</strong>
+$<span class="math notranslate nohighlight">\( s = \sqrt{0.000000025} = 0.000158 \)</span>$</p>
+</section>
+<section id="skewness-kemencengan">
+<h3>6. Skewness (Kemencengan)<a class="headerlink" href="#skewness-kemencengan" title="Link to this heading">#</a></h3>
+<p><strong>Penjelasan:</strong>
+Skewness mengukur tingkat ketidaksimetrisan (kemencengan) distribusi data terhadap rata-ratanya.</p>
 <ul class="simple">
-<li><p><strong>sidoarjo_pollutants.csv</strong> — keenam polutan digabung dalam satu tabel dengan indeks tanggal yang sama (data harian mentah).</p></li>
-<li><p><strong>sidoarjo_pollutants_rolling30.csv</strong> — versi rolling mean 30 hari dari tabel gabungan; kurvanya lebih halus sehingga tren jangka panjang lebih mudah dibaca.</p></li>
+<li><p><strong>Nilai = 0:</strong> Distribusi simetris sempurna (Normal).</p></li>
+<li><p><strong>Nilai &gt; 0:</strong> Menceng ke kanan (<em>Right-skewed</em>). Artinya, sebagian besar hari memiliki polusi rendah, tetapi ada beberapa hari dengan polusi sangat tinggi (ekor panjang di kanan).</p></li>
+<li><p><strong>Nilai &lt; 0:</strong> Menceng ke kiri (<em>Left-skewed</em>).</p></li>
 </ul>
-<p><a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_pollutants.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_pollutants.csv)" download
-   style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_pollutants.csv</a></p>
-<p><a href="[data/downloads/sidoarjo_pollutants_data/sidoarjo_pollutants_rolling30.csv](https://github.com/safamaster223/PSD/blob/main/data/downloads/sidoarjo_pollutants_data/sidoarjo_pollutants_rolling30.csv)" download
-   style="display:inline-block;padding:8px 18px;margin:4px 6px 4px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;"> sidoarjo_pollutants_rolling30.csv</a></p>
+<p><strong>Rumus (Sample Skewness):</strong>
+$<span class="math notranslate nohighlight">\( Skewness = \frac{n}{(n-1)(n-2)} \sum_{i=1}^{n} \left( \frac{x_i - \mu}{s} \right)^3 \)</span>$</p>
+</section>
+<section id="kurtosis-keruncingan">
+<h3>7. Kurtosis (Keruncingan)<a class="headerlink" href="#kurtosis-keruncingan" title="Link to this heading">#</a></h3>
+<p><strong>Penjelasan:</strong>
+Kurtosis mengukur ‘keruncingan’ distribusi data, atau seberapa banyak data yang berada di bagian ekor (<em>outliers</em>) dibandingkan dengan distribusi normal. KNIME menggunakan <em>Excess Kurtosis</em>.</p>
+<ul class="simple">
+<li><p><strong>Kurtosis = 0:</strong> Distribusi normal (<em>Mesokurtik</em>).</p></li>
+<li><p><strong>Kurtosis &gt; 0:</strong> Puncak tajam, banyak outlier (<em>Leptokurtik</em>). Menunjukkan sering terjadi lonjakan polusi ekstrem yang tiba-tiba.</p></li>
+<li><p><strong>Kurtosis &lt; 0:</strong> Puncak datar, sedikit outlier (<em>Platikurtik</em>). Menunjukkan tingkat polusi yang relatif stabil sepanjang tahun.</p></li>
+</ul>
+<p><strong>Rumus (Sample Excess Kurtosis):</strong>
+$<span class="math notranslate nohighlight">\( Kurtosis = \left\{ \frac{n(n+1)}{(n-1)(n-2)(n-3)} \sum_{i=1}^{n} \left( \frac{x_i - \mu}{s} \right)^4 \right\} - \frac{3(n-1)^2}{(n-2)(n-3)} \)</span>$</p>
+<hr class="docutils" />
+<p><em>Catatan: Hasil perhitungan statistik aktual dari dataset <code class="docutils literal notranslate"><span class="pre">sidoarjo_pollutants.csv</span></code> dapat dilihat langsung melalui output node Statistics pada platform KNIME.</em></p>
 </section>
 </section>
 </section>
@@ -550,22 +568,13 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="02_data_understanding.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introduction</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="02_data_understanding.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Data Understanding</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -586,13 +595,14 @@
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-bisnis">Tujuan Bisnis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polutan-yang-dianalisis">Polutan yang Dianalisis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-kerja">Alur Kerja</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unduh-data-analisis">Unduh Data Analisis</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batas-wilayah">Batas Wilayah</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-pengukuran-satelit-per-polutan">Hasil Pengukuran Satelit per Polutan</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-gabungan-versi-tren">Data Gabungan &amp; Versi Tren</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitur-statistik-dan-cara-menghitungnya">Fitur Statistik dan Cara Menghitungnya</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-min-maximum-max">1. Minimum (Min) &amp; Maximum (Max)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-rata-rata">2. Mean (Rata-rata)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#median-nilai-tengah">3. Median (Nilai Tengah)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-varians">4. Variance (Varians)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-deviation-standar-deviasi">5. Standard Deviation (Standar Deviasi)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skewness-kemencengan">6. Skewness (Kemencengan)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kurtosis-keruncingan">7. Kurtosis (Keruncingan)</a></li>
 </ul>
 </li>
 </ul>
