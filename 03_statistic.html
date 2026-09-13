@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Analisis Statistik Deskriptif &#8212; My sample book</title>
   
@@ -17,87 +16,82 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '03_statistic';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -105,7 +99,6 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -113,15 +106,59 @@ const thebe_selector_output = ".output, .cell_output"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
     </header>
   
 
@@ -132,7 +169,8 @@ const thebe_selector_output = ".output, .cell_output"
       
         
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -162,11 +200,18 @@ const thebe_selector_output = ".output, .cell_output"
     
     
     <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -213,9 +258,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -234,9 +284,9 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -345,7 +395,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -359,27 +409,19 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -399,7 +441,7 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitur-statistik-dan-cara-menghitungnya">Fitur Statistik dan Cara Menghitungnya</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-min-maximum-max">1. Minimum (Min) &amp; Maximum (Max)</a></li>
@@ -423,17 +465,17 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analisis-statistik-deskriptif">
-<h1>Analisis Statistik Deskriptif<a class="headerlink" href="#analisis-statistik-deskriptif" title="Permalink to this heading">#</a></h1>
+<h1>Analisis Statistik Deskriptif<a class="headerlink" href="#analisis-statistik-deskriptif" title="Link to this heading">#</a></h1>
 <section id="latar-belakang">
-<h2>Latar Belakang<a class="headerlink" href="#latar-belakang" title="Permalink to this heading">#</a></h2>
+<h2>Latar Belakang<a class="headerlink" href="#latar-belakang" title="Link to this heading">#</a></h2>
 <p>Setelah melakukan pengumpulan data (<em>Data Understanding</em>) dan interpretasi awal terhadap konsentrasi polutan di Kabupaten Sidoarjo menggunakan data satelit Sentinel-5P TROPOMI, langkah selanjutnya adalah melakukan analisis statistik deskriptif. Analisis ini bertujuan untuk memahami karakteristik, sebaran, dan anomali dari data <em>time series</em> polutan (NO₂, CO, HCHO, SO₂, O₃, dan CH₄) yang telah kita kumpulkan.</p>
 <p>Dalam proses ini, kita menggunakan platform <strong>KNIME Analytics</strong> yang terhubung dengan basis data <strong>PostgreSQL (Aiven)</strong>. Data <em>time series</em> yang sebelumnya telah digabungkan (<code class="docutils literal notranslate"><span class="pre">sidoarjo_pollutants.csv</span></code>) diunggah ke dalam basis data, kemudian ditarik kembali ke KNIME untuk dihitung nilai statistiknya menggunakan <em>node</em> <strong>Statistics</strong>.</p>
 </section>
 <section id="fitur-statistik-dan-cara-menghitungnya">
-<h2>Fitur Statistik dan Cara Menghitungnya<a class="headerlink" href="#fitur-statistik-dan-cara-menghitungnya" title="Permalink to this heading">#</a></h2>
+<h2>Fitur Statistik dan Cara Menghitungnya<a class="headerlink" href="#fitur-statistik-dan-cara-menghitungnya" title="Link to this heading">#</a></h2>
 <p><em>Node</em> Statistics pada KNIME menghasilkan berbagai metrik deskriptif. Berikut adalah penjelasan, rumus matematis, dan contoh perhitungan konseptual untuk setiap fitur yang dihasilkan.</p>
 <section id="minimum-min-maximum-max">
-<h3>1. Minimum (Min) &amp; Maximum (Max)<a class="headerlink" href="#minimum-min-maximum-max" title="Permalink to this heading">#</a></h3>
+<h3>1. Minimum (Min) &amp; Maximum (Max)<a class="headerlink" href="#minimum-min-maximum-max" title="Link to this heading">#</a></h3>
 <p><strong>Penjelasan:</strong>
 Nilai terkecil (Minimum) dan terbesar (Maximum) dalam suatu himpunan data. Metrik ini sangat berguna untuk mengetahui rentang (<em>range</em>) ekstrem dari konsentrasi polutan, misalnya untuk mengidentifikasi hari dengan tingkat polusi terendah dan tertinggi dalam satu tahun.</p>
 <p><strong>Rumus:</strong></p>
@@ -449,7 +491,7 @@ Misalkan kita memiliki 5 sampel data konsentrasi NO₂ harian (dalam mol/m²): <
 </ul>
 </section>
 <section id="mean-rata-rata">
-<h3>2. Mean (Rata-rata)<a class="headerlink" href="#mean-rata-rata" title="Permalink to this heading">#</a></h3>
+<h3>2. Mean (Rata-rata)<a class="headerlink" href="#mean-rata-rata" title="Link to this heading">#</a></h3>
 <p><strong>Penjelasan:</strong>
 Rata-rata aritmatika dari seluruh nilai dalam himpunan data. Mean menunjukkan titik pusat gravitasi dari distribusi data polutan selama periode pengamatan.</p>
 <p><strong>Rumus:</strong>
@@ -460,7 +502,7 @@ Menggunakan data <span class="math notranslate nohighlight">\(X\)</span> di atas
 $<span class="math notranslate nohighlight">\( \mu = \frac{0.0001 + 0.0003 + 0.0002 + 0.0005 + 0.0004}{5} = \frac{0.0015}{5} = 0.0003 \)</span>$</p>
 </section>
 <section id="median-nilai-tengah">
-<h3>3. Median (Nilai Tengah)<a class="headerlink" href="#median-nilai-tengah" title="Permalink to this heading">#</a></h3>
+<h3>3. Median (Nilai Tengah)<a class="headerlink" href="#median-nilai-tengah" title="Link to this heading">#</a></h3>
 <p><strong>Penjelasan:</strong>
 Nilai tengah dari himpunan data yang telah diurutkan dari terkecil hingga terbesar. Median lebih kebal terhadap nilai ekstrem (<em>outlier</em>) dibandingkan Mean. Jika ada satu hari dengan polusi sangat tinggi akibat kebakaran, nilai Mean akan melonjak, tetapi Median akan tetap stabil.</p>
 <p><strong>Rumus:</strong></p>
@@ -474,7 +516,7 @@ Posisi median = <span class="math notranslate nohighlight">\(\frac{5+1}{2} = 3\)
 Nilai pada posisi ke-3 adalah <span class="math notranslate nohighlight">\(0.0003\)</span>.</p>
 </section>
 <section id="variance-varians">
-<h3>4. Variance (Varians)<a class="headerlink" href="#variance-varians" title="Permalink to this heading">#</a></h3>
+<h3>4. Variance (Varians)<a class="headerlink" href="#variance-varians" title="Link to this heading">#</a></h3>
 <p><strong>Penjelasan:</strong>
 Varians mengukur seberapa jauh data tersebar dari nilai rata-ratanya. KNIME menggunakan rumus Varians Sampel (<em>Sample Variance</em>). Semakin besar varians, semakin fluktuatif tingkat polusi di Sidoarjo.</p>
 <p><strong>Rumus:</strong>
@@ -484,7 +526,7 @@ $<span class="math notranslate nohighlight">\( s^2 = \frac{(0.0001-0.0003)^2 + (
 \)</span><span class="math notranslate nohighlight">\( s^2 = \frac{0.00000004 + 0 + 0.00000001 + 0.00000004 + 0.00000001}{4} = 0.000000025 \)</span>$</p>
 </section>
 <section id="standard-deviation-standar-deviasi">
-<h3>5. Standard Deviation (Standar Deviasi)<a class="headerlink" href="#standard-deviation-standar-deviasi" title="Permalink to this heading">#</a></h3>
+<h3>5. Standard Deviation (Standar Deviasi)<a class="headerlink" href="#standard-deviation-standar-deviasi" title="Link to this heading">#</a></h3>
 <p><strong>Penjelasan:</strong>
 Akar kuadrat dari varians. Standar deviasi menunjukkan rata-rata penyimpangan setiap titik data dari nilai Mean. Metrik ini lebih mudah diinterpretasikan karena memiliki satuan yang sama dengan data aslinya (mol/m²).</p>
 <p><strong>Rumus:</strong>
@@ -493,7 +535,7 @@ $<span class="math notranslate nohighlight">\( s = \sqrt{s^2} \)</span>$</p>
 $<span class="math notranslate nohighlight">\( s = \sqrt{0.000000025} = 0.000158 \)</span>$</p>
 </section>
 <section id="skewness-kemencengan">
-<h3>6. Skewness (Kemencengan)<a class="headerlink" href="#skewness-kemencengan" title="Permalink to this heading">#</a></h3>
+<h3>6. Skewness (Kemencengan)<a class="headerlink" href="#skewness-kemencengan" title="Link to this heading">#</a></h3>
 <p><strong>Penjelasan:</strong>
 Skewness mengukur tingkat ketidaksimetrisan (kemencengan) distribusi data terhadap rata-ratanya.</p>
 <ul class="simple">
@@ -505,7 +547,7 @@ Skewness mengukur tingkat ketidaksimetrisan (kemencengan) distribusi data terhad
 $<span class="math notranslate nohighlight">\( Skewness = \frac{n}{(n-1)(n-2)} \sum_{i=1}^{n} \left( \frac{x_i - \mu}{s} \right)^3 \)</span>$</p>
 </section>
 <section id="kurtosis-keruncingan">
-<h3>7. Kurtosis (Keruncingan)<a class="headerlink" href="#kurtosis-keruncingan" title="Permalink to this heading">#</a></h3>
+<h3>7. Kurtosis (Keruncingan)<a class="headerlink" href="#kurtosis-keruncingan" title="Link to this heading">#</a></h3>
 <p><strong>Penjelasan:</strong>
 Kurtosis mengukur ‘keruncingan’ distribusi data, atau seberapa banyak data yang berada di bagian ekor (<em>outliers</em>) dibandingkan dengan distribusi normal. KNIME menggunakan <em>Excess Kurtosis</em>.</p>
 <ul class="simple">
@@ -558,15 +600,17 @@ $<span class="math notranslate nohighlight">\( Kurtosis = \left\{ \frac{n(n+1)}{
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitur-statistik-dan-cara-menghitungnya">Fitur Statistik dan Cara Menghitungnya</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-min-maximum-max">1. Minimum (Min) &amp; Maximum (Max)</a></li>
@@ -602,7 +646,7 @@ By The Jupyter Book Community
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -626,8 +670,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
 
   <footer class="bd-footer">
   </footer>
