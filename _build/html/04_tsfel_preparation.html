@@ -1,0 +1,646 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Persiapan Tugas: Time Series Feature Extraction &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '04_tsfel_preparation';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">BAB 1 — BUSINESS UNDERSTANDING</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_business_understanding.html">Business Understanding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BAB 2 — DATA UNDERSTANDING</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="02_data_understanding/2.1_data_collection.html">2.1 Data Collection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_data_understanding/2.2_deskripsi_dataset.html">2.2 Deskripsi Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_data_understanding/2.3_exploratory_data_analysis.html">2.3 Exploratory Data Analysis (EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_data_understanding/2.4_identifikasi_missing_value.html">2.4 Identifikasi Missing Value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_data_understanding/2.5_identifikasi_outlier.html">2.5 Identifikasi Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_data_understanding/2.6_kesimpulan_data_understanding.html">2.6 Kesimpulan Data Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_data_understanding/2.7_analisis_no2_aiven_knime.html">2.7 Praktikum Analisis Aiven &amp; KNIME</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BAB 3 — DATA PREPROCESSING</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="03_data_preprocessing/3.1_pembersihan_data.html">3.1 Pembersihan Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_data_preprocessing/3.2_penanganan_outlier.html">3.2 Penanganan Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_data_preprocessing/3.3_imputasi_missing_value.html">3.3 Imputasi Missing Value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_data_preprocessing/3.4_validasi_data_bersih.html">3.4 Validasi Data Bersih</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BAB 4 — FEATURE EXTRACTION</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="04_feature_extraction/4.1_persiapan_data.html">4.1 Persiapan Data untuk Ekstraksi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_feature_extraction/4.2_ekstraksi_fitur_tsfel.html">4.2 Ekstraksi Fitur Menggunakan TSFEL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_feature_extraction/4.3_fitur_domain_statistical.html">4.3 Fitur Domain Statistical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_feature_extraction/4.4_fitur_domain_temporal.html">4.4 Fitur Domain Temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_feature_extraction/4.5_fitur_domain_spectral.html">4.5 Fitur Domain Spectral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_feature_extraction/4.6_hasil_ekstraksi_68_fitur.html">4.6 Hasil Ekstraksi 68 Fitur</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Alghifari-Ananta/PSD" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Alghifari-Ananta/PSD/issues/new?title=Issue%20on%20page%20%2F04_tsfel_preparation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/04_tsfel_preparation.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Persiapan Tugas: Time Series Feature Extraction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang-tujuan">Latar Belakang &amp; Tujuan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-1-penanganan-missing-value-imputasi">Tahap 1: Penanganan Missing Value (Imputasi)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-2-deteksi-dan-perbaikan-outlier">Tahap 2: Deteksi dan Perbaikan Outlier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-3-ekstraksi-fitur-menggunakan-tsfel">Tahap 3: Ekstraksi Fitur menggunakan TSFEL</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="persiapan-tugas-time-series-feature-extraction">
+<h1>Persiapan Tugas: Time Series Feature Extraction<a class="headerlink" href="#persiapan-tugas-time-series-feature-extraction" title="Link to this heading">#</a></h1>
+<p><strong>Panduan Pre-Processing dan Ekstraksi Fitur TSFEL</strong></p>
+<hr class="docutils" />
+<section id="latar-belakang-tujuan">
+<h2>Latar Belakang &amp; Tujuan<a class="headerlink" href="#latar-belakang-tujuan" title="Link to this heading">#</a></h2>
+<p>Dokumen ini merangkum tahapan pra-pemrosesan (<em>pre-processing</em>) dan ekstraksi fitur tingkat lanjut untuk data <em>time series</em> polutan. Tahapan ini sangat krusial sebelum data dimasukkan ke dalam model <em>Machine Learning</em>. Data mentah dari satelit sering kali mengandung kekosongan (<em>missing values</em>) akibat tutupan awan dan lonjakan ekstrem (<em>outliers</em>) akibat anomali lokal.</p>
+<p>Tujuan utama dari proses ini adalah:</p>
+<ol class="arabic simple">
+<li><p>Mendeteksi dan memperbaiki <em>Missing Value</em> menggunakan metode <strong>Interpolasi Linear</strong>.</p></li>
+<li><p>Mendeteksi dan memperbaiki <em>Outlier</em> untuk memastikan kualitas data (<em>Data Quality</em>).</p></li>
+<li><p>Mengekstrak <strong>65 fitur</strong> <em>time series</em> menggunakan <em>library</em> <strong>TSFEL</strong> (<em>Time Series Feature Extraction Library</em>).</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="tahap-1-penanganan-missing-value-imputasi">
+<h2>Tahap 1: Penanganan Missing Value (Imputasi)<a class="headerlink" href="#tahap-1-penanganan-missing-value-imputasi" title="Link to this heading">#</a></h2>
+<p>Data <em>time series</em> memiliki sifat temporal (berurutan berdasarkan waktu). Oleh karena itu, kita <strong>tidak boleh sembarangan menghapus baris yang kosong (Drop NA)</strong>, karena akan merusak jarak waktu antar observasi.</p>
+<p><strong>Metode: Interpolasi Linear (Linear Interpolation)</strong>
+Interpolasi linear adalah metode estimasi nilai yang hilang dengan menarik garis lurus antara titik data sebelum dan sesudah nilai yang kosong.</p>
+<p><strong>Cara Kerja:</strong>
+Jika konsentrasi NO₂ pada hari ke-1 adalah 10, hari ke-2 kosong (NaN), dan hari ke-3 adalah 20, maka interpolasi linear akan mengisi hari ke-2 dengan nilai 15.
+Rumus matematisnya: <span class="math notranslate nohighlight">\(y = y_1 + \frac{(x - x_1)(y_2 - y_1)}{(x_2 - x_1)}\)</span></p>
+<p><strong>Implementasi di Python (Pandas):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mengisi missing value dengan interpolasi linear</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">'linear'</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="tahap-2-deteksi-dan-perbaikan-outlier">
+<h2>Tahap 2: Deteksi dan Perbaikan Outlier<a class="headerlink" href="#tahap-2-deteksi-dan-perbaikan-outlier" title="Link to this heading">#</a></h2>
+<p><em>Outlier</em> adalah titik data yang nilainya menyimpang sangat jauh dari observasi lainnya. Mendeteksi <em>outlier</em> penting untuk mengetahui apakah data kita ‘bagus’ (stabil) atau penuh dengan anomali (<em>noise</em>).</p>
+<p><strong>Metode Deteksi: Interquartile Range (IQR)</strong>
+IQR adalah rentang antara kuartil pertama (Q1, persentil ke-25) dan kuartil ketiga (Q3, persentil ke-75).</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(IQR = Q3 - Q1\)</span></p></li>
+<li><p>Batas Bawah = <span class="math notranslate nohighlight">\(Q1 - (1.5 \times IQR)\)</span></p></li>
+<li><p>Batas Atas = <span class="math notranslate nohighlight">\(Q3 + (1.5 \times IQR)\)</span></p></li>
+</ul>
+<p>Data yang berada di luar Batas Bawah dan Batas Atas didefinisikan sebagai <em>Outlier</em>.</p>
+<p><strong>Metode Perbaikan: Capping / Winsorization</strong>
+Sama seperti <em>missing value</em>, kita tidak boleh menghapus baris <em>outlier</em>. Sebagai gantinya, kita melakukan ‘<em>Capping</em>’. Jika ada nilai yang melebihi Batas Atas, nilai tersebut akan diubah (ditekan) menjadi sama dengan nilai Batas Atas. Hal ini mempertahankan urutan waktu namun menghilangkan efek ekstrem dari <em>outlier</em> tersebut.</p>
+<p><strong>Implementasi di Python:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Q1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">Q3</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+<span class="n">lower_bound</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+<span class="n">upper_bound</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+
+<span class="c1"># Memperbaiki outlier dengan Capping</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_bound</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">,</span> 
+            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">,</span> <span class="n">lower_bound</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]))</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="tahap-3-ekstraksi-fitur-menggunakan-tsfel">
+<h2>Tahap 3: Ekstraksi Fitur menggunakan TSFEL<a class="headerlink" href="#tahap-3-ekstraksi-fitur-menggunakan-tsfel" title="Link to this heading">#</a></h2>
+<p>Setelah data bersih dari <em>missing value</em> dan <em>outlier</em>, data siap diekstraksi. TSFEL (<em>Time Series Feature Extraction Library</em>) adalah pustaka Python yang secara otomatis mengekstrak puluhan fitur dari sinyal <em>time series</em>.</p>
+<p>Berdasarkan instruksi, kita akan mengekstrak <strong>65 fitur</strong> yang terbagi dalam tiga domain utama:</p>
+<ol class="arabic simple">
+<li><p><strong>Domain Statistik (Statistical):</strong> Mengekstrak metrik seperti Mean, Variance, Skewness, Kurtosis, Minimum, Maximum, dll.</p></li>
+<li><p><strong>Domain Temporal (Temporal):</strong> Mengekstrak fitur yang bergantung pada urutan waktu, seperti Autocorrelation, Mean Absolute Difference, Zero Crossing Rate, dll.</p></li>
+<li><p><strong>Domain Spektral (Spectral):</strong> Mengekstrak fitur berdasarkan frekuensi sinyal (menggunakan Fast Fourier Transform / FFT), seperti Spectral Entropy, FFT Mean, Wavelet Variance, dll.</p></li>
+</ol>
+<p><strong>Implementasi di Python (TSFEL):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tsfel</span>
+
+<span class="c1"># Menggunakan konfigurasi bawaan TSFEL untuk mengekstrak semua fitur</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">get_features_by_domain</span><span class="p">()</span>
+
+<span class="c1"># Melakukan ekstraksi fitur pada kolom yang sudah bersih</span>
+<span class="n">X_features</span> <span class="o">=</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">time_series_features_extractor</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Hasil dari proses ini adalah sebuah dataset baru di mana satu deret waktu (misalnya 1 tahun data NO₂) diubah menjadi 1 baris data yang memiliki 65 kolom fitur. Fitur-fitur inilah yang nantinya akan menjadi <em>input</em> (X) untuk algoritma <em>Machine Learning</em>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang-tujuan">Latar Belakang &amp; Tujuan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-1-penanganan-missing-value-imputasi">Tahap 1: Penanganan Missing Value (Imputasi)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-2-deteksi-dan-perbaikan-outlier">Tahap 2: Deteksi dan Perbaikan Outlier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-3-ekstraksi-fitur-menggunakan-tsfel">Tahap 3: Ekstraksi Fitur menggunakan TSFEL</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
