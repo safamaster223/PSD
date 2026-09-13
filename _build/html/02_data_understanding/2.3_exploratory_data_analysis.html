@@ -493,105 +493,77 @@ document.write(`
 <p>Tabel berikut merangkum statistik deskriptif dasar dari masing-masing polutan berdasarkan data <strong>mentah</strong> (sebelum imputasi), hanya dari observasi yang tersedia (non-NaN):</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Polutan</p></th>
-<th class="head"><p>N</p></th>
-<th class="head"><p>Missing</p></th>
-<th class="head"><p>Missing%</p></th>
-<th class="head"><p>Min</p></th>
-<th class="head"><p>Q1</p></th>
-<th class="head"><p>Median</p></th>
-<th class="head"><p>Mean</p></th>
-<th class="head"><p>Q3</p></th>
-<th class="head"><p>Max</p></th>
-<th class="head"><p>Std</p></th>
-<th class="head"><p>Skewness</p></th>
-<th class="head"><p>Kurtosis</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Polutan</p></th>
+<th class="head text-left"><p>N</p></th>
+<th class="head text-left"><p>Missing</p></th>
+<th class="head text-left"><p>Missing%</p></th>
+<th class="head text-left"><p>Min</p></th>
+<th class="head text-left"><p>Q1</p></th>
+<th class="head text-left"><p>Median</p></th>
+<th class="head text-left"><p>Mean</p></th>
+<th class="head text-left"><p>Q3</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>NO2</strong></p></td>
-<td><p>366</p></td>
-<td><p>102</p></td>
-<td><p>27.87%</p></td>
-<td><p>3.42e-06</p></td>
-<td><p>2.73e-05</p></td>
-<td><p>3.50e-05</p></td>
-<td><p>3.70e-05</p></td>
-<td><p>4.38e-05</p></td>
-<td><p>9.58e-05</p></td>
-<td><p>1.39e-05</p></td>
-<td><p>0.88</p></td>
-<td><p>1.86</p></td>
+<tr class="row-even"><td class="text-left"><p><strong>NO2</strong></p></td>
+<td class="text-left"><p>365</p></td>
+<td class="text-left"><p>160</p></td>
+<td class="text-left"><p>43.84%</p></td>
+<td class="text-left"><p>8.63e-06</p></td>
+<td class="text-left"><p>3.09e-05</p></td>
+<td class="text-left"><p>3.94e-05</p></td>
+<td class="text-left"><p>4.36e-05</p></td>
+<td class="text-left"><p>5.27e-05</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>CO</strong></p></td>
-<td><p>366</p></td>
-<td><p>79</p></td>
-<td><p>21.58%</p></td>
-<td><p>0.02174</p></td>
-<td><p>0.02679</p></td>
-<td><p>0.02934</p></td>
-<td><p>0.02951</p></td>
-<td><p>0.03126</p></td>
-<td><p>0.04294</p></td>
-<td><p>0.00371</p></td>
-<td><p>0.66</p></td>
-<td><p>0.49</p></td>
+<tr class="row-odd"><td class="text-left"><p><strong>CO</strong></p></td>
+<td class="text-left"><p>365</p></td>
+<td class="text-left"><p>128</p></td>
+<td class="text-left"><p>35.07%</p></td>
+<td class="text-left"><p>0.02087</p></td>
+<td class="text-left"><p>0.02773</p></td>
+<td class="text-left"><p>0.03054</p></td>
+<td class="text-left"><p>0.03181</p></td>
+<td class="text-left"><p>0.03543</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>HCHO</strong></p></td>
-<td><p>366</p></td>
-<td><p>62</p></td>
-<td><p>16.94%</p></td>
-<td><p>-6.59e-05</p></td>
-<td><p>1.26e-04</p></td>
-<td><p>1.68e-04</p></td>
-<td><p>1.74e-04</p></td>
-<td><p>2.08e-04</p></td>
-<td><p>5.51e-04</p></td>
-<td><p>7.92e-05</p></td>
-<td><p>1.16</p></td>
-<td><p>3.75</p></td>
+<tr class="row-even"><td class="text-left"><p><strong>HCHO</strong></p></td>
+<td class="text-left"><p>365</p></td>
+<td class="text-left"><p>129</p></td>
+<td class="text-left"><p>35.34%</p></td>
+<td class="text-left"><p>-2.56e-04</p></td>
+<td class="text-left"><p>8.81e-05</p></td>
+<td class="text-left"><p>1.79e-04</p></td>
+<td class="text-left"><p>1.81e-04</p></td>
+<td class="text-left"><p>2.72e-04</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>SO2</strong></p></td>
-<td><p>366</p></td>
-<td><p>70</p></td>
-<td><p>19.13%</p></td>
-<td><p>-5.09e-04</p></td>
-<td><p>1.11e-05</p></td>
-<td><p>8.09e-05</p></td>
-<td><p>1.25e-04</p></td>
-<td><p>2.18e-04</p></td>
-<td><p>8.81e-04</p></td>
-<td><p>1.99e-04</p></td>
-<td><p>0.92</p></td>
-<td><p>2.18</p></td>
+<tr class="row-odd"><td class="text-left"><p><strong>SO2</strong></p></td>
+<td class="text-left"><p>365</p></td>
+<td class="text-left"><p>140</p></td>
+<td class="text-left"><p>38.36%</p></td>
+<td class="text-left"><p>-1.21e-03</p></td>
+<td class="text-left"><p>-1.96e-05</p></td>
+<td class="text-left"><p>1.47e-04</p></td>
+<td class="text-left"><p>1.99e-04</p></td>
+<td class="text-left"><p>3.40e-04</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>O3</strong></p></td>
-<td><p>366</p></td>
-<td><p>5</p></td>
-<td><p>1.37%</p></td>
-<td><p>0.11055</p></td>
-<td><p>0.11421</p></td>
-<td><p>0.11594</p></td>
-<td><p>0.11591</p></td>
-<td><p>0.11714</p></td>
-<td><p>0.12269</p></td>
-<td><p>0.00226</p></td>
-<td><p>0.44</p></td>
-<td><p>0.12</p></td>
+<tr class="row-even"><td class="text-left"><p><strong>O3</strong></p></td>
+<td class="text-left"><p>365</p></td>
+<td class="text-left"><p>5</p></td>
+<td class="text-left"><p>1.37%</p></td>
+<td class="text-left"><p>0.10852</p></td>
+<td class="text-left"><p>0.11583</p></td>
+<td class="text-left"><p>0.11781</p></td>
+<td class="text-left"><p>0.11767</p></td>
+<td class="text-left"><p>0.11979</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>CH4</strong></p></td>
-<td><p>366</p></td>
-<td><p>283</p></td>
-<td><p>77.32%</p></td>
-<td><p>1720.20</p></td>
-<td><p>1869.01</p></td>
-<td><p>1887.07</p></td>
-<td><p>1877.59</p></td>
-<td><p>1900.48</p></td>
-<td><p>1925.62</p></td>
-<td><p>37.67</p></td>
-<td><p>-2.30</p></td>
-<td><p>6.23</p></td>
+<tr class="row-odd"><td class="text-left"><p><strong>CH4</strong></p></td>
+<td class="text-left"><p>365</p></td>
+<td class="text-left"><p>323</p></td>
+<td class="text-left"><p>88.49%</p></td>
+<td class="text-left"><p>1848.44287</p></td>
+<td class="text-left"><p>1881.64130</p></td>
+<td class="text-left"><p>1887.51672</p></td>
+<td class="text-left"><p>1885.52433</p></td>
+<td class="text-left"><p>1894.37808</p></td>
 </tr>
 </tbody>
 </table>
