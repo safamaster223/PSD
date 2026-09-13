@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>2.7 Praktikum Analisis NO2: Ingest PostgreSQL Aiven, Workflow KNIME, dan Kalkulasi Statistik (\(N = 240\)) &#8212; My sample book</title>
   
@@ -17,89 +16,84 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '02_data_understanding/2.7_analisis_no2_aiven_knime';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3.1 Pembersihan Data" href="../03_data_preprocessing/3.1_pembersihan_data.html" />
     <link rel="prev" title="2.6 Kesimpulan Data Understanding" href="2.6_kesimpulan_data_understanding.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -107,7 +101,6 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -115,15 +108,59 @@ const thebe_selector_output = ".output, .cell_output"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
     </header>
   
 
@@ -132,7 +169,8 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -162,11 +200,18 @@ const thebe_selector_output = ".output, .cell_output"
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -213,9 +258,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -234,9 +284,9 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -345,7 +395,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -359,27 +409,19 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -399,7 +441,7 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perancangan-struktur-basis-data-ingest-ke-postgresql-aiven">1. Perancangan Struktur Basis Data &amp; Ingest ke PostgreSQL Aiven</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-desain-skema-relasional-database-schema-architecture">A. Desain Skema Relasional (<em>Database Schema Architecture</em>)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-skrip-ddl-pembuatan-tabel-sql">B. Skrip DDL Pembuatan Tabel (SQL)</a></li>
@@ -450,12 +492,12 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="praktikum-analisis-no2-ingest-postgresql-aiven-workflow-knime-dan-kalkulasi-statistik-n-240">
-<h1>2.7 Praktikum Analisis NO2: Ingest PostgreSQL Aiven, Workflow KNIME, dan Kalkulasi Statistik (<span class="math notranslate nohighlight">\(N = 240\)</span>)<a class="headerlink" href="#praktikum-analisis-no2-ingest-postgresql-aiven-workflow-knime-dan-kalkulasi-statistik-n-240" title="Permalink to this heading">#</a></h1>
+<h1>2.7 Praktikum Analisis NO2: Ingest PostgreSQL Aiven, Workflow KNIME, dan Kalkulasi Statistik (<span class="math notranslate nohighlight">\(N = 240\)</span>)<a class="headerlink" href="#praktikum-analisis-no2-ingest-postgresql-aiven-workflow-knime-dan-kalkulasi-statistik-n-240" title="Link to this heading">#</a></h1>
 <p>Dokumen ini merupakan laporan teknis lengkap proses pengolahan data <em>time series</em> konsentrasi Nitrogen Dioksida (<span class="math notranslate nohighlight">\(\text{NO}_2\)</span>) dari berkas CSV <code class="docutils literal notranslate"><span class="pre">wonoayu_NO2.csv</span></code> untuk wilayah <strong>Kecamatan Wonoayu, Kabupaten Sidoarjo</strong> (periode <strong>31 Agustus 2025 s.d. 31 Agustus 2026</strong>).</p>
 <p>Pengolahan dimulai dari migrasi dan ingest data ke cloud database PostgreSQL Aiven, perancangan workflow analitik pada KNIME Analytics Platform, hingga pembuktian rumus dan kalkulasi statistik deskriptif secara manual matematis berdasarkan <strong>240 data valid</strong> (setelah menyaring 126 nilai <code class="docutils literal notranslate"><span class="pre">null</span></code>).</p>
 <hr class="docutils" />
 <section id="perancangan-struktur-basis-data-ingest-ke-postgresql-aiven">
-<h2>1. Perancangan Struktur Basis Data &amp; Ingest ke PostgreSQL Aiven<a class="headerlink" href="#perancangan-struktur-basis-data-ingest-ke-postgresql-aiven" title="Permalink to this heading">#</a></h2>
+<h2>1. Perancangan Struktur Basis Data &amp; Ingest ke PostgreSQL Aiven<a class="headerlink" href="#perancangan-struktur-basis-data-ingest-ke-postgresql-aiven" title="Link to this heading">#</a></h2>
 <p>Untuk mengelola seluruh data kualitas udara di <strong>Kecamatan Wonoayu, Kabupaten Sidoarjo</strong>, dirancang arsitektur basis data relasional berjenjang (<em>multi-tier schema</em>) di cloud database <strong>PostgreSQL Aiven</strong>. Struktur ini dirancang secara modular agar mampu menampung:</p>
 <ol class="arabic simple">
 <li><p><strong>Data Mentah (<em>Raw Data</em>)</strong>: Menyimpan observasi asli 6 polutan satelit (<span class="math notranslate nohighlight">\(\text{NO}_2, \text{CO}, \text{HCHO}, \text{SO}_2, \text{O}_3, \text{CH}_4\)</span>) lengkap dengan nilai kosong (<em>missing values</em>) dan nilai pencilan (<em>outliers</em>) untuk kebutuhan audit data dan <em>Data Understanding</em>.</p></li>
@@ -464,7 +506,7 @@ document.write(`
 </ol>
 <hr class="docutils" />
 <section id="a-desain-skema-relasional-database-schema-architecture">
-<h3>A. Desain Skema Relasional (<em>Database Schema Architecture</em>)<a class="headerlink" href="#a-desain-skema-relasional-database-schema-architecture" title="Permalink to this heading">#</a></h3>
+<h3>A. Desain Skema Relasional (<em>Database Schema Architecture</em>)<a class="headerlink" href="#a-desain-skema-relasional-database-schema-architecture" title="Link to this heading">#</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌────────────────────────────────────────────────────────────────────────────────────────┐
 │                                POSTGRESQL AIVEN (CLOUD)                                │
 ├───────────────────────────────────┬────────────────────────────────────────────────────┤
@@ -492,7 +534,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="b-skrip-ddl-pembuatan-tabel-sql">
-<h3>B. Skrip DDL Pembuatan Tabel (SQL)<a class="headerlink" href="#b-skrip-ddl-pembuatan-tabel-sql" title="Permalink to this heading">#</a></h3>
+<h3>B. Skrip DDL Pembuatan Tabel (SQL)<a class="headerlink" href="#b-skrip-ddl-pembuatan-tabel-sql" title="Link to this heading">#</a></h3>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- ====================================================================</span>
 <span class="c1">-- 1. TABEL DATA MENTAH MULTI-POLUTAN (RAW TIER)</span>
 <span class="c1">-- ====================================================================</span>
@@ -543,10 +585,10 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="c-fleksibilitas-pengambilan-data-tertentu-selective-querying">
-<h3>C. Fleksibilitas Pengambilan Data Tertentu (<em>Selective Querying</em>)<a class="headerlink" href="#c-fleksibilitas-pengambilan-data-tertentu-selective-querying" title="Permalink to this heading">#</a></h3>
+<h3>C. Fleksibilitas Pengambilan Data Tertentu (<em>Selective Querying</em>)<a class="headerlink" href="#c-fleksibilitas-pengambilan-data-tertentu-selective-querying" title="Link to this heading">#</a></h3>
 <p>Meskipun seluruh data (baik mentah maupun bersih) diunggah ke satu basis data terpusat di Aiven, kita tetap memiliki kendali penuh untuk mengambil potongan data tertentu sesuai kebutuhan analisis:</p>
 <section id="mengambil-parameter-tertentu-saja-contoh-hanya-text-no-2-valid-untuk-eda">
-<h4>1. Mengambil Parameter Tertentu Saja (Contoh: Hanya <span class="math notranslate nohighlight">\(\text{NO}_2\)</span> Valid untuk EDA)<a class="headerlink" href="#mengambil-parameter-tertentu-saja-contoh-hanya-text-no-2-valid-untuk-eda" title="Permalink to this heading">#</a></h4>
+<h4>1. Mengambil Parameter Tertentu Saja (Contoh: Hanya <span class="math notranslate nohighlight">\(\text{NO}_2\)</span> Valid untuk EDA)<a class="headerlink" href="#mengambil-parameter-tertentu-saja-contoh-hanya-text-no-2-valid-untuk-eda" title="Link to this heading">#</a></h4>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Mengambil deret waktu NO2 mentah yang valid (mengabaikan NULL)</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span><span class="w"> </span><span class="n">no2</span><span class="w"> </span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">wonoayu_pollutants_raw</span><span class="w"> </span>
@@ -556,7 +598,7 @@ document.write(`
 </div>
 </section>
 <section id="mengambil-parameter-tertentu-pada-data-bersih">
-<h4>2. Mengambil Parameter Tertentu pada Data Bersih<a class="headerlink" href="#mengambil-parameter-tertentu-pada-data-bersih" title="Permalink to this heading">#</a></h4>
+<h4>2. Mengambil Parameter Tertentu pada Data Bersih<a class="headerlink" href="#mengambil-parameter-tertentu-pada-data-bersih" title="Link to this heading">#</a></h4>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Mengambil data bersih NO2 hasil imputasi untuk masukan ekstraksi fitur</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span><span class="w"> </span><span class="n">no2</span><span class="w"> </span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">wonoayu_pollutants_clean</span><span class="w"> </span>
@@ -565,7 +607,7 @@ document.write(`
 </div>
 </section>
 <section id="mengambil-data-tertentu-berdasarkan-rentang-waktu-contoh-musim-hujan">
-<h4>3. Mengambil Data Tertentu Berdasarkan Rentang Waktu (Contoh: Musim Hujan)<a class="headerlink" href="#mengambil-data-tertentu-berdasarkan-rentang-waktu-contoh-musim-hujan" title="Permalink to this heading">#</a></h4>
+<h4>3. Mengambil Data Tertentu Berdasarkan Rentang Waktu (Contoh: Musim Hujan)<a class="headerlink" href="#mengambil-data-tertentu-berdasarkan-rentang-waktu-contoh-musim-hujan" title="Link to this heading">#</a></h4>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Mengambil konsentrasi seluruh polutan selama puncak musim hujan (Desember 2025 - Februari 2026)</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span><span class="w"> </span><span class="n">no2</span><span class="p">,</span><span class="w"> </span><span class="n">co</span><span class="p">,</span><span class="w"> </span><span class="n">so2</span><span class="p">,</span><span class="w"> </span><span class="n">o3</span><span class="w"> </span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">wonoayu_pollutants_clean</span><span class="w"> </span>
@@ -575,7 +617,7 @@ document.write(`
 </div>
 </section>
 <section id="kueri-audit-komparasi-berdampingan-nilai-mentah-vs-bersih-audit-query">
-<h4>4. Kueri Audit: Komparasi Berdampingan Nilai Mentah vs Bersih (<em>Audit Query</em>)<a class="headerlink" href="#kueri-audit-komparasi-berdampingan-nilai-mentah-vs-bersih-audit-query" title="Permalink to this heading">#</a></h4>
+<h4>4. Kueri Audit: Komparasi Berdampingan Nilai Mentah vs Bersih (<em>Audit Query</em>)<a class="headerlink" href="#kueri-audit-komparasi-berdampingan-nilai-mentah-vs-bersih-audit-query" title="Link to this heading">#</a></h4>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Membandingkan nilai asli vs nilai setelah imputasi pada tanggal tertentu</span>
 <span class="k">SELECT</span><span class="w"> </span>
 <span class="w">    </span><span class="n">r</span><span class="p">.</span><span class="nb">date</span><span class="p">,</span>
@@ -595,7 +637,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="d-skrip-otomasi-ingestion-python-ingest-aiven-wonoayu-py">
-<h3>D. Skrip Otomasi Ingestion Python (<code class="docutils literal notranslate"><span class="pre">ingest_aiven_wonoayu.py</span></code>)<a class="headerlink" href="#d-skrip-otomasi-ingestion-python-ingest-aiven-wonoayu-py" title="Permalink to this heading">#</a></h3>
+<h3>D. Skrip Otomasi Ingestion Python (<code class="docutils literal notranslate"><span class="pre">ingest_aiven_wonoayu.py</span></code>)<a class="headerlink" href="#d-skrip-otomasi-ingestion-python-ingest-aiven-wonoayu-py" title="Link to this heading">#</a></h3>
 <p>Skrip berikut secara otomatis mengunggah tabel multi-polutan mentah, tabel multi-polutan bersih, serta tabel spesifik <code class="docutils literal notranslate"><span class="pre">wonoayu_no2</span></code> ke instance database PostgreSQL Aiven. Anda dapat menyalin kode di bawah atau mengunduh berkas skrip langsung melalui tombol berikut:</p>
 <p><a href="ingest_aiven_wonoayu.py" download="ingest_aiven_wonoayu.py" style="display:inline-block;padding:10px 22px;margin:8px 0 16px 0;background:#1a73e8;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;box-shadow:0 2px 6px rgba(26,115,232,0.4);">📥 Unduh Script ingest_aiven_wonoayu.py</a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -669,7 +711,7 @@ document.write(`
 </div></blockquote>
 </section>
 <section id="cara-menjalankan-script-python">
-<h3>Cara Menjalankan Script Python:<a class="headerlink" href="#cara-menjalankan-script-python" title="Permalink to this heading">#</a></h3>
+<h3>Cara Menjalankan Script Python:<a class="headerlink" href="#cara-menjalankan-script-python" title="Link to this heading">#</a></h3>
 <ul>
 <li><p>Jalankan skrip ingestion melalui terminal sistem operasi:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>ingest_aiven_wonoayu.py
@@ -685,7 +727,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="setup-workflow-dan-detail-konfigurasi-node-knime">
-<h2>2. Setup Workflow dan Detail Konfigurasi Node KNIME<a class="headerlink" href="#setup-workflow-dan-detail-konfigurasi-node-knime" title="Permalink to this heading">#</a></h2>
+<h2>2. Setup Workflow dan Detail Konfigurasi Node KNIME<a class="headerlink" href="#setup-workflow-dan-detail-konfigurasi-node-knime" title="Link to this heading">#</a></h2>
 <p>Arsitektur aliran data di KNIME Analytics Platform menyusun alur pengolahan dari cloud database Aiven menuju pemrosesan statistik:</p>
 <p><img alt="KNIME Workflow Pipeline Overview" src="data/images/analisis_no2/03-knime-workflow-overview.png" /></p>
 <blockquote>
@@ -693,9 +735,9 @@ document.write(`
 </div></blockquote>
 <hr class="docutils" />
 <section id="penjelasan-detail-setup-setiap-node-knime">
-<h3>Penjelasan Detail Setup Setiap Node KNIME<a class="headerlink" href="#penjelasan-detail-setup-setiap-node-knime" title="Permalink to this heading">#</a></h3>
+<h3>Penjelasan Detail Setup Setiap Node KNIME<a class="headerlink" href="#penjelasan-detail-setup-setiap-node-knime" title="Link to this heading">#</a></h3>
 <section id="a-node-postgresql-connector">
-<h4>A. Node <code class="docutils literal notranslate"><span class="pre">PostgreSQL</span> <span class="pre">Connector</span></code><a class="headerlink" href="#a-node-postgresql-connector" title="Permalink to this heading">#</a></h4>
+<h4>A. Node <code class="docutils literal notranslate"><span class="pre">PostgreSQL</span> <span class="pre">Connector</span></code><a class="headerlink" href="#a-node-postgresql-connector" title="Link to this heading">#</a></h4>
 <p>Node ini bertugas membuka jalur komunikasi JDBC yang terenkripsi aman ke instance PostgreSQL Aiven.</p>
 <p><img alt="Konfigurasi PostgreSQL Connector Node" src="data/images/analisis_no2/04-knime-postgres-connector-config.png" /></p>
 <blockquote>
@@ -715,7 +757,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="b-node-db-table-selector">
-<h4>B. Node <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Table</span> <span class="pre">Selector</span></code><a class="headerlink" href="#b-node-db-table-selector" title="Permalink to this heading">#</a></h4>
+<h4>B. Node <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Table</span> <span class="pre">Selector</span></code><a class="headerlink" href="#b-node-db-table-selector" title="Link to this heading">#</a></h4>
 <p>Node ini menerima koneksi DB (port berwarna merah) dari <code class="docutils literal notranslate"><span class="pre">PostgreSQL</span> <span class="pre">Connector</span></code> untuk mengidentifikasi dan memilih tabel data Kecamatan Wonoayu.</p>
 <p><img alt="Konfigurasi DB Table Selector Node" src="data/images/analisis_no2/05-knime-db-table-selector-config.png" /></p>
 <blockquote>
@@ -734,7 +776,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="c-node-db-reader">
-<h4>C. Node <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Reader</span></code><a class="headerlink" href="#c-node-db-reader" title="Permalink to this heading">#</a></h4>
+<h4>C. Node <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Reader</span></code><a class="headerlink" href="#c-node-db-reader" title="Link to this heading">#</a></h4>
 <p>Node ini mengeksekusi perintah pembacaan SQL dari <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Table</span> <span class="pre">Selector</span></code> dan mengonversi data dari database menjadi tabel memori internal KNIME (port data berwarna hitam).</p>
 <p><img alt="Konfigurasi DB Reader Node" src="data/images/analisis_no2/06-knime-db-reader-config.png" /></p>
 <blockquote>
@@ -752,7 +794,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="d-node-db-query-reader-opsional-alternatif">
-<h4>D. Node <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Query</span> <span class="pre">Reader</span></code> (Opsional / Alternatif)<a class="headerlink" href="#d-node-db-query-reader-opsional-alternatif" title="Permalink to this heading">#</a></h4>
+<h4>D. Node <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Query</span> <span class="pre">Reader</span></code> (Opsional / Alternatif)<a class="headerlink" href="#d-node-db-query-reader-opsional-alternatif" title="Link to this heading">#</a></h4>
 <p>Node ini dapat digunakan sebagai alternatif apabila ingin menjalankan kueri SQL khusus secara langsung (misalnya memfilter baris non-null langsung di tingkat database engine).</p>
 <p><img alt="Konfigurasi DB Query Reader Node" src="data/images/analisis_no2/07-knime-db-query-reader-config.png" /></p>
 <blockquote>
@@ -774,7 +816,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="e-node-statistics">
-<h4>E. Node <code class="docutils literal notranslate"><span class="pre">Statistics</span></code><a class="headerlink" href="#e-node-statistics" title="Permalink to this heading">#</a></h4>
+<h4>E. Node <code class="docutils literal notranslate"><span class="pre">Statistics</span></code><a class="headerlink" href="#e-node-statistics" title="Link to this heading">#</a></h4>
 <p>Node ini menghitung seluruh metrik statistik deskriptif dari tabel data yang diterima dari <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Reader</span></code> atau <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Query</span> <span class="pre">Reader</span></code>.</p>
 <p><img alt="Konfigurasi Statistics Node" src="data/images/analisis_no2/08-knime-statistics-node-config.png" /></p>
 <blockquote>
@@ -794,7 +836,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="tabel-ringkasan-konfigurasi-node-knime">
-<h3>Tabel Ringkasan Konfigurasi Node KNIME<a class="headerlink" href="#tabel-ringkasan-konfigurasi-node-knime" title="Permalink to this heading">#</a></h3>
+<h3>Tabel Ringkasan Konfigurasi Node KNIME<a class="headerlink" href="#tabel-ringkasan-konfigurasi-node-knime" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Node Name</p></th>
@@ -830,7 +872,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="penjelasan-fitur-rumus-dan-perhitungan-statistik-riil-wonoayu-n-240">
-<h2>3. Penjelasan Fitur, Rumus, dan Perhitungan Statistik Riil Wonoayu (<span class="math notranslate nohighlight">\(N = 240\)</span>)<a class="headerlink" href="#penjelasan-fitur-rumus-dan-perhitungan-statistik-riil-wonoayu-n-240" title="Permalink to this heading">#</a></h2>
+<h2>3. Penjelasan Fitur, Rumus, dan Perhitungan Statistik Riil Wonoayu (<span class="math notranslate nohighlight">\(N = 240\)</span>)<a class="headerlink" href="#penjelasan-fitur-rumus-dan-perhitungan-statistik-riil-wonoayu-n-240" title="Link to this heading">#</a></h2>
 <p>Mengapa nilai <strong>Min</strong>, <strong>Max</strong>, <strong>Mean</strong>, <strong>Std Dev</strong>, dan <strong>Variance</strong> pada tabel keluaran KNIME terlihat bernilai <code class="docutils literal notranslate"><span class="pre">0</span></code>?<br />
 Hal ini terjadi karena format tampilan standar KNIME (<em>Display Format</em>) membulatkan desimal hingga 2–3 angka di belakang koma. Karena konsentrasi <span class="math notranslate nohighlight">\(\text{NO}_2\)</span> berada pada skala mikro atmosfer <span class="math notranslate nohighlight">\(10^{-5}\)</span> (<span class="math notranslate nohighlight">\(\approx 0.000031\text{ mol/m}^2\)</span>), pembulatan otomatis menampilkannya sebagai <code class="docutils literal notranslate"><span class="pre">0</span></code>. Namun, nilai <strong>Skewness</strong> (<span class="math notranslate nohighlight">\(0.732\)</span>), <strong>Kurtosis</strong> (<span class="math notranslate nohighlight">\(2.848\)</span>), <strong>Overall Sum</strong> (<span class="math notranslate nohighlight">\(0.01\)</span>), dan <strong>Missing Values</strong> (<span class="math notranslate nohighlight">\(126\)</span>) membuktikan bahwa kalkulasi presisi tinggi tetap bekerja secara akurat di latar belakang.</p>
 <p><img alt="Statistics Table Output di KNIME" src="data/images/analisis_no2/09-knime-statistics-table-output.png" /></p>
@@ -839,7 +881,7 @@ Hal ini terjadi karena format tampilan standar KNIME (<em>Display Format</em>) m
 </div></blockquote>
 <hr class="docutils" />
 <section id="a-total-data-n-missing-value-count">
-<h3>A. Total Data (<span class="math notranslate nohighlight">\(N\)</span>) &amp; Missing Value Count<a class="headerlink" href="#a-total-data-n-missing-value-count" title="Permalink to this heading">#</a></h3>
+<h3>A. Total Data (<span class="math notranslate nohighlight">\(N\)</span>) &amp; Missing Value Count<a class="headerlink" href="#a-total-data-n-missing-value-count" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Penjelasan</strong>: Dari 366 hari kalender observasi satelit di Kecamatan Wonoayu, terdapat 126 baris bernilai kosong (<code class="docutils literal notranslate"><span class="pre">null</span></code>). Perhitungan statistik deskriptif secara otomatis mengabaikan nilai <code class="docutils literal notranslate"><span class="pre">null</span></code> sehingga total sampel data valid yang diproses adalah <span class="math notranslate nohighlight">\(N = 240\)</span>.</p></li>
 <li><p><strong>Rumus</strong>:
@@ -848,7 +890,7 @@ $<span class="math notranslate nohighlight">\(N_{\text{valid}} = N_{\text{total}
 </section>
 <hr class="docutils" />
 <section id="b-minimum-text-min-dan-maximum-text-max">
-<h3>B. Minimum (<span class="math notranslate nohighlight">\(\text{Min}\)</span>) dan Maximum (<span class="math notranslate nohighlight">\(\text{Max}\)</span>)<a class="headerlink" href="#b-minimum-text-min-dan-maximum-text-max" title="Permalink to this heading">#</a></h3>
+<h3>B. Minimum (<span class="math notranslate nohighlight">\(\text{Min}\)</span>) dan Maximum (<span class="math notranslate nohighlight">\(\text{Max}\)</span>)<a class="headerlink" href="#b-minimum-text-min-dan-maximum-text-max" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Penjelasan</strong>: Nilai konsentrasi <span class="math notranslate nohighlight">\(\text{NO}_2\)</span> terkecil dan terbesar di antara 240 data valid Kecamatan Wonoayu.</p></li>
 <li><p><strong>Rumus</strong>:
@@ -860,7 +902,7 @@ $<span class="math notranslate nohighlight">\(\text{Min} = -0.0000012541 \text{ 
 </section>
 <hr class="docutils" />
 <section id="c-overall-sum-dan-mean-bar-x">
-<h3>C. Overall Sum dan Mean (<span class="math notranslate nohighlight">\(\bar{x}\)</span>)<a class="headerlink" href="#c-overall-sum-dan-mean-bar-x" title="Permalink to this heading">#</a></h3>
+<h3>C. Overall Sum dan Mean (<span class="math notranslate nohighlight">\(\bar{x}\)</span>)<a class="headerlink" href="#c-overall-sum-dan-mean-bar-x" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Penjelasan</strong>: <strong>Overall Sum</strong> adalah jumlah akumulasi dari 240 sampel data valid, sedangkan <strong>Mean</strong> adalah nilai rata-rata konsentrasi <span class="math notranslate nohighlight">\(\text{NO}_2\)</span> di Kecamatan Wonoayu.</p></li>
 <li><p><strong>Rumus</strong>:
@@ -872,7 +914,7 @@ $<span class="math notranslate nohighlight">\(\text{Overall Sum} = 0.0074757837 
 </section>
 <hr class="docutils" />
 <section id="d-variance-s-2-dan-standard-deviation-s">
-<h3>D. Variance (<span class="math notranslate nohighlight">\(s^2\)</span>) dan Standard Deviation (<span class="math notranslate nohighlight">\(s\)</span>)<a class="headerlink" href="#d-variance-s-2-dan-standard-deviation-s" title="Permalink to this heading">#</a></h3>
+<h3>D. Variance (<span class="math notranslate nohighlight">\(s^2\)</span>) dan Standard Deviation (<span class="math notranslate nohighlight">\(s\)</span>)<a class="headerlink" href="#d-variance-s-2-dan-standard-deviation-s" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Penjelasan</strong>: Mengukur dispersi dan simpangan baku data terhadap nilai rata-ratanya berdasarkan derajat kebebasan sampel (<span class="math notranslate nohighlight">\(N - 1 = 239\)</span>).</p></li>
 <li><p><strong>Rumus</strong>:
@@ -885,7 +927,7 @@ $<span class="math notranslate nohighlight">\(\sum_{i=1}^{240} (x_i - \bar{x})^2
 </section>
 <hr class="docutils" />
 <section id="e-median-q-2-kuartil-1-q-1-kuartil-3-q-3-dan-iqr">
-<h3>E. Median (<span class="math notranslate nohighlight">\(Q_2\)</span>), Kuartil 1 (<span class="math notranslate nohighlight">\(Q_1\)</span>), Kuartil 3 (<span class="math notranslate nohighlight">\(Q_3\)</span>), dan IQR<a class="headerlink" href="#e-median-q-2-kuartil-1-q-1-kuartil-3-q-3-dan-iqr" title="Permalink to this heading">#</a></h3>
+<h3>E. Median (<span class="math notranslate nohighlight">\(Q_2\)</span>), Kuartil 1 (<span class="math notranslate nohighlight">\(Q_1\)</span>), Kuartil 3 (<span class="math notranslate nohighlight">\(Q_3\)</span>), dan IQR<a class="headerlink" href="#e-median-q-2-kuartil-1-q-1-kuartil-3-q-3-dan-iqr" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Penjelasan</strong>: Nilai batas kuartil dari 240 data valid yang telah diurutkan dari terkecil hingga terbesar (<em>monotonic ascending</em>).</p></li>
 <li><p><strong>Hasil Perhitungan Presisi</strong>:</p>
@@ -901,7 +943,7 @@ $<span class="math notranslate nohighlight">\(\text{IQR} = Q_3 - Q_1 = 0.0000386
 </section>
 <hr class="docutils" />
 <section id="f-skewness-kemencengan-distribusi">
-<h3>F. Skewness (Kemencengan Distribusi)<a class="headerlink" href="#f-skewness-kemencengan-distribusi" title="Permalink to this heading">#</a></h3>
+<h3>F. Skewness (Kemencengan Distribusi)<a class="headerlink" href="#f-skewness-kemencengan-distribusi" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Penjelasan</strong>: Mengukur ketidaksimetrisan sebaran data. Nilai positif <span class="math notranslate nohighlight">\(+0.732\)</span> menunjukkan kurva distribusi condong ke kanan (<em>right-skewed</em>), di mana mayoritas konsentrasi berada pada level rendah namun terdapat ekor panjang dari konsentrasi tinggi.</p></li>
 <li><p><strong>Rumus (Sample Unbiased Skewness)</strong>:
@@ -914,7 +956,7 @@ $<span class="math notranslate nohighlight">\(\frac{N}{(N-1)(N-2)} = \frac{240}{
 </section>
 <hr class="docutils" />
 <section id="g-kurtosis-keruncingan-puncak-excess-kurtosis">
-<h3>G. Kurtosis (Keruncingan Puncak / Excess Kurtosis)<a class="headerlink" href="#g-kurtosis-keruncingan-puncak-excess-kurtosis" title="Permalink to this heading">#</a></h3>
+<h3>G. Kurtosis (Keruncingan Puncak / Excess Kurtosis)<a class="headerlink" href="#g-kurtosis-keruncingan-puncak-excess-kurtosis" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Penjelasan</strong>: Mengukur ketajaman puncak kurva distribusi relatif terhadap distribusi normal. Nilai positif <span class="math notranslate nohighlight">\(+2.848\)</span> membuktikan distribusi bersifat <strong>Leptokurtik</strong> (memiliki puncak runcing dan peluang kemunculan nilai ekstrem/pencilan yang lebih tinggi).</p></li>
 <li><p><strong>Rumus (Sample Unbiased Excess Kurtosis)</strong>:
@@ -928,7 +970,7 @@ $<span class="math notranslate nohighlight">\(\text{Suku Pertama} = \frac{240 \t
 </section>
 <hr class="docutils" />
 <section id="tabel-ringkasan-komparasi-statistik-riil-wonoayu-n-240">
-<h2>4. Tabel Ringkasan Komparasi Statistik Riil Wonoayu (<span class="math notranslate nohighlight">\(N = 240\)</span>)<a class="headerlink" href="#tabel-ringkasan-komparasi-statistik-riil-wonoayu-n-240" title="Permalink to this heading">#</a></h2>
+<h2>4. Tabel Ringkasan Komparasi Statistik Riil Wonoayu (<span class="math notranslate nohighlight">\(N = 240\)</span>)<a class="headerlink" href="#tabel-ringkasan-komparasi-statistik-riil-wonoayu-n-240" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Indikator Statistik</p></th>
@@ -994,7 +1036,7 @@ $<span class="math notranslate nohighlight">\(\text{Suku Pertama} = \frac{240 \t
 </section>
 <hr class="docutils" />
 <section id="kesimpulan-praktikum">
-<h2>5. Kesimpulan Praktikum<a class="headerlink" href="#kesimpulan-praktikum" title="Permalink to this heading">#</a></h2>
+<h2>5. Kesimpulan Praktikum<a class="headerlink" href="#kesimpulan-praktikum" title="Link to this heading">#</a></h2>
 <p>Praktikum integrasi PostgreSQL Aiven dan KNIME Analytics Platform untuk data <span class="math notranslate nohighlight">\(\text{NO}_2\)</span> Kecamatan Wonoayu membuktikan bahwa:</p>
 <ol class="arabic simple">
 <li><p>Skema basis data relasional dengan presisi <code class="docutils literal notranslate"><span class="pre">DOUBLE</span> <span class="pre">PRECISION</span></code> berhasil menyimpan data deret waktu polutan atmosfer tanpa kehilangan angka desimal mikro.</p></li>
@@ -1059,15 +1101,17 @@ $<span class="math notranslate nohighlight">\(\text{Suku Pertama} = \frac{240 \t
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perancangan-struktur-basis-data-ingest-ke-postgresql-aiven">1. Perancangan Struktur Basis Data &amp; Ingest ke PostgreSQL Aiven</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-desain-skema-relasional-database-schema-architecture">A. Desain Skema Relasional (<em>Database Schema Architecture</em>)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-skrip-ddl-pembuatan-tabel-sql">B. Skrip DDL Pembuatan Tabel (SQL)</a></li>
@@ -1130,7 +1174,7 @@ By The Jupyter Book Community
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1154,8 +1198,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
 
   <footer class="bd-footer">
   </footer>
