@@ -212,7 +212,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="5.2_reduksi_dimensi_pca.html">5.2 Reduksi Dimensi PCA (1 - 37 Komponen)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5.3_penentuan_jumlah_cluster.html">5.3 Penentuan Jumlah Cluster Terbaik</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5.4_komparasi_pca_vs_68fitur.html">5.4 Komparasi PCA 37 vs 68 Fitur Asli</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5.5_implementasi_knime_workflow.html">5.5 Implementasi KNIME &amp; Notebook Interaktif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.5_implementasi_knime_workflow.html">5.5 Implementasi KNIME Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering.html">5.6 Notebook Interaktif K-Means &amp; PCA</a></li>
 </ul>
 
     </div>
@@ -409,7 +410,21 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#karakteristik-deret-waktu-masing-masing-polutan-combined">1. Karakteristik Deret Waktu Masing-Masing Polutan &amp; Combined</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar-k-means-clustering">2. Konsep Dasar K-Means Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-contoh-perhitungan-manual-fitur-tsfel-khusus-spectral-domain">2. Deskripsi &amp; Contoh Perhitungan Manual Fitur TSFEL Khusus (Spectral Domain)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-konsep-matriks-204-fitur-3-polutan-times-68-fitur-tsfel">A. Konsep Matriks 204 Fitur (3 Polutan <span class="math notranslate nohighlight">\(\times\)</span> 68 Fitur TSFEL)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-perhitungan-manual-fitur-1-spectral-positive-turning">B. Perhitungan Manual Fitur 1: <code class="docutils literal notranslate"><span class="pre">spectral_positive_turning</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#definisi-formulasi-matematis">1. Definisi &amp; Formulasi Matematis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan-manual-3-polutan-sampel-5-hari">2. Contoh Perhitungan Manual 3 Polutan (Sampel 5 Hari)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-perhitungan-manual-fitur-2-spectral-roll-off">C. Perhitungan Manual Fitur 2: <code class="docutils literal notranslate"><span class="pre">spectral_roll_off</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. Definisi &amp; Formulasi Matematis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan-manual-3-polutan">2. Contoh Perhitungan Manual 3 Polutan</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar-k-means-clustering">3. Konsep Dasar K-Means Clustering</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perumusan-matematis-k-means">Perumusan Matematis K-Means:</a></li>
 </ul>
 </li>
@@ -417,7 +432,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterasi-1">Iterasi 1:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar-perhitungan-manual-pca">4. Konsep Dasar &amp; Perhitungan Manual PCA</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar-perhitungan-manual-pca">5. Konsep Dasar &amp; Perhitungan Manual PCA</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-matematis-pca">Tahapan Matematis PCA:</a></li>
 </ul>
 </li>
@@ -466,8 +481,113 @@ document.write(`
 </ol>
 </section>
 <hr class="docutils" />
+<section id="deskripsi-contoh-perhitungan-manual-fitur-tsfel-khusus-spectral-domain">
+<h2>2. Deskripsi &amp; Contoh Perhitungan Manual Fitur TSFEL Khusus (Spectral Domain)<a class="headerlink" href="#deskripsi-contoh-perhitungan-manual-fitur-tsfel-khusus-spectral-domain" title="Permalink to this heading">#</a></h2>
+<p>Sesuai pembagian tugas analisis fitur domain spektral TSFEL, bagian ini memuat deskripsi mendalam dan <strong>contoh perhitungan manual langkah demi langkah</strong> untuk 2 fitur spektral khusus pada <strong>3 polutan sekaligus (<span class="math notranslate nohighlight">\(\text{NO}_2, \text{SO}_2, \text{CO}\)</span>)</strong> sehingga menghasilkan matriks <strong>204 fitur</strong> (<span class="math notranslate nohighlight">\(68 \text{ fitur} \times 3 \text{ polutan}\)</span>):</p>
+<ol class="arabic simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">spectral_positive_turning</span></code></strong> (<em>Spectral Positive Turning Points</em>)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">spectral_roll_off</span></code></strong> (<em>Spectral Roll-Off Frequency</em>)</p></li>
+</ol>
+<hr class="docutils" />
+<section id="a-konsep-matriks-204-fitur-3-polutan-times-68-fitur-tsfel">
+<h3>A. Konsep Matriks 204 Fitur (3 Polutan <span class="math notranslate nohighlight">\(\times\)</span> 68 Fitur TSFEL)<a class="headerlink" href="#a-konsep-matriks-204-fitur-3-polutan-times-68-fitur-tsfel" title="Permalink to this heading">#</a></h3>
+<p>Sebelum ekstraksi dilakukan, 3 sinyal polutan terpisah (<span class="math notranslate nohighlight">\(\text{NO}_2, \text{SO}_2, \text{CO}\)</span>) dihitung 68 fitur TSFEL-nya masing-masing pada jendela deret waktu harian:
+$<span class="math notranslate nohighlight">\(\text{Total Kolom Fitur} = 3 \text{ Polutan} \times 68 \text{ Fitur TSFEL} = 204 \text{ Kolom}\)</span>$</p>
+<ul class="simple">
+<li><p><strong>Fitur 1 – 68</strong>: Fitur TSFEL <span class="math notranslate nohighlight">\(\text{NO}_2\)</span> (termasuk <code class="docutils literal notranslate"><span class="pre">NO2_spectral_positive_turning</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">NO2_spectral_roll_off</span></code>)</p></li>
+<li><p><strong>Fitur 69 – 136</strong>: Fitur TSFEL <span class="math notranslate nohighlight">\(\text{SO}_2\)</span> (termasuk <code class="docutils literal notranslate"><span class="pre">SO2_spectral_positive_turning</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">SO2_spectral_roll_off</span></code>)</p></li>
+<li><p><strong>Fitur 137 – 204</strong>: Fitur TSFEL <span class="math notranslate nohighlight">\(\text{CO}\)</span> (termasuk <code class="docutils literal notranslate"><span class="pre">CO_spectral_positive_turning</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">CO_spectral_roll_off</span></code>)</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="b-perhitungan-manual-fitur-1-spectral-positive-turning">
+<h3>B. Perhitungan Manual Fitur 1: <code class="docutils literal notranslate"><span class="pre">spectral_positive_turning</span></code><a class="headerlink" href="#b-perhitungan-manual-fitur-1-spectral-positive-turning" title="Permalink to this heading">#</a></h3>
+<section id="definisi-formulasi-matematis">
+<h4>1. Definisi &amp; Formulasi Matematis<a class="headerlink" href="#definisi-formulasi-matematis" title="Permalink to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">spectral_positive_turning</span></code> menghitung <strong>jumlah puncak lokal (puncak frekuensi)</strong> pada Spektrum Daya (<em>Power Spectral Density</em> / PSD) sinyal. Puncak lokal terjadi ketika kemiringan (turunan pertama) dari spektrum daya berubah dari bernilai positif ke negatif:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}P(f_k) = \begin{cases} 1, &amp; \text{jika } S(f_k) &gt; S(f_{k-1}) \text{ dan } S(f_k) &gt; S(f_{k+1}) \\ 0, &amp; \text{lainnya} \end{cases}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\text{Spectral Positive Turning} = \sum_{k=2}^{N/2-1} P(f_k)\]</div>
+<p>di mana <span class="math notranslate nohighlight">\(S(f_k) = |X(f_k)|^2\)</span> adalah spektrum daya hasil Fast Fourier Transform (FFT).</p>
+</section>
+<section id="contoh-perhitungan-manual-3-polutan-sampel-5-hari">
+<h4>2. Contoh Perhitungan Manual 3 Polutan (Sampel 5 Hari)<a class="headerlink" href="#contoh-perhitungan-manual-3-polutan-sampel-5-hari" title="Permalink to this heading">#</a></h4>
+<p>Misalkan kita mengambil sampel konsentrasi 5 hari untuk <span class="math notranslate nohighlight">\(\text{NO}_2, \text{SO}_2, \text{CO}\)</span>:</p>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(\text{NO}_2\)</span></strong>: <span class="math notranslate nohighlight">\([40, 55, 35, 60, 45] \times 10^{-6} \text{ mol/m}^2\)</span></p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\text{SO}_2\)</span></strong>: <span class="math notranslate nohighlight">\([100, 250, 120, 300, 150] \times 10^{-6} \text{ mol/m}^2\)</span></p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\text{CO}\)</span></strong>: <span class="math notranslate nohighlight">\([25, 31, 27, 35, 28] \times 10^{-3} \text{ mol/m}^2\)</span></p></li>
+</ul>
+<p><strong>Langkah 1: Hitung Spektrum Daya FFT (<span class="math notranslate nohighlight">\(S(f_k)\)</span>) untuk <span class="math notranslate nohighlight">\(\text{NO}_2\)</span></strong>:
+Setelah dilakukan transformasi Fourier diskrit (FFT) pada sinyal <span class="math notranslate nohighlight">\(\text{NO}_2\)</span>, diperoleh nilai spektrum daya pada komponen frekuensi <span class="math notranslate nohighlight">\(f_0, f_1, f_2, f_3, f_4\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(S(f_0) = 18.5\)</span> (DC Component)</p></li>
+<li><p><span class="math notranslate nohighlight">\(S(f_1) = 42.1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S(f_2) = 15.3\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S(f_3) = 38.8\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S(f_4) = 12.0\)</span></p></li>
+</ul>
+<p><strong>Langkah 2: Identifikasi Puncak Positif (<span class="math notranslate nohighlight">\(S(f_k) &gt; S(f_{k-1})\)</span> dan <span class="math notranslate nohighlight">\(S(f_k) &gt; S(f_{k+1})\)</span>)</strong>:</p>
+<ul class="simple">
+<li><p>Pada <span class="math notranslate nohighlight">\(f_1\)</span>: <span class="math notranslate nohighlight">\(S(f_1) = 42.1 &gt; S(f_0) = 18.5\)</span> dan <span class="math notranslate nohighlight">\(S(f_1) = 42.1 &gt; S(f_2) = 15.3 \implies \mathbf{\text{Penyumbang Puncak (1)}}\)</span></p></li>
+<li><p>Pada <span class="math notranslate nohighlight">\(f_2\)</span>: <span class="math notranslate nohighlight">\(S(f_2) = 15.3 &lt; S(f_1) = 42.1 \implies \text{Bukan Puncak (0)}\)</span></p></li>
+<li><p>Pada <span class="math notranslate nohighlight">\(f_3\)</span>: <span class="math notranslate nohighlight">\(S(f_3) = 38.8 &gt; S(f_2) = 15.3\)</span> dan <span class="math notranslate nohighlight">\(S(f_3) = 38.8 &gt; S(f_4) = 12.0 \implies \mathbf{\text{Penyumbang Puncak (1)}}\)</span></p></li>
+</ul>
+<p><strong>Hasil Akhir <code class="docutils literal notranslate"><span class="pre">spectral_positive_turning</span></code></strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{NO}_2\text{\_spectral\_positive\_turning} = 1 + 1 = \mathbf{2}\)</span></p></li>
+<li><p>Dengan cara yang sama untuk <span class="math notranslate nohighlight">\(\text{SO}_2\)</span> &amp; <span class="math notranslate nohighlight">\(\text{CO}\)</span>:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\text{SO}_2\text{\_spectral\_positive\_turning} = \mathbf{2}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{CO}\text{\_spectral\_positive\_turning} = \mathbf{1}\)</span> (karena sinyal CO lebih mulus/smooth)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="c-perhitungan-manual-fitur-2-spectral-roll-off">
+<h3>C. Perhitungan Manual Fitur 2: <code class="docutils literal notranslate"><span class="pre">spectral_roll_off</span></code><a class="headerlink" href="#c-perhitungan-manual-fitur-2-spectral-roll-off" title="Permalink to this heading">#</a></h3>
+<section id="id1">
+<h4>1. Definisi &amp; Formulasi Matematis<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">spectral_roll_off</span></code> menentukan <strong>frekuensi ambang batas</strong> di mana <span class="math notranslate nohighlight">\(85\%\)</span> (persentase standar TSFEL) dari total energi spektral terkonsentrasi di bawah frekuensi tersebut. Fitur ini mengukur seberapa dominan frekuensi rendah vs frekuensi tinggi pada polutan udara:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{k=1}^{R} S(f_k) = 0.85 \times \sum_{k=1}^{N/2} S(f_k)\]</div>
+<p>di mana <span class="math notranslate nohighlight">\(f_R\)</span> adalah <strong>Spectral Roll-Off Frequency</strong>.</p>
+</section>
+<section id="contoh-perhitungan-manual-3-polutan">
+<h4>2. Contoh Perhitungan Manual 3 Polutan<a class="headerlink" href="#contoh-perhitungan-manual-3-polutan" title="Permalink to this heading">#</a></h4>
+<p>Diberikan spektrum daya <span class="math notranslate nohighlight">\(S(f_k)\)</span> untuk 5 komponen frekuensi (<span class="math notranslate nohighlight">\(f_0 = 0.0\text{ Hz}, f_1 = 0.1\text{ Hz}, f_2 = 0.2\text{ Hz}, f_3 = 0.3\text{ Hz}, f_4 = 0.4\text{ Hz}\)</span>):</p>
+<p><strong>Langkah 1: Hitung Total Energi Spektral (<span class="math notranslate nohighlight">\(\sum S(f_k)\)</span>) untuk <span class="math notranslate nohighlight">\(\text{NO}_2\)</span></strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(S = [10, 40, 20, 20, 10]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Total Energi } E_{\text{total}} = 10 + 40 + 20 + 20 + 10 = \mathbf{100}\)</span></p></li>
+<li><p><strong>Ambang <span class="math notranslate nohighlight">\(85\%\)</span> Energi</strong>: <span class="math notranslate nohighlight">\(0.85 \times 100 = \mathbf{85}\)</span></p></li>
+</ul>
+<p><strong>Langkah 2: Hitung Akumulasi Energi dari Frekuensi Rendah ke Tinggi</strong>:</p>
+<ul class="simple">
+<li><p>Pada <span class="math notranslate nohighlight">\(f_0 = 0.0\text{ Hz}\)</span>: Akumulasi = <span class="math notranslate nohighlight">\(10\)</span> (<span class="math notranslate nohighlight">\(10 &lt; 85\)</span>)</p></li>
+<li><p>Pada <span class="math notranslate nohighlight">\(f_1 = 0.1\text{ Hz}\)</span>: Akumulasi = <span class="math notranslate nohighlight">\(40 + 10 = 50\)</span> (<span class="math notranslate nohighlight">\(50 &lt; 85\)</span>)</p></li>
+<li><p>Pada <span class="math notranslate nohighlight">\(f_2 = 0.2\text{ Hz}\)</span>: Akumulasi = <span class="math notranslate nohighlight">\(50 + 20 = 70\)</span> (<span class="math notranslate nohighlight">\(70 &lt; 85\)</span>)</p></li>
+<li><p>Pada <span class="math notranslate nohighlight">\(f_3 = 0.3\text{ Hz}\)</span>: Akumulasi = <span class="math notranslate nohighlight">\(70 + 20 = \mathbf{90}\)</span> (<span class="math notranslate nohighlight">\(\mathbf{90 \ge 85}\)</span>) <span class="math notranslate nohighlight">\(\implies \mathbf{\text{Batas Roll-Off Tercapai!}}\)</span></p></li>
+</ul>
+<p><strong>Hasil Akhir <code class="docutils literal notranslate"><span class="pre">spectral_roll_off</span></code></strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{NO}_2\text{\_spectral\_roll\_off} = f_3 = \mathbf{0.3\text{ Hz}}\)</span></p></li>
+<li><p>Dengan cara yang sama untuk <span class="math notranslate nohighlight">\(\text{SO}_2\)</span> &amp; <span class="math notranslate nohighlight">\(\text{CO}\)</span>:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\text{SO}_2\text{\_spectral\_roll\_off} = \mathbf{0.4\text{ Hz}}\)</span> (karena fluktuasi fluktuatif/spikes frekuensi tinggi)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{CO}\text{\_spectral\_roll\_off} = \mathbf{0.2\text{ Hz}}\)</span> (karena frekuensi rendah musiman dominan)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
 <section id="konsep-dasar-k-means-clustering">
-<h2>2. Konsep Dasar K-Means Clustering<a class="headerlink" href="#konsep-dasar-k-means-clustering" title="Permalink to this heading">#</a></h2>
+<h2>3. Konsep Dasar K-Means Clustering<a class="headerlink" href="#konsep-dasar-k-means-clustering" title="Permalink to this heading">#</a></h2>
 <p><strong>K-Means Clustering</strong> mengelompokkan data ke dalam <span class="math notranslate nohighlight">\(K\)</span> kelompok (klaster) berdasarkan kemiripan karakteristik. Tujuan utamanya adalah meminimalkan jumlah kuadrat jarak antara setiap titik data dengan pusat klasternya (<em>centroid</em>), yang dikenal sebagai <strong>Within-Cluster Sum of Squares (WCSS)</strong> atau <strong>Inertia</strong>.</p>
 <section id="perumusan-matematis-k-means">
 <h3>Perumusan Matematis K-Means:<a class="headerlink" href="#perumusan-matematis-k-means" title="Permalink to this heading">#</a></h3>
@@ -517,7 +637,7 @@ $<span class="math notranslate nohighlight">\(S(i) = \frac{b(i) - a(i)}{\max(a(i
 </section>
 <hr class="docutils" />
 <section id="konsep-dasar-perhitungan-manual-pca">
-<h2>4. Konsep Dasar &amp; Perhitungan Manual PCA<a class="headerlink" href="#konsep-dasar-perhitungan-manual-pca" title="Permalink to this heading">#</a></h2>
+<h2>5. Konsep Dasar &amp; Perhitungan Manual PCA<a class="headerlink" href="#konsep-dasar-perhitungan-manual-pca" title="Permalink to this heading">#</a></h2>
 <p><strong>Principal Component Analysis (PCA)</strong> mereduksi dimensi data berdimensi tinggi (<span class="math notranslate nohighlight">\(d=68\)</span>) menjadi <span class="math notranslate nohighlight">\(m\)</span> komponen utama (<span class="math notranslate nohighlight">\(m \le 37\)</span>) yang saling tegak lurus (<em>orthogonal</em>), sambil mempertahankan varians informasi secara maksimal.</p>
 <section id="tahapan-matematis-pca">
 <h3>Tahapan Matematis PCA:<a class="headerlink" href="#tahapan-matematis-pca" title="Permalink to this heading">#</a></h3>
@@ -596,7 +716,21 @@ $<span class="math notranslate nohighlight">\(S(i) = \frac{b(i) - a(i)}{\max(a(i
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#karakteristik-deret-waktu-masing-masing-polutan-combined">1. Karakteristik Deret Waktu Masing-Masing Polutan &amp; Combined</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar-k-means-clustering">2. Konsep Dasar K-Means Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-contoh-perhitungan-manual-fitur-tsfel-khusus-spectral-domain">2. Deskripsi &amp; Contoh Perhitungan Manual Fitur TSFEL Khusus (Spectral Domain)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-konsep-matriks-204-fitur-3-polutan-times-68-fitur-tsfel">A. Konsep Matriks 204 Fitur (3 Polutan <span class="math notranslate nohighlight">\(\times\)</span> 68 Fitur TSFEL)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-perhitungan-manual-fitur-1-spectral-positive-turning">B. Perhitungan Manual Fitur 1: <code class="docutils literal notranslate"><span class="pre">spectral_positive_turning</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#definisi-formulasi-matematis">1. Definisi &amp; Formulasi Matematis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan-manual-3-polutan-sampel-5-hari">2. Contoh Perhitungan Manual 3 Polutan (Sampel 5 Hari)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-perhitungan-manual-fitur-2-spectral-roll-off">C. Perhitungan Manual Fitur 2: <code class="docutils literal notranslate"><span class="pre">spectral_roll_off</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. Definisi &amp; Formulasi Matematis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan-manual-3-polutan">2. Contoh Perhitungan Manual 3 Polutan</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar-k-means-clustering">3. Konsep Dasar K-Means Clustering</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perumusan-matematis-k-means">Perumusan Matematis K-Means:</a></li>
 </ul>
 </li>
@@ -604,7 +738,7 @@ $<span class="math notranslate nohighlight">\(S(i) = \frac{b(i) - a(i)}{\max(a(i
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterasi-1">Iterasi 1:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar-perhitungan-manual-pca">4. Konsep Dasar &amp; Perhitungan Manual PCA</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar-perhitungan-manual-pca">5. Konsep Dasar &amp; Perhitungan Manual PCA</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-matematis-pca">Tahapan Matematis PCA:</a></li>
 </ul>
 </li>
