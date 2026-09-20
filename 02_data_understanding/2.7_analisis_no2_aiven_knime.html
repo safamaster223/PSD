@@ -663,10 +663,6 @@ document.write(`
 <span class="nb">print</span><span class="p">(</span><span class="s2">"🔒 Seluruh data berhasil diunggah dan koneksi database ditutup dengan aman."</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><img alt="Status Service PostgreSQL Aiven" src="data/images/analisis_no2/01-aiven-postgres-dashboard.png" /></p>
-<blockquote>
-<div><p><strong>Panduan Gambar 01 (<code class="docutils literal notranslate"><span class="pre">data/images/analisis_no2/01-aiven-postgres-dashboard.png</span></code>):</strong> Tangkapan layar dari dashboard Aiven Console yang menampilkan status service PostgreSQL dalam kondisi <em>Running</em>, lengkap dengan informasi Host URI, Port, dan Database Name.</p>
-</div></blockquote>
 </section>
 <section id="cara-menjalankan-script-python">
 <h3>Cara Menjalankan Script Python:<a class="headerlink" href="#cara-menjalankan-script-python" title="Permalink to this heading">#</a></h3>
@@ -677,10 +673,6 @@ document.write(`
 </div>
 </li>
 </ul>
-<p><img alt="Log Eksekusi Ingest Python" src="data/images/analisis_no2/02-python-ingestion-log.png" /></p>
-<blockquote>
-<div><p><strong>Panduan Gambar 02 (<code class="docutils literal notranslate"><span class="pre">data/images/analisis_no2/02-python-ingestion-log.png</span></code>):</strong> Tangkapan layar terminal yang menampilkan log sukses pengunggahan tabel mentah, tabel bersih, dan tabel analisis <code class="docutils literal notranslate"><span class="pre">wonoayu_no2</span></code>.</p>
-</div></blockquote>
 </section>
 </section>
 <hr class="docutils" />
@@ -697,10 +689,6 @@ document.write(`
 <section id="a-node-postgresql-connector">
 <h4>A. Node <code class="docutils literal notranslate"><span class="pre">PostgreSQL</span> <span class="pre">Connector</span></code><a class="headerlink" href="#a-node-postgresql-connector" title="Permalink to this heading">#</a></h4>
 <p>Node ini bertugas membuka jalur komunikasi JDBC yang terenkripsi aman ke instance PostgreSQL Aiven.</p>
-<p><img alt="Konfigurasi PostgreSQL Connector Node" src="data/images/analisis_no2/04-knime-postgres-connector-config.png" /></p>
-<blockquote>
-<div><p><strong>Panduan Gambar 04 (<code class="docutils literal notranslate"><span class="pre">data/images/analisis_no2/04-knime-postgres-connector-config.png</span></code>):</strong> Tangkapan layar jendela dialog pengaturan koneksi database JDBC pada node PostgreSQL Connector di KNIME.</p>
-</div></blockquote>
 <ul class="simple">
 <li><p><strong>Langkah Konfigurasi</strong>:</p>
 <ol class="arabic simple">
@@ -717,10 +705,6 @@ document.write(`
 <section id="b-node-db-table-selector">
 <h4>B. Node <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Table</span> <span class="pre">Selector</span></code><a class="headerlink" href="#b-node-db-table-selector" title="Permalink to this heading">#</a></h4>
 <p>Node ini menerima koneksi DB (port berwarna merah) dari <code class="docutils literal notranslate"><span class="pre">PostgreSQL</span> <span class="pre">Connector</span></code> untuk mengidentifikasi dan memilih tabel data Kecamatan Wonoayu.</p>
-<p><img alt="Konfigurasi DB Table Selector Node" src="data/images/analisis_no2/05-knime-db-table-selector-config.png" /></p>
-<blockquote>
-<div><p><strong>Panduan Gambar 05 (<code class="docutils literal notranslate"><span class="pre">data/images/analisis_no2/05-knime-db-table-selector-config.png</span></code>):</strong> Tangkapan layar jendela penjelajah skema database pada node DB Table Selector di KNIME.</p>
-</div></blockquote>
 <ul class="simple">
 <li><p><strong>Langkah Konfigurasi</strong>:</p>
 <ol class="arabic simple">
@@ -736,10 +720,6 @@ document.write(`
 <section id="c-node-db-reader">
 <h4>C. Node <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Reader</span></code><a class="headerlink" href="#c-node-db-reader" title="Permalink to this heading">#</a></h4>
 <p>Node ini mengeksekusi perintah pembacaan SQL dari <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Table</span> <span class="pre">Selector</span></code> dan mengonversi data dari database menjadi tabel memori internal KNIME (port data berwarna hitam).</p>
-<p><img alt="Konfigurasi DB Reader Node" src="data/images/analisis_no2/06-knime-db-reader-config.png" /></p>
-<blockquote>
-<div><p><strong>Panduan Gambar 06 (<code class="docutils literal notranslate"><span class="pre">data/images/analisis_no2/06-knime-db-reader-config.png</span></code>):</strong> Tangkapan layar opsi pengaturan pembacaan tabel dan fetch size pada node DB Reader di KNIME.</p>
-</div></blockquote>
 <ul class="simple">
 <li><p><strong>Langkah Konfigurasi</strong>:</p>
 <ol class="arabic simple">
@@ -754,10 +734,6 @@ document.write(`
 <section id="d-node-db-query-reader-opsional-alternatif">
 <h4>D. Node <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Query</span> <span class="pre">Reader</span></code> (Opsional / Alternatif)<a class="headerlink" href="#d-node-db-query-reader-opsional-alternatif" title="Permalink to this heading">#</a></h4>
 <p>Node ini dapat digunakan sebagai alternatif apabila ingin menjalankan kueri SQL khusus secara langsung (misalnya memfilter baris non-null langsung di tingkat database engine).</p>
-<p><img alt="Konfigurasi DB Query Reader Node" src="data/images/analisis_no2/07-knime-db-query-reader-config.png" /></p>
-<blockquote>
-<div><p><strong>Panduan Gambar 07 (<code class="docutils literal notranslate"><span class="pre">data/images/analisis_no2/07-knime-db-query-reader-config.png</span></code>):</strong> Tangkapan layar jendela SQL Editor pada node DB Query Reader di KNIME.</p>
-</div></blockquote>
 <ul>
 <li><p><strong>Langkah Konfigurasi</strong>:</p>
 <ol class="arabic">
@@ -776,10 +752,6 @@ document.write(`
 <section id="e-node-statistics">
 <h4>E. Node <code class="docutils literal notranslate"><span class="pre">Statistics</span></code><a class="headerlink" href="#e-node-statistics" title="Permalink to this heading">#</a></h4>
 <p>Node ini menghitung seluruh metrik statistik deskriptif dari tabel data yang diterima dari <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Reader</span></code> atau <code class="docutils literal notranslate"><span class="pre">DB</span> <span class="pre">Query</span> <span class="pre">Reader</span></code>.</p>
-<p><img alt="Konfigurasi Statistics Node" src="data/images/analisis_no2/08-knime-statistics-node-config.png" /></p>
-<blockquote>
-<div><p><strong>Panduan Gambar 08 (<code class="docutils literal notranslate"><span class="pre">data/images/analisis_no2/08-knime-statistics-node-config.png</span></code>):</strong> Tangkapan layar jendela pengaturan seleksi kolom numerik dan kalkulasi kuartil pada node Statistics di KNIME.</p>
-</div></blockquote>
 <ul class="simple">
 <li><p><strong>Langkah Konfigurasi</strong>:</p>
 <ol class="arabic simple">

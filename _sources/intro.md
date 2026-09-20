@@ -61,7 +61,7 @@ Sesuai dengan kurikulum mata kuliah, proyek ini mengikuti kerangka kerja standar
 
 | Nama | NIM |
 | :--- | :--- |
-| **Alghifari Amar Mukhasyafah (NIM: 240411100123)** | 240411100071 |
+| **Alghifari Amar Mukhasyafah (NIM: 240411100123)** | 240411100123 |
 
 **Dosen Pengampu:** MULA'AB, S.Si., M.Kom  
 *Program Studi Teknik Informatika, Fakultas Teknik, Universitas Trunojoyo Madura*
