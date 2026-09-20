@@ -42,6 +42,7 @@ Sesuai dengan kurikulum mata kuliah, proyek ini mengikuti kerangka kerja standar
 | **BAB 2 — Data Understanding** | Pengumpulan data satelit Sentinel-5P via openEO (`wonoayu.geojson`), deskripsi dataset, EDA, analisis skema PostgreSQL Aiven & KNIME, identifikasi 102 missing value, dan analisis pencilan (*outliers*). |
 | **BAB 3 — Data Preprocessing** | Pembersihan indeks waktu, strategi penanganan pencilan, imputasi missing value (**3.3.1 Interpolasi Linear**), dan validasi integritas data bersih 366 hari. |
 | **BAB 4 — Feature Extraction** | Penyiapan sinyal kontinu, konfigurasi pustaka TSFEL, ekstraksi domain statistik, domain temporal, domain spektral, dan tabulasi matriks 68 fitur. |
+| **BAB 5 — K-Means Clustering** | Konsep K-Means & PCA manual, reduksi dimensi PCA 37 komponen, penentuan cluster optimal ($K=4$), komparasi 68 fitur, KNIME workflow, dan Notebook interaktif 28 grafik terpisah. |
 
 ---
 
@@ -51,7 +52,7 @@ Sesuai dengan kurikulum mata kuliah, proyek ini mengikuti kerangka kerja standar
 *   **Pengambilan Data:** openEO (*Copernicus Data Space Ecosystem*)
 *   **Basis Data Cloud:** PostgreSQL Aiven (SSL Mode, Float 53-bit)
 *   **Workflow Analitik Visual:** KNIME Analytics Platform
-*   **Library Analisis:** Pandas, NumPy, GeoPandas, SQLAlchemy, TSFEL
+*   **Library Analisis:** Pandas, NumPy, GeoPandas, SQLAlchemy, TSFEL, Scikit-learn
 *   **Dokumentasi:** Jupyter Book & MyST Markdown
 *   **Version Control:** GitHub ([github.com/Alghifari-Ananta/PSD](https://github.com/Alghifari-Ananta/PSD))
 
@@ -102,7 +103,8 @@ Gunakan menu navigasi di sebelah kiri untuk menelusuri setiap bagian:
    - 5.2 Reduksi Dimensi PCA (1 s.d. 37 Komponen)
    - 5.3 Penentuan Jumlah Cluster Terbaik
    - 5.4 Komparasi PCA 37 vs 68 Fitur TSFEL Asli
-   - 5.5 Implementasi KNIME & Notebook Interaktif
+   - 5.5 Implementasi KNIME Workflow
+   - 5.6 Notebook Interaktif K-Means & PCA (28 Grafik Terpisah)
 
 
 ---

@@ -213,7 +213,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/5.2_reduksi_dimensi_pca.html">5.2 Reduksi Dimensi PCA (1 - 37 Komponen)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/5.3_penentuan_jumlah_cluster.html">5.3 Penentuan Jumlah Cluster Terbaik</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/5.4_komparasi_pca_vs_68fitur.html">5.4 Komparasi PCA 37 vs 68 Fitur Asli</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/5.5_implementasi_knime_workflow.html">5.5 Implementasi KNIME &amp; Notebook Interaktif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/5.5_implementasi_knime_workflow.html">5.5 Implementasi KNIME Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/05_kmeans_clustering.html">5.6 Notebook Interaktif K-Means &amp; PCA</a></li>
 </ul>
 
     </div>
@@ -483,6 +484,9 @@ document.write(`
 <tr class="row-odd"><td class="text-left"><p><strong>BAB 4 — Feature Extraction</strong></p></td>
 <td class="text-left"><p>Penyiapan sinyal kontinu, konfigurasi pustaka TSFEL, ekstraksi domain statistik, domain temporal, domain spektral, dan tabulasi matriks 68 fitur.</p></td>
 </tr>
+<tr class="row-even"><td class="text-left"><p><strong>BAB 5 — K-Means Clustering</strong></p></td>
+<td class="text-left"><p>Konsep K-Means &amp; PCA manual, reduksi dimensi PCA 37 komponen, penentuan cluster optimal (<span class="math notranslate nohighlight">\(K=4\)</span>), komparasi 68 fitur, KNIME workflow, dan Notebook interaktif 28 grafik terpisah.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -495,7 +499,7 @@ document.write(`
 <li><p><strong>Pengambilan Data:</strong> openEO (<em>Copernicus Data Space Ecosystem</em>)</p></li>
 <li><p><strong>Basis Data Cloud:</strong> PostgreSQL Aiven (SSL Mode, Float 53-bit)</p></li>
 <li><p><strong>Workflow Analitik Visual:</strong> KNIME Analytics Platform</p></li>
-<li><p><strong>Library Analisis:</strong> Pandas, NumPy, GeoPandas, SQLAlchemy, TSFEL</p></li>
+<li><p><strong>Library Analisis:</strong> Pandas, NumPy, GeoPandas, SQLAlchemy, TSFEL, Scikit-learn</p></li>
 <li><p><strong>Dokumentasi:</strong> Jupyter Book &amp; MyST Markdown</p></li>
 <li><p><strong>Version Control:</strong> GitHub (<a class="reference external" href="https://github.com/Alghifari-Ananta/PSD">github.com/Alghifari-Ananta/PSD</a>)</p></li>
 </ul>
@@ -566,7 +570,8 @@ document.write(`
 <li><p>5.2 Reduksi Dimensi PCA (1 s.d. 37 Komponen)</p></li>
 <li><p>5.3 Penentuan Jumlah Cluster Terbaik</p></li>
 <li><p>5.4 Komparasi PCA 37 vs 68 Fitur TSFEL Asli</p></li>
-<li><p>5.5 Implementasi KNIME &amp; Notebook Interaktif</p></li>
+<li><p>5.5 Implementasi KNIME Workflow</p></li>
+<li><p>5.6 Notebook Interaktif K-Means &amp; PCA (28 Grafik Terpisah)</p></li>
 </ul>
 </li>
 </ol>
@@ -616,7 +621,8 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/5.2_reduksi_dimensi_pca.html">5.2 Reduksi Dimensi PCA (1 - 37 Komponen)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/5.3_penentuan_jumlah_cluster.html">5.3 Penentuan Jumlah Cluster Terbaik</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/5.4_komparasi_pca_vs_68fitur.html">5.4 Komparasi PCA 37 vs 68 Fitur Asli</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/5.5_implementasi_knime_workflow.html">5.5 Implementasi KNIME &amp; Notebook Interaktif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/5.5_implementasi_knime_workflow.html">5.5 Implementasi KNIME Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/05_kmeans_clustering.html">5.6 Notebook Interaktif K-Means &amp; PCA</a></li>
 </ul>
 </div>
 </section>
