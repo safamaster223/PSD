@@ -59,6 +59,8 @@ Sesuai dengan kurikulum mata kuliah, proyek ini mengikuti kerangka kerja standar
 
 ## Tim Pengembang
 
+<img src="assets/pp.jpg" alt="Alghifari Amar Mukhasyafah" style="width:140px; height:140px; border-radius:50%; object-fit:cover; margin-bottom:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);" />
+
 | Nama | NIM |
 | :--- | :--- |
 | **Alghifari Amar Mukhasyafah (NIM: 240411100123)** | 240411100123 |
