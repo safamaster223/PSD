@@ -206,6 +206,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="4.5_fitur_domain_spectral.html">4.5 Fitur Domain Spectral</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4.6_hasil_ekstraksi_68_fitur.html">4.6 Hasil Ekstraksi 68 Fitur</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BAB 5 — K-MEANS CLUSTERING</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.1_konsep_kmeans_pca_manual.html">5.1 Konsep K-Means &amp; PCA (Hitung Manual)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.2_reduksi_dimensi_pca.html">5.2 Reduksi Dimensi PCA (1 - 37 Komponen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.3_penentuan_jumlah_cluster.html">5.3 Penentuan Jumlah Cluster Terbaik</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.4_komparasi_pca_vs_68fitur.html">5.4 Komparasi PCA 37 vs 68 Fitur Asli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.5_implementasi_knime_workflow.html">5.5 Implementasi KNIME &amp; Notebook Interaktif</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -406,6 +414,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-fitur-fraktal-kompleksitas-non-linear-6-fitur">B. Fitur Fraktal &amp; Kompleksitas Non-Linear (6 Fitur)</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-pembuktian-kode-tsfel">3. Perhitungan Manual &amp; Pembuktian Kode TSFEL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-perhitungan-manual-langkah-demi-langkah">A. Perhitungan Manual Langkah demi Langkah</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-kode-pembuktian-python-menggunakan-tsfel">B. Kode Pembuktian Python Menggunakan TSFEL</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -419,7 +432,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="fitur-domain-temporal">
 <h1>4.4 Fitur Domain Temporal<a class="headerlink" href="#fitur-domain-temporal" title="Permalink to this heading">#</a></h1>
-<p>Dokumen ini memuat perincian 21 fitur dalam <strong>Domain Temporal &amp; Dinamika Fraktal</strong> dari daftar 68 fitur TSFEL yang diekstraksi untuk sinyal polutan <span class="math notranslate nohighlight">\(\text{NO}_2\)</span> <strong>Kecamatan Wonoayu, Kabupaten Sidoarjo</strong>.</p>
+<p>Dokumen ini memuat perincian 21 fitur dalam <strong>Domain Temporal &amp; Dinamika Fraktal</strong> dari daftar 68 fitur TSFEL yang diekstraksi untuk sinyal polutan <span class="math notranslate nohighlight">\(\text{NO}_2\)</span> <strong>Kecamatan Wonoayu, Kabupaten Sidoarjo</strong>, lengkap dengan <strong>deskripsi</strong>, <strong>contoh perhitungan manual</strong>, dan <strong>pembuktian kode Python menggunakan pustaka TSFEL</strong>.</p>
 <hr class="docutils" />
 <section id="konsep-domain-temporal-kompleksitas-sinyal">
 <h2>1. Konsep Domain Temporal &amp; Kompleksitas Sinyal<a class="headerlink" href="#konsep-domain-temporal-kompleksitas-sinyal" title="Permalink to this heading">#</a></h2>
@@ -565,6 +578,129 @@ document.write(`
 </div>
 </section>
 </section>
+<hr class="docutils" />
+<section id="perhitungan-manual-pembuktian-kode-tsfel">
+<h2>3. Perhitungan Manual &amp; Pembuktian Kode TSFEL<a class="headerlink" href="#perhitungan-manual-pembuktian-kode-tsfel" title="Permalink to this heading">#</a></h2>
+<p>Untuk membuktikan keakuratan formulasi di atas, digunakan sampel sinyal acuan sederhana <span class="math notranslate nohighlight">\(N=5\)</span> dengan frekuensi sampling <span class="math notranslate nohighlight">\(fs = 1\text{ Hz}\)</span> dan sumbu waktu <span class="math notranslate nohighlight">\(t = [0, 1, 2, 3, 4]\)</span>:
+$<span class="math notranslate nohighlight">\(X = [1.0, 3.0, 2.0, 5.0, 4.0]\)</span>$</p>
+<section id="a-perhitungan-manual-langkah-demi-langkah">
+<h3>A. Perhitungan Manual Langkah demi Langkah<a class="headerlink" href="#a-perhitungan-manual-langkah-demi-langkah" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Selisih Harian (<span class="math notranslate nohighlight">\(\Delta X = x_{t} - x_{t-1}\)</span>)</strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Delta X = [3-1, 2-3, 5-2, 4-5] = [2.0, -1.0, 3.0, -1.0]\)</span> (<span class="math notranslate nohighlight">\(N-1 = 4\)</span> elemen)</p></li>
+<li><p>Mutlak selisih <span class="math notranslate nohighlight">\(|\Delta X| = [2.0, 1.0, 3.0, 1.0]\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">mean_diff</span></code></strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bar{\Delta X} = \frac{2.0 + (-1.0) + 3.0 + (-1.0)}{4} = \frac{3.0}{4} = \mathbf{0.75}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">mean_abs_diff</span></code></strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\overline{|\Delta X|} = \frac{2.0 + 1.0 + 3.0 + 1.0}{4} = \frac{7.0}{4} = \mathbf{1.75}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">sum_abs_diff</span></code></strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sum |\Delta X| = 2.0 + 1.0 + 3.0 + 1.0 = \mathbf{7.0}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">median_diff</span></code></strong>:</p>
+<ul class="simple">
+<li><p>Data selisih terurut: <span class="math notranslate nohighlight">\([-1.0, -1.0, 2.0, 3.0] \implies \text{Median} = \frac{-1.0 + 2.0}{2} = \mathbf{0.5}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">median_abs_diff</span></code></strong>:</p>
+<ul class="simple">
+<li><p>Data mutlak terurut: <span class="math notranslate nohighlight">\([1.0, 1.0, 2.0, 3.0] \implies \text{Median} = \frac{1.0 + 2.0}{2} = \mathbf{1.5}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">auc</span></code> (Area Under Curve - Integrasi Trapesium)</strong>:</p>
+<ul class="simple">
+<li><p>Trapesium 1 (<span class="math notranslate nohighlight">\(t=0 \to 1\)</span>): <span class="math notranslate nohighlight">\(\frac{1.0 + 3.0}{2} \times 1 = 2.0\)</span></p></li>
+<li><p>Trapesium 2 (<span class="math notranslate nohighlight">\(t=1 \to 2\)</span>): <span class="math notranslate nohighlight">\(\frac{3.0 + 2.0}{2} \times 1 = 2.5\)</span></p></li>
+<li><p>Trapesium 3 (<span class="math notranslate nohighlight">\(t=2 \to 3\)</span>): <span class="math notranslate nohighlight">\(\frac{2.0 + 5.0}{2} \times 1 = 3.5\)</span></p></li>
+<li><p>Trapesium 4 (<span class="math notranslate nohighlight">\(t=3 \to 4\)</span>): <span class="math notranslate nohighlight">\(\frac{5.0 + 4.0}{2} \times 1 = 4.5\)</span></p></li>
+<li><p>Total <span class="math notranslate nohighlight">\(\text{AUC} = 2.0 + 2.5 + 3.5 + 4.5 = \mathbf{12.5}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">slope</span></code> (Kemiringan Regresi Linier Terhadap Waktu <span class="math notranslate nohighlight">\(t = [0, 1, 2, 3, 4]\)</span>)</strong>:</p>
+<ul class="simple">
+<li><p>Rata-rata <span class="math notranslate nohighlight">\(\bar{t} = 2.0\)</span>, <span class="math notranslate nohighlight">\(\bar{x} = 3.0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Cov}(t, x) = \sum (t_i - \bar{t})(x_i - \bar{x}) = (-2)(-2) + (-1)(0) + (0)(-1) + (1)(2) + (2)(1) = 4 + 0 + 0 + 2 + 2 = 8.0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Var}(t) = \sum (t_i - \bar{t})^2 = (-2)^2 + (-1)^2 + 0^2 + 1^2 + 2^2 = 4 + 1 + 0 + 1 + 4 = 10.0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Slope} = \frac{\text{Cov}(t, x)}{\text{Var}(t)} = \frac{8.0}{10.0} = \mathbf{0.8}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">calc_centroid</span></code> (Titik Berat Temporal Berbasis Energi <span class="math notranslate nohighlight">\(x^2\)</span>)</strong>:</p>
+<ul class="simple">
+<li><p>Sinyal Energi <span class="math notranslate nohighlight">\(X^2 = [1, 9, 4, 25, 16] \implies \sum X^2 = 55.0\)</span></p></li>
+<li><p>Momen Waktu Energi <span class="math notranslate nohighlight">\(= 0(1) + 1(9) + 2(4) + 3(25) + 4(16) = 0 + 9 + 8 + 75 + 64 = 156.0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Centroid} = \frac{156.0}{55.0} = \frac{156}{55} \approx \mathbf{2.836364}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">distance</span></code> (Panjang Lintasan kurva sinyal <span class="math notranslate nohighlight">\(d = \sum \sqrt{\Delta t^2 + \Delta x^2}\)</span>)</strong>:</p>
+<ul class="simple">
+<li><p>Segmen 1 (<span class="math notranslate nohighlight">\(1 \to 3\)</span>): <span class="math notranslate nohighlight">\(\sqrt{1^2 + 2^2} = \sqrt{5} \approx 2.236068\)</span></p></li>
+<li><p>Segmen 2 (<span class="math notranslate nohighlight">\(3 \to 2\)</span>): <span class="math notranslate nohighlight">\(\sqrt{1^2 + (-1)^2} = \sqrt{2} \approx 1.414214\)</span></p></li>
+<li><p>Segmen 3 (<span class="math notranslate nohighlight">\(2 \to 5\)</span>): <span class="math notranslate nohighlight">\(\sqrt{1^2 + 3^2} = \sqrt{10} \approx 3.162278\)</span></p></li>
+<li><p>Segmen 4 (<span class="math notranslate nohighlight">\(5 \to 4\)</span>): <span class="math notranslate nohighlight">\(\sqrt{1^2 + (-1)^2} = \sqrt{2} \approx 1.414214\)</span></p></li>
+<li><p>Total <span class="math notranslate nohighlight">\(\text{Distance} = \sqrt{5} + \sqrt{2} + \sqrt{10} + \sqrt{2} \approx \mathbf{8.226773}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">positive_turning</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">negative_turning</span></code> (Titik Belok Puncak &amp; Lembah TSFEL)</strong>:</p>
+<ul class="simple">
+<li><p>Vektor turunan <span class="math notranslate nohighlight">\(\Delta X = [2, -1, 3, -1]\)</span></p></li>
+<li><p>Puncak (Positive Turning): Transisi <span class="math notranslate nohighlight">\(\Delta X &gt; 0 \to \Delta X &lt; 0\)</span> terjadi pada 2 titik (<span class="math notranslate nohighlight">\([2, -1]\)</span> dan <span class="math notranslate nohighlight">\([3, -1]\)</span>) <span class="math notranslate nohighlight">\(\rightarrow \mathbf{2}\)</span></p></li>
+<li><p>Lembah (Negative Turning): Transisi <span class="math notranslate nohighlight">\(\Delta X &lt; 0 \to \Delta X &gt; 0\)</span> terjadi pada 1 titik (<span class="math notranslate nohighlight">\([-1, 3]\)</span>) <span class="math notranslate nohighlight">\(\rightarrow \mathbf{1}\)</span></p></li>
+</ul>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="b-kode-pembuktian-python-menggunakan-tsfel">
+<h3>B. Kode Pembuktian Python Menggunakan TSFEL<a class="headerlink" href="#b-kode-pembuktian-python-menggunakan-tsfel" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tsfel</span>
+
+<span class="c1"># 1. Definisi Sinyal Acuan Sederhana</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># 2. Ekstraksi Fitur Domain Temporal via TSFEL</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"=== PEMBUKTIAN FITUR DOMAIN TEMPORAL ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"mean_diff          :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">mean_diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"mean_abs_diff      :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">mean_abs_diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"sum_abs_diff       :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">sum_abs_diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"median_diff        :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">median_diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"median_abs_diff    :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">median_abs_diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"auc                :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">auc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"slope              :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">slope</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"calc_centroid      :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">calc_centroid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"distance           :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"positive_turning   :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">positive_turning</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"negative_turning   :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">negative_turning</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Output Eksekusi Python (Persis Sesuai Perhitungan Manual):</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>=== PEMBUKTIAN FITUR DOMAIN TEMPORAL ===
+mean_diff          : 0.75
+mean_abs_diff      : 1.75
+sum_abs_diff       : 7.0
+median_diff        : 0.5
+median_abs_diff    : 1.5
+auc                : 12.5
+slope              : 0.8
+calc_centroid      : 2.8363636363636364
+distance           : 8.22677276241436
+positive_turning   : 2
+negative_turning   : 1
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -635,6 +771,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rincian-21-fitur-domain-temporal">2. Rincian 21 Fitur Domain Temporal</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-fitur-dinamika-waktu-konvensional-15-fitur">A. Fitur Dinamika Waktu Konvensional (15 Fitur)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-fitur-fraktal-kompleksitas-non-linear-6-fitur">B. Fitur Fraktal &amp; Kompleksitas Non-Linear (6 Fitur)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-pembuktian-kode-tsfel">3. Perhitungan Manual &amp; Pembuktian Kode TSFEL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-perhitungan-manual-langkah-demi-langkah">A. Perhitungan Manual Langkah demi Langkah</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-kode-pembuktian-python-menggunakan-tsfel">B. Kode Pembuktian Python Menggunakan TSFEL</a></li>
 </ul>
 </li>
 </ul>

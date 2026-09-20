@@ -97,6 +97,13 @@ Gunakan menu navigasi di sebelah kiri untuk menelusuri setiap bagian:
    - 4.4 Fitur Domain Temporal
    - 4.5 Fitur Domain Spectral
    - 4.6 Hasil Ekstraksi 68 Fitur
+5. **BAB 5 — K-MEANS CLUSTERING**:
+   - 5.1 Konsep K-Means & PCA (Perhitungan Manual)
+   - 5.2 Reduksi Dimensi PCA (1 s.d. 37 Komponen)
+   - 5.3 Penentuan Jumlah Cluster Terbaik
+   - 5.4 Komparasi PCA 37 vs 68 Fitur TSFEL Asli
+   - 5.5 Implementasi KNIME & Notebook Interaktif
+
 
 ---
 

@@ -52,3 +52,17 @@ parts:
         title: 4.5 Fitur Domain Spectral
       - file: 04_feature_extraction/4.6_hasil_ekstraksi_68_fitur
         title: 4.6 Hasil Ekstraksi 68 Fitur
+
+  - caption: BAB 5 — K-MEANS CLUSTERING
+    chapters:
+      - file: 05_kmeans_clustering/5.1_konsep_kmeans_pca_manual
+        title: 5.1 Konsep K-Means & PCA (Hitung Manual)
+      - file: 05_kmeans_clustering/5.2_reduksi_dimensi_pca
+        title: 5.2 Reduksi Dimensi PCA (1 - 37 Komponen)
+      - file: 05_kmeans_clustering/5.3_penentuan_jumlah_cluster
+        title: 5.3 Penentuan Jumlah Cluster Terbaik
+      - file: 05_kmeans_clustering/5.4_komparasi_pca_vs_68fitur
+        title: 5.4 Komparasi PCA 37 vs 68 Fitur Asli
+      - file: 05_kmeans_clustering/5.5_implementasi_knime_workflow
+        title: 5.5 Implementasi KNIME & Notebook Interaktif
+
