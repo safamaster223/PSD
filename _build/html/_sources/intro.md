@@ -99,12 +99,12 @@ Gunakan menu navigasi di sebelah kiri untuk menelusuri setiap bagian:
    - 4.5 Fitur Domain Spectral
    - 4.6 Hasil Ekstraksi 68 Fitur
 5. **BAB 5 — K-MEANS CLUSTERING**:
-   - 5.1 Konsep K-Means & PCA (Perhitungan Manual)
-   - 5.2 Reduksi Dimensi PCA (1 s.d. 37 Komponen)
-   - 5.3 Penentuan Jumlah Cluster Terbaik
-   - 5.4 Komparasi PCA 37 vs 68 Fitur TSFEL Asli
-   - 5.5 Implementasi KNIME Workflow
-   - 5.6 Notebook Interaktif K-Means & PCA (28 Grafik Terpisah)
+   - [5.1 Konsep K-Means & PCA (Perhitungan Manual)](05_kmeans_clustering/5.1_konsep_kmeans_pca_manual.md)
+   - [5.2 Reduksi Dimensi PCA (1 s.d. 37 Komponen)](05_kmeans_clustering/5.2_reduksi_dimensi_pca.md)
+   - [5.3 Penentuan Jumlah Cluster Terbaik](05_kmeans_clustering/5.3_penentuan_jumlah_cluster.md)
+   - [5.4 Komparasi PCA 37 vs 68 Fitur TSFEL Asli](05_kmeans_clustering/5.4_komparasi_pca_vs_68fitur.md)
+   - [5.5 Implementasi KNIME Workflow](05_kmeans_clustering/5.5_implementasi_knime_workflow.md)
+   - [5.6 Notebook Interaktif K-Means & PCA (28 Grafik Terpisah)](05_kmeans_clustering/05_kmeans_clustering.ipynb)
 
 
 ---
