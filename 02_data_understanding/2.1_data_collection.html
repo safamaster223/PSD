@@ -398,6 +398,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dokumentasi-hasil-pengumpulan-data-data-collection">Dokumentasi Hasil Pengumpulan Data (Data Collection)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-dan-interpretasi">Analisis dan Interpretasi</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
 </ul>
@@ -586,6 +587,10 @@ document.write(`
 </div>
 </div>
 <p>Pesanan yang sudah disusun dikirim ke server untuk dihitung. Loop ini menjalankan satu batch job per polutan, menunggunya sampai selesai (progresnya terlihat di output), lalu mengunduh hasilnya sebagai file CSV — misalnya <code class="docutils literal notranslate"><span class="pre">wonoayu_NO2.csv</span></code>. Setelah loop selesai, kelima polutan sudah tersimpan rapi di lima file CSV.</p>
+<section id="dokumentasi-hasil-pengumpulan-data-data-collection">
+<h2>Dokumentasi Hasil Pengumpulan Data (Data Collection)<a class="headerlink" href="#dokumentasi-hasil-pengumpulan-data-data-collection" title="Permalink to this heading">#</a></h2>
+<p>Berikut adalah tangkapan layar proses dan alur pengumpulan data polutan atmosfer (<em>Data Collection</em>) untuk wilayah Kecamatan Wonoayu:</p>
+<p><img alt="Dokumentasi Data Collection" src="../_images/2.1_data_colection.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -717,6 +722,7 @@ document.write(`
 </div>
 </div>
 <p>Terakhir, semua file CSV hasil analisis dikemas ke dalam satu arsip ZIP (<code class="docutils literal notranslate"><span class="pre">wonoayu_pollutants_data.zip</span></code>) supaya mudah diunduh sekaligus. Jika notebook dijalankan di Colab, unduhan bahkan dimulai otomatis.</p>
+</section>
 <section id="analisis-dan-interpretasi">
 <h2>Analisis dan Interpretasi<a class="headerlink" href="#analisis-dan-interpretasi" title="Permalink to this heading">#</a></h2>
 <p>Melihat kelima grafik di atas, ada beberapa cerita yang menonjol. Konsentrasi <strong>NO₂</strong> bergerak naik-turun sepanjang tahun dengan lonjakan pada periode tertentu — pola yang wajar untuk wilayah padat kendaraan seperti Kecamatan Wonoayu, karena NO₂ sangat berkaitan dengan intensitas lalu lintas dan industri. <strong>CO</strong> menunjukkan tren yang relatif stabil dengan fluktuasi ringan, mengikuti aktivitas pembakaran bahan bakar sehari-hari. Kurva <strong>O₃</strong> tampak lebih tinggi pada bulan-bulan cerah, sesuai sifatnya yang terbentuk dengan bantuan sinar matahari. Sementara itu, <strong>HCHO</strong> dan <strong>SO₂</strong> berada pada level yang rendah namun tetap berfluktuasi, dengan SO₂ sesekali mengalami lonjakan singkat yang bisa berkaitan dengan aktivitas industri tertentu.</p>
@@ -793,6 +799,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dokumentasi-hasil-pengumpulan-data-data-collection">Dokumentasi Hasil Pengumpulan Data (Data Collection)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-dan-interpretasi">Analisis dan Interpretasi</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
 </ul>
