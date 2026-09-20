@@ -206,6 +206,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="4.5_fitur_domain_spectral.html">4.5 Fitur Domain Spectral</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4.6_hasil_ekstraksi_68_fitur.html">4.6 Hasil Ekstraksi 68 Fitur</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BAB 5 — K-MEANS CLUSTERING</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.1_konsep_kmeans_pca_manual.html">5.1 Konsep K-Means &amp; PCA (Hitung Manual)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.2_reduksi_dimensi_pca.html">5.2 Reduksi Dimensi PCA (1 - 37 Komponen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.3_penentuan_jumlah_cluster.html">5.3 Penentuan Jumlah Cluster Terbaik</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.4_komparasi_pca_vs_68fitur.html">5.4 Komparasi PCA 37 vs 68 Fitur Asli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.5_implementasi_knime_workflow.html">5.5 Implementasi KNIME &amp; Notebook Interaktif</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -402,6 +410,11 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-domain-statistical">1. Konsep Domain Statistical</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rincian-21-fitur-domain-statistical">2. Rincian 21 Fitur Domain Statistical</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-pembuktian-kode-tsfel">3. Perhitungan Manual &amp; Pembuktian Kode TSFEL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-perhitungan-manual-langkah-demi-langkah">A. Perhitungan Manual Langkah demi Langkah</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-kode-pembuktian-python-menggunakan-tsfel">B. Kode Pembuktian Python Menggunakan TSFEL</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -415,7 +428,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="fitur-domain-statistical">
 <h1>4.3 Fitur Domain Statistical<a class="headerlink" href="#fitur-domain-statistical" title="Permalink to this heading">#</a></h1>
-<p>Dokumen ini memuat perincian 21 fitur dalam <strong>Domain Statistical</strong> dari daftar 68 fitur TSFEL yang diekstraksi untuk sinyal polutan <span class="math notranslate nohighlight">\(\text{NO}_2\)</span> <strong>Kecamatan Wonoayu, Kabupaten Sidoarjo</strong>.</p>
+<p>Dokumen ini memuat perincian 21 fitur dalam <strong>Domain Statistical</strong> dari daftar 68 fitur TSFEL yang diekstraksi untuk sinyal polutan <span class="math notranslate nohighlight">\(\text{NO}_2\)</span> <strong>Kecamatan Wonoayu, Kabupaten Sidoarjo</strong>, lengkap dengan <strong>deskripsi</strong>, <strong>contoh perhitungan manual</strong>, dan <strong>pembuktian kode Python menggunakan pustaka TSFEL</strong>.</p>
 <hr class="docutils" />
 <section id="konsep-domain-statistical">
 <h2>1. Konsep Domain Statistical<a class="headerlink" href="#konsep-domain-statistical" title="Permalink to this heading">#</a></h2>
@@ -490,8 +503,8 @@ document.write(`
 </tr>
 <tr class="row-odd"><td class="text-center"><p>12</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">average_power</span></code></p></td>
-<td class="text-left"><p>Daya rata-rata <span class="math notranslate nohighlight">\(\frac{1}{N}\sum |x_i|^2\)</span></p></td>
-<td class="text-left"><p>Rata-rata daya sinyal per hari observasi.</p></td>
+<td class="text-left"><p>Daya rata-rata <span class="math notranslate nohighlight">\(\frac{1}{\Delta t}\sum |x_i|^2\)</span></p></td>
+<td class="text-left"><p>Rata-rata daya sinyal per satuan waktu.</p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p>13</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">mean_abs_deviation</span></code></p></td>
@@ -541,6 +554,112 @@ document.write(`
 </tbody>
 </table>
 </div>
+</section>
+<hr class="docutils" />
+<section id="perhitungan-manual-pembuktian-kode-tsfel">
+<h2>3. Perhitungan Manual &amp; Pembuktian Kode TSFEL<a class="headerlink" href="#perhitungan-manual-pembuktian-kode-tsfel" title="Permalink to this heading">#</a></h2>
+<p>Untuk membuktikan keakuratan formulasi di atas, digunakan sampel sinyal acuan sederhana <span class="math notranslate nohighlight">\(N=5\)</span> dengan frekuensi sampling <span class="math notranslate nohighlight">\(fs = 1\text{ Hz}\)</span>:
+$<span class="math notranslate nohighlight">\(X = [1.0, 3.0, 2.0, 5.0, 4.0]\)</span>$</p>
+<section id="a-perhitungan-manual-langkah-demi-langkah">
+<h3>A. Perhitungan Manual Langkah demi Langkah<a class="headerlink" href="#a-perhitungan-manual-langkah-demi-langkah" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">calc_min</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">calc_max</span></code></strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{Min} = \min(1.0, 3.0, 2.0, 5.0, 4.0) = \mathbf{1.0}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Max} = \max(1.0, 3.0, 2.0, 5.0, 4.0) = \mathbf{5.0}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">calc_mean</span></code></strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bar{x} = \frac{1.0 + 3.0 + 2.0 + 5.0 + 4.0}{5} = \frac{15.0}{5} = \mathbf{3.0}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">calc_median</span></code></strong>:</p>
+<ul class="simple">
+<li><p>Data terurut: <span class="math notranslate nohighlight">\([1.0, 2.0, \mathbf{3.0}, 4.0, 5.0]\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> Posisi ke-3 = <span class="math notranslate nohighlight">\(\mathbf{3.0}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">abs_energy</span></code></strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sum x_i^2 = 1.0^2 + 3.0^2 + 2.0^2 + 5.0^2 + 4.0^2 = 1 + 9 + 4 + 25 + 16 = \mathbf{55.0}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">average_power</span></code></strong> (<span class="math notranslate nohighlight">\(fs=1, \Delta t = t_4 - t_0 = 4\)</span>):</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P_{\text{avg}} = \frac{\sum x_i^2}{t_{\text{end}} - t_{\text{start}}} = \frac{55.0}{4} = \mathbf{13.75}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">rms</span></code></strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{RMS} = \sqrt{\frac{1}{N}\sum x_i^2} = \sqrt{\frac{55.0}{5}} = \sqrt{11} \approx \mathbf{3.316625}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">pk_pk_distance</span></code></strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{Max} - \text{Min} = 5.0 - 1.0 = \mathbf{4.0}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">calc_var</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">calc_std</span></code></strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(s^2 = \frac{(1-3)^2 + (3-3)^2 + (2-3)^2 + (5-3)^2 + (4-3)^2}{5-1} = \frac{4 + 0 + 1 + 4 + 1}{4} = \frac{10}{4} = \mathbf{2.0}\)</span> (Bebas bias / sample var)</p></li>
+<li><p><span class="math notranslate nohighlight">\(s = \sqrt{2.0} \approx \mathbf{1.414214}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">interq_range</span></code></strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Q_1 = 2.0, Q_3 = 4.0 \implies \text{IQR} = 4.0 - 2.0 = \mathbf{2.0}\)</span></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">mean_abs_deviation</span></code></strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\frac{\|1-3\| + \|3-3\| + \|2-3\| + \|5-3\| + \|4-3\|}{5} = \frac{2 + 0 + 1 + 2 + 1}{5} = \frac{6}{5} = \mathbf{1.2}\)</span></p></li>
+</ul>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="b-kode-pembuktian-python-menggunakan-tsfel">
+<h3>B. Kode Pembuktian Python Menggunakan TSFEL<a class="headerlink" href="#b-kode-pembuktian-python-menggunakan-tsfel" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tsfel</span>
+
+<span class="c1"># 1. Definisi Sinyal Acuan Sederhana</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># 2. Ekstraksi Fitur Domain Statistik via TSFEL</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"=== PEMBUKTIAN FITUR DOMAIN STATISTICAL ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"calc_min             :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">calc_min</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"calc_max             :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">calc_max</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"calc_mean            :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">calc_mean</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"calc_median          :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">calc_median</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"abs_energy           :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">abs_energy</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"average_power        :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">average_power</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"rms                  :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">rms</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"pk_pk_distance       :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">pk_pk_distance</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"calc_var             :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">calc_var</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"calc_std             :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">calc_std</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"interq_range         :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">interq_range</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"mean_abs_deviation   :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">mean_abs_deviation</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Output Eksekusi Python (Persis Sesuai Perhitungan Manual):</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>=== PEMBUKTIAN FITUR DOMAIN STATISTICAL ===
+calc_min             : 1.0
+calc_max             : 5.0
+calc_mean            : 3.0
+calc_median          : 3.0
+abs_energy           : 55.0
+average_power        : 13.75
+rms                  : 3.3166247903554
+pk_pk_distance       : 4.0
+calc_var             : 2.0
+calc_std             : 1.4142135623730951
+interq_range         : 2.0
+mean_abs_deviation   : 1.2
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
@@ -610,6 +729,11 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-domain-statistical">1. Konsep Domain Statistical</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rincian-21-fitur-domain-statistical">2. Rincian 21 Fitur Domain Statistical</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-pembuktian-kode-tsfel">3. Perhitungan Manual &amp; Pembuktian Kode TSFEL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-perhitungan-manual-langkah-demi-langkah">A. Perhitungan Manual Langkah demi Langkah</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-kode-pembuktian-python-menggunakan-tsfel">B. Kode Pembuktian Python Menggunakan TSFEL</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

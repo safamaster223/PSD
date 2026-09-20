@@ -206,6 +206,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">4.5 Fitur Domain Spectral</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4.6_hasil_ekstraksi_68_fitur.html">4.6 Hasil Ekstraksi 68 Fitur</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BAB 5 — K-MEANS CLUSTERING</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.1_konsep_kmeans_pca_manual.html">5.1 Konsep K-Means &amp; PCA (Hitung Manual)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.2_reduksi_dimensi_pca.html">5.2 Reduksi Dimensi PCA (1 - 37 Komponen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.3_penentuan_jumlah_cluster.html">5.3 Penentuan Jumlah Cluster Terbaik</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.4_komparasi_pca_vs_68fitur.html">5.4 Komparasi PCA 37 vs 68 Fitur Asli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_kmeans_clustering/5.5_implementasi_knime_workflow.html">5.5 Implementasi KNIME &amp; Notebook Interaktif</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -402,6 +410,11 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-domain-spectral">1. Konsep Domain Spectral</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rincian-26-fitur-domain-spectral">2. Rincian 26 Fitur Domain Spectral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-konseptual-pembuktian-kode-tsfel">3. Perhitungan Konseptual &amp; Pembuktian Kode TSFEL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-konsep-perhitungan-spektral">A. Konsep Perhitungan Spektral</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-kode-pembuktian-python-menggunakan-tsfel">B. Kode Pembuktian Python Menggunakan TSFEL</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -415,7 +428,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="fitur-domain-spectral">
 <h1>4.5 Fitur Domain Spectral<a class="headerlink" href="#fitur-domain-spectral" title="Permalink to this heading">#</a></h1>
-<p>Dokumen ini memuat perincian 26 fitur dalam <strong>Domain Spectral &amp; Wavelet</strong> dari daftar 68 fitur TSFEL yang diekstraksi untuk sinyal polutan <span class="math notranslate nohighlight">\(\text{NO}_2\)</span> <strong>Kecamatan Wonoayu, Kabupaten Sidoarjo</strong>.</p>
+<p>Dokumen ini memuat perincian 26 fitur dalam <strong>Domain Spectral &amp; Wavelet</strong> dari daftar 68 fitur TSFEL yang diekstraksi untuk sinyal polutan <span class="math notranslate nohighlight">\(\text{NO}_2\)</span> <strong>Kecamatan Wonoayu, Kabupaten Sidoarjo</strong>, lengkap dengan <strong>deskripsi</strong>, <strong>konsep frekuensi</strong>, dan <strong>pembuktian kode Python menggunakan pustaka TSFEL</strong>.</p>
 <hr class="docutils" />
 <section id="konsep-domain-spectral">
 <h2>1. Konsep Domain Spectral<a class="headerlink" href="#konsep-domain-spectral" title="Permalink to this heading">#</a></h2>
@@ -567,6 +580,70 @@ document.write(`
 </table>
 </div>
 </section>
+<hr class="docutils" />
+<section id="perhitungan-konseptual-pembuktian-kode-tsfel">
+<h2>3. Perhitungan Konseptual &amp; Pembuktian Kode TSFEL<a class="headerlink" href="#perhitungan-konseptual-pembuktian-kode-tsfel" title="Permalink to this heading">#</a></h2>
+<p>Untuk domain spektral, sinyal waktu dikonversi ke spektrum frekuensi menggunakan <strong>Fast Fourier Transform (FFT)</strong>. Untuk sampel sinyal acuan sederhana <span class="math notranslate nohighlight">\(N=5\)</span> dengan frekuensi sampling <span class="math notranslate nohighlight">\(fs = 1\text{ Hz}\)</span>:
+$<span class="math notranslate nohighlight">\(X = [1.0, 3.0, 2.0, 5.0, 4.0]\)</span>$</p>
+<section id="a-konsep-perhitungan-spektral">
+<h3>A. Konsep Perhitungan Spektral<a class="headerlink" href="#a-konsep-perhitungan-spektral" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Komponen Frekuensi Nyquist</strong>:</p>
+<ul class="simple">
+<li><p>Dengan <span class="math notranslate nohighlight">\(fs = 1\text{ Hz}\)</span> dan <span class="math notranslate nohighlight">\(N = 5\)</span>, sumbu frekuensi bernilai <span class="math notranslate nohighlight">\(f = [0.0, 0.2, 0.4]\text{ Hz}\)</span> (sampai batas <span class="math notranslate nohighlight">\(fs/2 = 0.5\text{ Hz}\)</span>).</p></li>
+</ul>
+</li>
+<li><p><strong>Frekuensi Fundamental (<code class="docutils literal notranslate"><span class="pre">fundamental_frequency</span></code>)</strong>:</p>
+<ul class="simple">
+<li><p>Resolusi frekuensi dasar <span class="math notranslate nohighlight">\(\Delta f = \frac{fs}{N} = \frac{1}{5} = \mathbf{0.2\text{ Hz}}\)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Frekuensi Maksimum (<code class="docutils literal notranslate"><span class="pre">max_frequency</span></code>)</strong>:</p>
+<ul class="simple">
+<li><p>Batas tertinggi komponen frekuensi signifikan <span class="math notranslate nohighlight">\(\mathbf{0.4\text{ Hz}}\)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Sentroid Spektral (<code class="docutils literal notranslate"><span class="pre">spectral_centroid</span></code>)</strong>:</p>
+<ul class="simple">
+<li><p>Rata-rata frekuensi terbobot energi <span class="math notranslate nohighlight">\(\bar{f}_{\text{spec}} = \frac{\sum f_i \cdot P(f_i)}{\sum P(f_i)} \approx \mathbf{0.0946\text{ Hz}}\)</span>.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="b-kode-pembuktian-python-menggunakan-tsfel">
+<h3>B. Kode Pembuktian Python Menggunakan TSFEL<a class="headerlink" href="#b-kode-pembuktian-python-menggunakan-tsfel" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tsfel</span>
+
+<span class="c1"># 1. Definisi Sinyal Acuan Sederhana</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># 2. Ekstraksi Fitur Domain Spektral via TSFEL</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"=== PEMBUKTIAN FITUR DOMAIN SPECTRAL ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"fundamental_frequency:"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">fundamental_frequency</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"max_frequency        :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">max_frequency</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"max_power_spectrum   :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">max_power_spectrum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"spectral_centroid    :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">spectral_centroid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"spectral_spread      :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">spectral_spread</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"spectral_entropy     :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">spectral_entropy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"spectral_slope       :"</span><span class="p">,</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">spectral_slope</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fs</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Output Eksekusi Python:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>=== PEMBUKTIAN FITUR DOMAIN SPECTRAL ===
+fundamental_frequency: 0.2
+max_frequency        : 0.4
+max_power_spectrum   : 3.0150283239582443
+spectral_centroid    : 0.09461299739835113
+spectral_spread      : 0.14900828190250298
+spectral_entropy     : 0.9942215007348465
+spectral_slope       : -1.3173375325206116
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -635,6 +712,11 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-domain-spectral">1. Konsep Domain Spectral</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rincian-26-fitur-domain-spectral">2. Rincian 26 Fitur Domain Spectral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-konseptual-pembuktian-kode-tsfel">3. Perhitungan Konseptual &amp; Pembuktian Kode TSFEL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-konsep-perhitungan-spektral">A. Konsep Perhitungan Spektral</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-kode-pembuktian-python-menggunakan-tsfel">B. Kode Pembuktian Python Menggunakan TSFEL</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
