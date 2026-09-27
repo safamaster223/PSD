@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '05_kmeans_clustering/5.5_implementasi_knime_workflow';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="BAB 5 — K-Means Clustering &amp; Reduksi Dimensi PCA" href="05_kmeans_clustering.html" />
+    <link rel="next" title="BAB 5 — K-Means Clustering &amp; Reduksi Dimensi PCA (Analisis Granular Per Polutan &amp; Combined)" href="05_kmeans_clustering.html" />
     <link rel="prev" title="5.4 Komparasi Score Plot PCA &amp; Profiling Klaster (NO2, SO2, CO &amp; Combined)" href="5.4_komparasi_pca_vs_68fitur.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -410,8 +410,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arsitektur-workflow-knime-analytics-platform">1. Arsitektur Workflow KNIME Analytics Platform</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#panduan-setup-konfigurasi-setiap-node-knime">2. Panduan Setup &amp; Konfigurasi Setiap Node KNIME</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arsitektur-tangkapan-layar-workflow-knime">1. Arsitektur &amp; Tangkapan Layar Workflow KNIME</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagram-alur-pemrosesan-data-di-knime">2. Diagram Alur Pemrosesan Data di KNIME</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#panduan-setup-detail-konfigurasi-setiap-node-knime">3. Panduan Setup &amp; Detail Konfigurasi Setiap Node KNIME</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-node-csv-reader">A. Node <code class="docutils literal notranslate"><span class="pre">CSV</span> <span class="pre">Reader</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-node-normalizer">B. Node <code class="docutils literal notranslate"><span class="pre">Normalizer</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-node-pca-compute-pca-apply">C. Node <code class="docutils literal notranslate"><span class="pre">PCA</span> <span class="pre">Compute</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">PCA</span> <span class="pre">Apply</span></code></a></li>
@@ -419,7 +420,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-node-color-manager-scatter-plot">E. Node <code class="docutils literal notranslate"><span class="pre">Color</span> <span class="pre">Manager</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">Scatter</span> <span class="pre">Plot</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tautan-notebook-interaktif-kode-python">3. Tautan Notebook Interaktif &amp; Kode Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tautan-notebook-interaktif-kode-python">4. Tautan Notebook Interaktif &amp; Kode Python</a></li>
 </ul>
             </nav>
         </div>
@@ -433,11 +434,20 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="implementasi-workflow-knime-analytics-platform">
 <h1>5.5 Implementasi Workflow KNIME Analytics Platform<a class="headerlink" href="#implementasi-workflow-knime-analytics-platform" title="Permalink to this heading">#</a></h1>
-<p>Dokumen ini menjelaskan rancangan dan konfigurasi <strong>workflow KNIME Analytics Platform</strong> untuk mereplikasi tahapan <strong>Reduksi Dimensi PCA (1 - 37 Komponen)</strong> dan <strong>K-Means Clustering</strong> secara visual tanpa kode untuk polutan individu (<span class="math notranslate nohighlight">\(\text{NO}_2\)</span>, <span class="math notranslate nohighlight">\(\text{SO}_2\)</span>, <span class="math notranslate nohighlight">\(\text{CO}\)</span>) dan gabungannya.</p>
+<p>Dokumen ini menjelaskan rancangan, diagram visual, dan konfigurasi <strong>workflow KNIME Analytics Platform</strong> untuk mereplikasi tahapan <strong>Reduksi Dimensi PCA (1 - 37 Komponen)</strong> dan <strong>K-Means Clustering</strong> secara visual tanpa kode (<em>low-code/no-code</em>) untuk polutan individu (<span class="math notranslate nohighlight">\(\text{NO}_2\)</span>, <span class="math notranslate nohighlight">\(\text{SO}_2\)</span>, <span class="math notranslate nohighlight">\(\text{CO}\)</span>) dan gabungannya di Kecamatan Wonoayu.</p>
 <hr class="docutils" />
-<section id="arsitektur-workflow-knime-analytics-platform">
-<h2>1. Arsitektur Workflow KNIME Analytics Platform<a class="headerlink" href="#arsitektur-workflow-knime-analytics-platform" title="Permalink to this heading">#</a></h2>
-<p>Alur pemrosesan data pada kanvas KNIME Analytics Platform dirancang sebagai berikut:</p>
+<section id="arsitektur-tangkapan-layar-workflow-knime">
+<h2>1. Arsitektur &amp; Tangkapan Layar Workflow KNIME<a class="headerlink" href="#arsitektur-tangkapan-layar-workflow-knime" title="Permalink to this heading">#</a></h2>
+<p>Berikut adalah tangkapan layar resmi (<em>screenshot</em>) rancangan workflow yang telah dikembangkan dan dieksekusi pada kanvas KNIME Analytics Platform:</p>
+<p><img alt="Workflow KNIME Analytics Platform Bab 5.5" src="../_images/knime-workflow-5.5.png" /></p>
+<blockquote>
+<div><p><strong>Panduan Gambar (<code class="docutils literal notranslate"><span class="pre">assets/knime-workflow-5.5.png</span></code>):</strong> Tangkapan layar kanvas workflow KNIME yang menampilkan alur komprehensif ekstraksi masukan data 68 fitur TSFEL, normalisasi Z-score (<code class="docutils literal notranslate"><span class="pre">Normalizer</span></code>), reduksi dimensi PCA 37 komponen (<code class="docutils literal notranslate"><span class="pre">PCA</span> <span class="pre">Compute</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">PCA</span> <span class="pre">Apply</span></code>), pemodelan <code class="docutils literal notranslate"><span class="pre">k-Means</span> <span class="pre">Clustering</span></code>, pewarnaan klaster (<code class="docutils literal notranslate"><span class="pre">Color</span> <span class="pre">Manager</span></code>), hingga visualisasi sebaran data 2D/3D (<code class="docutils literal notranslate"><span class="pre">Scatter</span> <span class="pre">Plot</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">3D</span> <span class="pre">Scatter</span> <span class="pre">Plot</span></code>).</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="diagram-alur-pemrosesan-data-di-knime">
+<h2>2. Diagram Alur Pemrosesan Data di KNIME<a class="headerlink" href="#diagram-alur-pemrosesan-data-di-knime" title="Permalink to this heading">#</a></h2>
+<p>Alur pemrosesan data pada kanvas KNIME Analytics Platform secara skematis dirancang sebagai berikut:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐
 │   CSV Reader    │ ───► │   Normalizer    │ ───► │   PCA Compute   │
 │ (68 Fitur TSFEL)│      │  (Z-Score Norm) │      │  (37 Komponen)  │
@@ -452,17 +462,17 @@ document.write(`
 </div>
 </section>
 <hr class="docutils" />
-<section id="panduan-setup-konfigurasi-setiap-node-knime">
-<h2>2. Panduan Setup &amp; Konfigurasi Setiap Node KNIME<a class="headerlink" href="#panduan-setup-konfigurasi-setiap-node-knime" title="Permalink to this heading">#</a></h2>
+<section id="panduan-setup-detail-konfigurasi-setiap-node-knime">
+<h2>3. Panduan Setup &amp; Detail Konfigurasi Setiap Node KNIME<a class="headerlink" href="#panduan-setup-detail-konfigurasi-setiap-node-knime" title="Permalink to this heading">#</a></h2>
 <section id="a-node-csv-reader">
 <h3>A. Node <code class="docutils literal notranslate"><span class="pre">CSV</span> <span class="pre">Reader</span></code><a class="headerlink" href="#a-node-csv-reader" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Fungsi</strong>: Memuat berkas dataset matriks 68 fitur TSFEL (<code class="docutils literal notranslate"><span class="pre">wonoayu_pollutants.csv</span></code> atau matriks multi-fitur <span class="math notranslate nohighlight">\(\text{NO}_2, \text{SO}_2, \text{CO}\)</span>).</p></li>
+<li><p><strong>Fungsi</strong>: Memuat berkas dataset matriks 68 fitur TSFEL (<code class="docutils literal notranslate"><span class="pre">SO2_Wonoayu_TSFEL.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">CO_Wonoayu_TSFEL.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">NO2_Wonoayu_TSFEL.csv</span></code>, atau data 1 Kelas).</p></li>
 <li><p><strong>Pengaturan</strong>:</p>
 <ol class="arabic simple">
-<li><p>Tentukan lokasi file CSV.</p></li>
-<li><p>Centang <em>Has Column Header</em>.</p></li>
-<li><p>Pastikan seluruh kolom terdeteksi sebagai tipe data <code class="docutils literal notranslate"><span class="pre">Number</span> <span class="pre">(double)</span></code>.</p></li>
+<li><p>Tentukan lokasi berkas CSV masukan.</p></li>
+<li><p>Centang opsi <em>Has Column Header</em>.</p></li>
+<li><p>Pastikan seluruh kolom fitur terdeteksi sebagai tipe data <code class="docutils literal notranslate"><span class="pre">Number</span> <span class="pre">(double)</span></code>.</p></li>
 </ol>
 </li>
 </ul>
@@ -470,10 +480,10 @@ document.write(`
 <section id="b-node-normalizer">
 <h3>B. Node <code class="docutils literal notranslate"><span class="pre">Normalizer</span></code><a class="headerlink" href="#b-node-normalizer" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Fungsi</strong>: Mengubah skala seluruh 68 fitur ke rentang terstandar (<em>Z-Score Normalization</em> / Mean=0, Std=1).</p></li>
+<li><p><strong>Fungsi</strong>: Mengubah skala seluruh 68 fitur ke rentang terstandar (<em>Z-Score Normalization</em> / Mean = 0, Std = 1) untuk mencegah dominasi variabel dengan skala magnitudo besar.</p></li>
 <li><p><strong>Pengaturan</strong>:</p>
 <ol class="arabic simple">
-<li><p>Masukkan kolom numerik pada daftar <em>Include Columns</em>.</p></li>
+<li><p>Masukkan seluruh 68 kolom numerik pada daftar <em>Include Columns</em>.</p></li>
 <li><p>Pilih metode <em>Z-Score Normalization (Gaussian)</em>.</p></li>
 </ol>
 </li>
@@ -482,11 +492,11 @@ document.write(`
 <section id="c-node-pca-compute-pca-apply">
 <h3>C. Node <code class="docutils literal notranslate"><span class="pre">PCA</span> <span class="pre">Compute</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">PCA</span> <span class="pre">Apply</span></code><a class="headerlink" href="#c-node-pca-compute-pca-apply" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Fungsi</strong>: Menghitung matriks kovarians dan memproyeksikan data ke <strong>37 Komponen Utama (PCA 1 - PCA 37)</strong> untuk multi-polutan atau komponen utama individual.</p></li>
+<li><p><strong>Fungsi</strong>: Menghitung matriks kovarians dan memproyeksikan data dari 68 fitur TSFEL ke <strong>37 Komponen Utama (PCA 1 - PCA 37)</strong>.</p></li>
 <li><p><strong>Pengaturan</strong>:</p>
 <ol class="arabic simple">
 <li><p>Pilih target reduksi berbasis jumlah komponen: <strong>37 Komponen</strong> (untuk combined) atau komponen individual.</p></li>
-<li><p>Centang opsi <em>Output Cumulative Variance</em>.</p></li>
+<li><p>Centang opsi <em>Output Cumulative Variance</em> (mempertahankan <span class="math notranslate nohighlight">\(\approx 100\%\)</span> varians data).</p></li>
 </ol>
 </li>
 </ul>
@@ -494,10 +504,10 @@ document.write(`
 <section id="d-node-k-means">
 <h3>D. Node <code class="docutils literal notranslate"><span class="pre">k-Means</span></code><a class="headerlink" href="#d-node-k-means" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Fungsi</strong>: Menjalankan algoritma K-Means Clustering pada data hasil transformasi 37 komponen PCA.</p></li>
+<li><p><strong>Fungsi</strong>: Menjalankan algoritma K-Means Clustering pada data hasil proyeksi 37 komponen PCA.</p></li>
 <li><p><strong>Pengaturan</strong>:</p>
 <ol class="arabic simple">
-<li><p>Set <em>Number of Clusters (<span class="math notranslate nohighlight">\(k\)</span>)</em> = <strong>4</strong> (untuk Combined 3 Polutan) atau <strong>3</strong> (untuk polutan individu).</p></li>
+<li><p>Set <em>Number of Clusters (<span class="math notranslate nohighlight">\(k\)</span>)</em> = <strong>4</strong> (untuk Combined 3 Polutan) atau <strong>2</strong> (untuk data 1 Kelas / polutan individu).</p></li>
 <li><p>Set <em>Max number of iterations</em> = <strong>100</strong>.</p></li>
 <li><p>Set <em>Initialization method</em> = <strong>k-Means++</strong> / Random dengan fixed seed.</p></li>
 </ol>
@@ -513,10 +523,10 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="tautan-notebook-interaktif-kode-python">
-<h2>3. Tautan Notebook Interaktif &amp; Kode Python<a class="headerlink" href="#tautan-notebook-interaktif-kode-python" title="Permalink to this heading">#</a></h2>
+<h2>4. Tautan Notebook Interaktif &amp; Kode Python<a class="headerlink" href="#tautan-notebook-interaktif-kode-python" title="Permalink to this heading">#</a></h2>
 <p>Seluruh eksekusi kode Python, visualisasi Scree Plot, Heatmap Silhouette Score, dan perbandingan performa dapat dijalankan secara langsung melalui berkas notebook Jupyter:</p>
-<p>📥 <strong>Tautan Berkas Notebook</strong>: <a class="reference internal" href="05_kmeans_clustering.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">05_kmeans_clustering.ipynb</span></code></span></a></p>
-<p><em>(Notebook ini memuat visualisasi lengkap deret waktu, Scree Plot PCA, Elbow Plot, dan Score Plot 2D untuk NO2, SO2, CO, dan Combined).</em></p>
+<p>📥 <strong>Tautan Berkas Notebook</strong>: <a class="reference internal" href="05_kmeans_clustering.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">05_kmeans_clustering.ipynb</span></code></span></a><br />
+📥 <strong>Tautan Notebook Data 1 Kelas</strong>: <a class="reference internal" href="5.7_clustering_satu_kelas.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">5.7_clustering_satu_kelas.ipynb</span></code></span></a></p>
 </section>
 </section>
 
@@ -564,7 +574,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">BAB 5 — K-Means Clustering &amp; Reduksi Dimensi PCA</p>
+        <p class="prev-next-title">BAB 5 — K-Means Clustering &amp; Reduksi Dimensi PCA (Analisis Granular Per Polutan &amp; Combined)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -584,8 +594,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arsitektur-workflow-knime-analytics-platform">1. Arsitektur Workflow KNIME Analytics Platform</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#panduan-setup-konfigurasi-setiap-node-knime">2. Panduan Setup &amp; Konfigurasi Setiap Node KNIME</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arsitektur-tangkapan-layar-workflow-knime">1. Arsitektur &amp; Tangkapan Layar Workflow KNIME</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagram-alur-pemrosesan-data-di-knime">2. Diagram Alur Pemrosesan Data di KNIME</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#panduan-setup-detail-konfigurasi-setiap-node-knime">3. Panduan Setup &amp; Detail Konfigurasi Setiap Node KNIME</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-node-csv-reader">A. Node <code class="docutils literal notranslate"><span class="pre">CSV</span> <span class="pre">Reader</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-node-normalizer">B. Node <code class="docutils literal notranslate"><span class="pre">Normalizer</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-node-pca-compute-pca-apply">C. Node <code class="docutils literal notranslate"><span class="pre">PCA</span> <span class="pre">Compute</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">PCA</span> <span class="pre">Apply</span></code></a></li>
@@ -593,7 +604,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-node-color-manager-scatter-plot">E. Node <code class="docutils literal notranslate"><span class="pre">Color</span> <span class="pre">Manager</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">Scatter</span> <span class="pre">Plot</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tautan-notebook-interaktif-kode-python">3. Tautan Notebook Interaktif &amp; Kode Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tautan-notebook-interaktif-kode-python">4. Tautan Notebook Interaktif &amp; Kode Python</a></li>
 </ul>
   </nav></div>
 
