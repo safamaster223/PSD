@@ -67,3 +67,5 @@ parts:
         title: 5.5 Implementasi KNIME Workflow
       - file: 05_kmeans_clustering/05_kmeans_clustering
         title: 5.6 Notebook Interaktif K-Means & PCA
+      - file: 05_kmeans_clustering/5.7_clustering_satu_kelas
+        title: 5.7 Notebook Clustering Data 1 Kelas

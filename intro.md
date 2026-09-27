@@ -105,6 +105,7 @@ Gunakan menu navigasi di sebelah kiri untuk menelusuri setiap bagian:
    - [5.4 Komparasi PCA 37 vs 68 Fitur TSFEL Asli](05_kmeans_clustering/5.4_komparasi_pca_vs_68fitur.md)
    - [5.5 Implementasi KNIME Workflow](05_kmeans_clustering/5.5_implementasi_knime_workflow.md)
    - [5.6 Notebook Interaktif K-Means & PCA (28 Grafik Terpisah)](05_kmeans_clustering/05_kmeans_clustering.ipynb)
+   - [5.7 Notebook Clustering Data 1 Kelas (CO, NO2, SO2)](05_kmeans_clustering/5.7_clustering_satu_kelas.ipynb)
 
 
 ---
