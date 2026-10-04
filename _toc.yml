@@ -69,3 +69,10 @@ parts:
         title: 5.6 Notebook Interaktif K-Means & PCA
       - file: 05_kmeans_clustering/5.7_clustering_satu_kelas
         title: 5.7 Notebook Clustering Data 1 Kelas
+      - file: 05_kmeans_clustering/5.8_clustering_polynomial
+        title: 5.8 Notebook Clustering Data Polynomial
+
+  - caption: BAB 6 — SUPERVISED LEARNING (KLASIFIKASI)
+    chapters:
+      - file: 6.1_persiapan_klasifikasi
+        title: 6.1 Klasifikasi Sawah vs Non-Sawah (Sentinel-2A Kamal)

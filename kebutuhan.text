@@ -1,0 +1,17 @@
+[14/9 16.12] +62 858-4773-0295: Tugas: 
+- jadikan timeseries pada setiap polutan di eksplorasi data
+- berikan konsep dasar dari statistic dll, serta contoh menghitung masing - masing fitur
+- sebelum ekstraksi fitur, membuat deskripsi dari masing - masing fitur serta contoh perhitungan manual dari masing masing fitur dan buktikan menggunakan tsfel
+- membagi ekstraksi fitur untuk 1 kelas 
+- Analisis Menentukan Jumlah Cluster pada K-Means Clustering
+- lakukan reduksi dimensi menjadi 37
+- tentukan jumlah cluster terbaik pada k-means clustering
+- dari hasil reduksi dimensi PCA 1 - PCA 37 berapa baiknya cluster
+- berapa baiknya data ini di cluster
+- Setelah itu lakukan pada 68 fitur dengan cara yang sama
+- kerjakan menggunakan tools dan code
+[20/9 21.13] +62 858-4773-0295: host: basisdata2-c.my.id
+port: 3306
+db: basisda1_PSD-A
+uname: basisda1_PSD-User
+pass: PSD-A#2026
