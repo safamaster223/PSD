@@ -427,6 +427,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#status-akhir-6-1-selesai-level-kandidat-2026-10-03">Status akhir 6.1 — SELESAI (level kandidat, 2026-10-03)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#peta-interaktif-folium-sawah-vs-non-sawah">Peta Interaktif Folium: Sawah vs Non-Sawah</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unduh-berkas-klasifikasi-sawah">Unduh Berkas Klasifikasi Sawah</a></li>
 </ul>
             </nav>
@@ -868,6 +869,173 @@ tersimpan: boxplot, spektral, hist, korelasi, pca, ndvi_violin
 <li><p>Syarat pakai serius: validasi lapangan/citra resolusi tinggi + tambah sampel air/tambak + split blok spasial, lalu latih ulang.</p></li>
 </ul>
 </section>
+<section id="peta-interaktif-folium-sawah-vs-non-sawah">
+<h2>Peta Interaktif Folium: Sawah vs Non-Sawah<a class="headerlink" href="#peta-interaktif-folium-sawah-vs-non-sawah" title="Permalink to this heading">#</a></h2>
+<p>Visualisasi spasial interaktif menggunakan <strong>folium</strong> — menampilkan layer <strong>sawah</strong> (hijau) dan <strong>non-sawah</strong> (merah) dari shapefile input yang telah diklasifikasikan. Layer dapat di-toggle on/off via LayerControl.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Siapkan sidecar files (.shx, .dbf, .prj) agar shapefile terbaca GeoPandas</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<span class="c1"># ── Sawah ──────────────────────────────────────────────────────────────────</span>
+<span class="n">_SAWAH_SHX_SRC</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"C:\Users\heker\AppData\Local\Temp\input.shx"</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">"sawah.shx"</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">_SAWAH_SHX_SRC</span><span class="p">):</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">_SAWAH_SHX_SRC</span><span class="p">,</span> <span class="s2">"sawah.shx"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"[OK] Disalin: sawah.shx"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[WARN] sawah.shx tidak ditemukan — coba copy manual dari: </span><span class="si">{</span><span class="n">_SAWAH_SHX_SRC</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"[OK] sawah.shx sudah ada"</span><span class="p">)</span>
+
+<span class="c1"># ── Non-sawah ──────────────────────────────────────────────────────────────</span>
+<span class="c1"># Cari file nonsawah.shp dari berbagai sumber, prioritas:</span>
+<span class="c1">#  1. nonsawah.shp sudah ada di root (paling ideal)</span>
+<span class="c1">#  2. Salin dari folder asli C:\Users\heker\Downloads\data–non–sawah\input.*</span>
+<span class="c1">#  3. Salin dari data1kelas\input.* (fallback lokal)</span>
+<span class="n">_NONSAWAH_SRC_DIR</span> <span class="o">=</span> <span class="s2">"C:</span><span class="se">\\</span><span class="s2">Users</span><span class="se">\\</span><span class="s2">heker</span><span class="se">\\</span><span class="s2">Downloads</span><span class="se">\\</span><span class="s2">data</span><span class="se">\u2013</span><span class="s2">non</span><span class="se">\u2013</span><span class="s2">sawah"</span>  <span class="c1"># em-dash</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">"nonsawah.shp"</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">_NONSAWAH_SRC_DIR</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_ext</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"shp"</span><span class="p">,</span> <span class="s2">"shx"</span><span class="p">,</span> <span class="s2">"dbf"</span><span class="p">,</span> <span class="s2">"prj"</span><span class="p">):</span>
+            <span class="n">_src</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_NONSAWAH_SRC_DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"input.</span><span class="si">{</span><span class="n">_ext</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">_src</span><span class="p">):</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">_src</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"nonsawah.</span><span class="si">{</span><span class="n">_ext</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[OK] Disalin: nonsawah.</span><span class="si">{</span><span class="n">_ext</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"[OK] nonsawah.shp siap dari folder sumber"</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">"data1kelas/input.shp"</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_ext</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"shp"</span><span class="p">,</span> <span class="s2">"shx"</span><span class="p">,</span> <span class="s2">"dbf"</span><span class="p">,</span> <span class="s2">"prj"</span><span class="p">):</span>
+            <span class="n">_src</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"data1kelas/input.</span><span class="si">{</span><span class="n">_ext</span><span class="si">}</span><span class="s2">"</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">_src</span><span class="p">):</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">_src</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"nonsawah.</span><span class="si">{</span><span class="n">_ext</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[OK] Disalin: </span><span class="si">{</span><span class="n">_src</span><span class="si">}</span><span class="s2"> → nonsawah.</span><span class="si">{</span><span class="n">_ext</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"[OK] nonsawah.shp siap dari data1kelas/input.shp"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"[WARN] Tidak dapat menyiapkan nonsawah.shp — cek path manual"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"[OK] nonsawah.shp sudah ada"</span><span class="p">)</span>
+
+<span class="c1"># Cek apakah nonsawah.shx ada (user mungkin sudah copy manual)</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">"nonsawah.shx"</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"[OK] nonsawah.shx ada"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"[WARN] nonsawah.shx tidak ditemukan — shapefile mungkin gagal dibaca"</span><span class="p">)</span>
+
+<span class="c1"># Ringkasan</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">_f</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"sawah.shp"</span><span class="p">,</span><span class="s2">"sawah.shx"</span><span class="p">,</span><span class="s2">"nonsawah.shp"</span><span class="p">,</span><span class="s2">"nonsawah.shx"</span><span class="p">,</span><span class="s2">"nonsawah.dbf"</span><span class="p">,</span><span class="s2">"nonsawah.prj"</span><span class="p">]:</span>
+    <span class="n">_s</span> <span class="o">=</span> <span class="s2">"✅"</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">_f</span><span class="p">)</span> <span class="k">else</span> <span class="s2">"❌"</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">_s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">_f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">folium.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeasureControl</span><span class="p">,</span> <span class="n">MiniMap</span>
+
+<span class="c1"># ── Tentukan path shapefile ────────────────────────────────────────────────</span>
+<span class="n">SHP_SAWAH</span> <span class="o">=</span> <span class="s2">"sawah.shp"</span>
+
+<span class="c1"># nonsawah: prioritas nonsawah.shp → input.shp (root) → data1kelas/input.shp</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">"nonsawah.shp"</span><span class="p">):</span>
+    <span class="n">SHP_NONSAWAH</span> <span class="o">=</span> <span class="s2">"nonsawah.shp"</span>
+<span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">"input.shp"</span><span class="p">):</span>
+    <span class="c1"># Pastikan sidecar nonsawah.shx tersedia sebagai input.shx</span>
+    <span class="c1"># (geopandas/pyogrio butuh .shx dengan nama yang sama dengan .shp)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">"nonsawah.shx"</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">"input.shx"</span><span class="p">):</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="s2">"nonsawah.shx"</span><span class="p">,</span> <span class="s2">"input.shx"</span><span class="p">)</span>
+    <span class="n">SHP_NONSAWAH</span> <span class="o">=</span> <span class="s2">"input.shp"</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">SHP_NONSAWAH</span> <span class="o">=</span> <span class="s2">"data1kelas/input.shp"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sawah    : </span><span class="si">{</span><span class="n">SHP_SAWAH</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Non-sawah: </span><span class="si">{</span><span class="n">SHP_NONSAWAH</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># ── Muat shapefile ─────────────────────────────────────────────────────────</span>
+<span class="n">gdf_sawah</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">SHP_SAWAH</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"pyogrio"</span><span class="p">,</span>
+                           <span class="n">open_options</span><span class="o">=</span><span class="p">[</span><span class="s2">"SHAPE_RESTORE_SHX=YES"</span><span class="p">])</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s2">"EPSG:4326"</span><span class="p">)</span>
+<span class="n">gdf_ns</span>    <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">SHP_NONSAWAH</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"pyogrio"</span><span class="p">,</span>
+                           <span class="n">open_options</span><span class="o">=</span><span class="p">[</span><span class="s2">"SHAPE_RESTORE_SHX=YES"</span><span class="p">])</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s2">"EPSG:4326"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Sawah    : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gdf_sawah</span><span class="p">)</span><span class="si">}</span><span class="s2"> fitur | CRS: </span><span class="si">{</span><span class="n">gdf_sawah</span><span class="o">.</span><span class="n">crs</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Non-sawah: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gdf_ns</span><span class="p">)</span><span class="si">}</span><span class="s2"> fitur | CRS: </span><span class="si">{</span><span class="n">gdf_ns</span><span class="o">.</span><span class="n">crs</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kolom sawah   : </span><span class="si">{</span><span class="n">gdf_sawah</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kolom nonsawah: </span><span class="si">{</span><span class="n">gdf_ns</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># ── Centroid untuk memusatkan peta ────────────────────────────────────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shapely</span>
+<span class="n">_all_geoms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">gdf_sawah</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">gdf_ns</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+<span class="n">_union</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">unary_union</span><span class="p">(</span><span class="n">_all_geoms</span><span class="p">)</span>
+<span class="n">_cx</span><span class="p">,</span> <span class="n">_cy</span> <span class="o">=</span> <span class="n">_union</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">_union</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">y</span>
+
+<span class="c1"># ── Buat peta Folium ───────────────────────────────────────────────────────</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="n">_cy</span><span class="p">,</span> <span class="n">_cx</span><span class="p">],</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+               <span class="n">tiles</span><span class="o">=</span><span class="s2">"CartoDB positron"</span><span class="p">,</span> <span class="n">control_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Ambil kolom attribute (selain geometry) untuk tooltip, maks 5 kolom</span>
+<span class="n">_ns_cols</span>   <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">gdf_ns</span><span class="o">.</span><span class="n">columns</span>    <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s2">"geometry"</span><span class="p">][:</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">_sawah_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">gdf_sawah</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s2">"geometry"</span><span class="p">][:</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="c1"># Layer Non-Sawah (merah)</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">GeoJson</span><span class="p">(</span>
+    <span class="n">gdf_ns</span><span class="o">.</span><span class="n">__geo_interface__</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"🔴 Non-Sawah"</span><span class="p">,</span>
+    <span class="n">style_function</span><span class="o">=</span><span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"fillColor"</span><span class="p">:</span> <span class="s2">"#e53935"</span><span class="p">,</span>
+        <span class="s2">"color"</span><span class="p">:</span>     <span class="s2">"#b71c1c"</span><span class="p">,</span>
+        <span class="s2">"weight"</span><span class="p">:</span>    <span class="mf">1.5</span><span class="p">,</span>
+        <span class="s2">"fillOpacity"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="n">folium</span><span class="o">.</span><span class="n">GeoJsonTooltip</span><span class="p">(</span>
+        <span class="n">fields</span><span class="o">=</span><span class="n">_ns_cols</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="n">_ns_cols</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="k">if</span> <span class="n">_ns_cols</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="c1"># Layer Sawah (hijau)</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">GeoJson</span><span class="p">(</span>
+    <span class="n">gdf_sawah</span><span class="o">.</span><span class="n">__geo_interface__</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"🟢 Sawah"</span><span class="p">,</span>
+    <span class="n">style_function</span><span class="o">=</span><span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"fillColor"</span><span class="p">:</span> <span class="s2">"#2e7d32"</span><span class="p">,</span>
+        <span class="s2">"color"</span><span class="p">:</span>     <span class="s2">"#1b5e20"</span><span class="p">,</span>
+        <span class="s2">"weight"</span><span class="p">:</span>    <span class="mf">1.5</span><span class="p">,</span>
+        <span class="s2">"fillOpacity"</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="n">folium</span><span class="o">.</span><span class="n">GeoJsonTooltip</span><span class="p">(</span>
+        <span class="n">fields</span><span class="o">=</span><span class="n">_sawah_cols</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="n">_sawah_cols</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="k">if</span> <span class="n">_sawah_cols</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="c1"># Tile Google Satellite sebagai layer opsional</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">TileLayer</span><span class="p">(</span>
+    <span class="n">tiles</span><span class="o">=</span><span class="s2">"https://mt1.google.com/vt/lyrs=s&amp;x=</span><span class="si">{x}</span><span class="s2">&amp;y=</span><span class="si">{y}</span><span class="s2">&amp;z=</span><span class="si">{z}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="n">attr</span><span class="o">=</span><span class="s2">"Google Satellite"</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"🛰️ Google Satellite"</span><span class="p">,</span>
+    <span class="n">overlay</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">control</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="n">folium</span><span class="o">.</span><span class="n">LayerControl</span><span class="p">(</span><span class="n">collapsed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">MeasureControl</span><span class="p">()</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">MiniMap</span><span class="p">(</span><span class="n">toggle_display</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="c1"># Simpan HTML</span>
+<span class="n">_MAP_HTML</span> <span class="o">=</span> <span class="s2">"fig_folium_sawah_nonsawah.html"</span>
+<span class="n">m</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">_MAP_HTML</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">✅ Peta tersimpan: </span><span class="si">{</span><span class="n">_MAP_HTML</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Sawah    : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gdf_sawah</span><span class="p">)</span><span class="si">}</span><span class="s2"> poligon  (hijau)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Non-Sawah: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gdf_ns</span><span class="p">)</span><span class="si">}</span><span class="s2"> poligon  (merah)"</span><span class="p">)</span>
+<span class="n">m</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="unduh-berkas-klasifikasi-sawah">
 <h2>Unduh Berkas Klasifikasi Sawah<a class="headerlink" href="#unduh-berkas-klasifikasi-sawah" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -965,6 +1133,7 @@ tersimpan: boxplot, spektral, hist, korelasi, pca, ndvi_violin
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#status-akhir-6-1-selesai-level-kandidat-2026-10-03">Status akhir 6.1 — SELESAI (level kandidat, 2026-10-03)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#peta-interaktif-folium-sawah-vs-non-sawah">Peta Interaktif Folium: Sawah vs Non-Sawah</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unduh-berkas-klasifikasi-sawah">Unduh Berkas Klasifikasi Sawah</a></li>
 </ul>
   </nav></div>
