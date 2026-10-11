@@ -189,6 +189,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../02_data_understanding/2.5_identifikasi_outlier.html">2.5 Identifikasi Outlier</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_data_understanding/2.6_kesimpulan_data_understanding.html">2.6 Kesimpulan Data Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02_data_understanding/2.7_analisis_no2_aiven_knime.html">2.7 Praktikum Analisis Aiven &amp; KNIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_data_understanding/2.8_konsep_dasar_statistik.html">2.8 Konsep Dasar Statistik + Contoh Hitung</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">BAB 3 — DATA PREPROCESSING</span></p>
 <ul class="nav bd-sidenav">
@@ -223,6 +224,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../6.2_training_model.html">6.2 Training &amp; Perbandingan Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6.3_peta_demo.html">6.3 Peta Klasifikasi + Folium</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../6.4_streamlit_deploy.html">6.4 Streamlit + Deploy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.5_klasifikasi_wonoayu.html">6.5 Klasifikasi Wonoayu (Sawah vs Non-Sawah)</a></li>
 </ul>
 
     </div>
@@ -488,6 +490,9 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">data1kelas/so2.csv</span></code>: Data polutan <span class="math notranslate nohighlight">\(\text{SO}_2\)</span> (37 sampel <span class="math notranslate nohighlight">\(\times\)</span> 68 fitur TSFEL)</p></li>
 <li><p><strong>Combined Dataset</strong>: Penggabungan ketiga polutan (<span class="math notranslate nohighlight">\(111\)</span> sampel <span class="math notranslate nohighlight">\(\times\)</span> 68 fitur TSFEL)</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Provenansi data (jujur):</strong> ketiga CSV adalah <strong>ekspor MySQL</strong> (<a class="reference external" href="http://basisdata2-c.my.id:3306">basisdata2-c.my.id:3306</a>, db basisda1_PSD-A) – perwakilan tim mengunduhnya karena koneksi Aiven terbatas (satu link untuk 20 user), lalu dibagikan ke Tim sebagai data1kelas/. Kolom nama/daerah = identitas pengumpul per daerah; 68 kolom sisanya = fitur TSFEL siap olah.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Penentuan path direktori data1kelas</span>

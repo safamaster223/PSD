@@ -86,6 +86,8 @@ Gunakan menu navigasi di sebelah kiri untuk menelusuri setiap bagian:
    - 2.4 Identifikasi Missing Value (Analisis 102 Data Kosong)
    - 2.5 Identifikasi Outlier (Deteksi Batas IQR & Z-Score)
    - 2.6 Kesimpulan Data Understanding
+   - 2.7 Praktikum Analisis Aiven & KNIME
+   - 2.8 Konsep Dasar Statistik + Contoh Hitung
 3. **BAB 3 — DATA PREPROCESSING**:
    - 3.1 Pembersihan Data
    - 3.2 Penanganan Outlier
