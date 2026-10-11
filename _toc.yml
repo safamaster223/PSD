@@ -25,6 +25,8 @@ parts:
         title: 2.6 Kesimpulan Data Understanding
       - file: 02_data_understanding/2.7_analisis_no2_aiven_knime
         title: 2.7 Praktikum Analisis Aiven & KNIME
+      - file: 02_data_understanding/2.8_konsep_dasar_statistik
+        title: 2.8 Konsep Dasar Statistik + Contoh Hitung
 
 
   - caption: BAB 3 — DATA PREPROCESSING
