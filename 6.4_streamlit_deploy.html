@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Persiapan Tugas: Time Series Feature Extraction &#8212; Analisis Polutan Atmosfer Kecamatan Wonoayu</title>
+    <title>6.4 Sistem Informasi Streamlit + Deploy &#8212; Analisis Polutan Atmosfer Kecamatan Wonoayu</title>
   
   
   
@@ -63,11 +63,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '04_tsfel_preparation';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '6.4_streamlit_deploy';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="6.3 Peta Hasil Klasifikasi — Jendela Demo Sidoarjo–Surabaya (Folium)" href="6.3_peta_demo.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -129,8 +128,6 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -215,6 +212,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/5.5_implementasi_knime_workflow.html">5.5 Implementasi KNIME Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/05_kmeans_clustering.html">5.6 Notebook Interaktif K-Means &amp; PCA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/5.7_clustering_satu_kelas.html">5.7 Notebook Clustering Data 1 Kelas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_kmeans_clustering/5.8_clustering_polynomial.html">5.8 Notebook Clustering Data Polynomial</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BAB 6 — SUPERVISED LEARNING (KLASIFIKASI)</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="6.1_persiapan_klasifikasi.html">6.1 Klasifikasi Jawa Timur (Sentinel-2A, 6 Kelas)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6.2_training_model.html">6.2 Training &amp; Perbandingan Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6.3_peta_demo.html">6.3 Peta Klasifikasi + Folium</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6.4 Streamlit + Deploy</a></li>
 </ul>
 
     </div>
@@ -286,7 +291,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/Alghifari-Ananta/PSD/issues/new?title=Issue%20on%20page%20%2F04_tsfel_preparation.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Alghifari-Ananta/PSD/issues/new?title=Issue%20on%20page%20%2F6.4_streamlit_deploy.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -316,7 +321,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/04_tsfel_preparation.md" target="_blank"
+      <li><a href="_sources/6.4_streamlit_deploy.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -326,7 +331,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -400,7 +405,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Persiapan Tugas: Time Series Feature Extraction</h1>
+    <h1>6.4 Sistem Informasi Streamlit + Deploy</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -410,10 +415,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang-tujuan">Latar Belakang &amp; Tujuan</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-1-penanganan-missing-value-imputasi">Tahap 1: Penanganan Missing Value (Imputasi)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-2-deteksi-dan-perbaikan-outlier">Tahap 2: Deteksi dan Perbaikan Outlier</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-3-ekstraksi-fitur-menggunakan-tsfel">Tahap 3: Ekstraksi Fitur menggunakan TSFEL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menjalankan-aplikasi">Menjalankan aplikasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy">Deploy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batas-jujur">Batas jujur</a></li>
 </ul>
             </nav>
         </div>
@@ -425,83 +429,34 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="persiapan-tugas-time-series-feature-extraction">
-<h1>Persiapan Tugas: Time Series Feature Extraction<a class="headerlink" href="#persiapan-tugas-time-series-feature-extraction" title="Permalink to this heading">#</a></h1>
-<p><strong>Panduan Pre-Processing dan Ekstraksi Fitur TSFEL</strong></p>
-<hr class="docutils" />
-<section id="latar-belakang-tujuan">
-<h2>Latar Belakang &amp; Tujuan<a class="headerlink" href="#latar-belakang-tujuan" title="Permalink to this heading">#</a></h2>
-<p>Dokumen ini merangkum tahapan pra-pemrosesan (<em>pre-processing</em>) dan ekstraksi fitur tingkat lanjut untuk data <em>time series</em> polutan. Tahapan ini sangat krusial sebelum data dimasukkan ke dalam model <em>Machine Learning</em>. Data mentah dari satelit sering kali mengandung kekosongan (<em>missing values</em>) akibat tutupan awan dan lonjakan ekstrem (<em>outliers</em>) akibat anomali lokal.</p>
-<p>Tujuan utama dari proses ini adalah:</p>
-<ol class="arabic simple">
-<li><p>Mendeteksi dan memperbaiki <em>Missing Value</em> menggunakan metode <strong>Interpolasi Linear</strong>.</p></li>
-<li><p>Mendeteksi dan memperbaiki <em>Outlier</em> untuk memastikan kualitas data (<em>Data Quality</em>).</p></li>
-<li><p>Mengekstrak <strong>65 fitur</strong> <em>time series</em> menggunakan <em>library</em> <strong>TSFEL</strong> (<em>Time Series Feature Extraction Library</em>).</p></li>
-</ol>
-</section>
-<hr class="docutils" />
-<section id="tahap-1-penanganan-missing-value-imputasi">
-<h2>Tahap 1: Penanganan Missing Value (Imputasi)<a class="headerlink" href="#tahap-1-penanganan-missing-value-imputasi" title="Permalink to this heading">#</a></h2>
-<p>Data <em>time series</em> memiliki sifat temporal (berurutan berdasarkan waktu). Oleh karena itu, kita <strong>tidak boleh sembarangan menghapus baris yang kosong (Drop NA)</strong>, karena akan merusak jarak waktu antar observasi.</p>
-<p><strong>Metode: Interpolasi Linear (Linear Interpolation)</strong>
-Interpolasi linear adalah metode estimasi nilai yang hilang dengan menarik garis lurus antara titik data sebelum dan sesudah nilai yang kosong.</p>
-<p><strong>Cara Kerja:</strong>
-Jika konsentrasi NO₂ pada hari ke-1 adalah 10, hari ke-2 kosong (NaN), dan hari ke-3 adalah 20, maka interpolasi linear akan mengisi hari ke-2 dengan nilai 15.
-Rumus matematisnya: <span class="math notranslate nohighlight">\(y = y_1 + \frac{(x - x_1)(y_2 - y_1)}{(x_2 - x_1)}\)</span></p>
-<p><strong>Implementasi di Python (Pandas):</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mengisi missing value dengan interpolasi linear</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">'linear'</span><span class="p">)</span>
+  <section class="tex2jax_ignore mathjax_ignore" id="sistem-informasi-streamlit-deploy">
+<h1>6.4 Sistem Informasi Streamlit + Deploy<a class="headerlink" href="#sistem-informasi-streamlit-deploy" title="Permalink to this heading">#</a></h1>
+<section id="menjalankan-aplikasi">
+<h2>Menjalankan aplikasi<a class="headerlink" href="#menjalankan-aplikasi" title="Permalink to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+streamlit<span class="w"> </span>run<span class="w"> </span>streamlit_jatim.py
 </pre></div>
 </div>
+<p>Buka <code class="docutils literal notranslate"><span class="pre">http://localhost:8501</span></code>. Dua mode:</p>
+<ol class="arabic simple">
+<li><p><strong>Tebak kelas</strong> — isi 6 nilai reflektansi band (B02, B03, B04, B08, B11, B12, skala 0–10000) → model <code class="docutils literal notranslate"><span class="pre">jatim_best.joblib</span></code> (SVM-RBF-C10, akurasi 67,7%) menghitung 6 indeks + memprediksi 1 dari 6 kelas + probabilitas.</p></li>
+<li><p><strong>Klasifikasi CSV</strong> — upload CSV berisi kolom B02..B12 → seluruh baris diprediksi + unduh hasil.</p></li>
+</ol>
 </section>
-<hr class="docutils" />
-<section id="tahap-2-deteksi-dan-perbaikan-outlier">
-<h2>Tahap 2: Deteksi dan Perbaikan Outlier<a class="headerlink" href="#tahap-2-deteksi-dan-perbaikan-outlier" title="Permalink to this heading">#</a></h2>
-<p><em>Outlier</em> adalah titik data yang nilainya menyimpang sangat jauh dari observasi lainnya. Mendeteksi <em>outlier</em> penting untuk mengetahui apakah data kita ‘bagus’ (stabil) atau penuh dengan anomali (<em>noise</em>).</p>
-<p><strong>Metode Deteksi: Interquartile Range (IQR)</strong>
-IQR adalah rentang antara kuartil pertama (Q1, persentil ke-25) dan kuartil ketiga (Q3, persentil ke-75).</p>
+<section id="deploy">
+<h2>Deploy<a class="headerlink" href="#deploy" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(IQR = Q3 - Q1\)</span></p></li>
-<li><p>Batas Bawah = <span class="math notranslate nohighlight">\(Q1 - (1.5 \times IQR)\)</span></p></li>
-<li><p>Batas Atas = <span class="math notranslate nohighlight">\(Q3 + (1.5 \times IQR)\)</span></p></li>
+<li><p><strong>Web statis (dokumentasi proses + peta):</strong> Jupyter Book ini → GitHub Pages (branch <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>, via <code class="docutils literal notranslate"><span class="pre">ghp-import</span></code>). Peta Folium interaktif: <code class="docutils literal notranslate"><span class="pre">jatim/folium_jatim_samples.html</span></code> (sebaran 2.823 sampel) dan <code class="docutils literal notranslate"><span class="pre">jatim/folium_demo_klasifikasi.html</span></code> (hasil klasifikasi + Google Satellite).</p></li>
+<li><p><strong>Aplikasi interaktif:</strong> Streamlit Community Cloud (hubungkan repo → <code class="docutils literal notranslate"><span class="pre">streamlit_jatim.py</span></code>) atau server sendiri (<code class="docutils literal notranslate"><span class="pre">streamlit</span> <span class="pre">run</span> <span class="pre">--server.port</span> <span class="pre">80</span></code>).</p></li>
 </ul>
-<p>Data yang berada di luar Batas Bawah dan Batas Atas didefinisikan sebagai <em>Outlier</em>.</p>
-<p><strong>Metode Perbaikan: Capping / Winsorization</strong>
-Sama seperti <em>missing value</em>, kita tidak boleh menghapus baris <em>outlier</em>. Sebagai gantinya, kita melakukan ‘<em>Capping</em>’. Jika ada nilai yang melebihi Batas Atas, nilai tersebut akan diubah (ditekan) menjadi sama dengan nilai Batas Atas. Hal ini mempertahankan urutan waktu namun menghilangkan efek ekstrem dari <em>outlier</em> tersebut.</p>
-<p><strong>Implementasi di Python:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Q1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
-<span class="n">Q3</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
-<span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
-<span class="n">lower_bound</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
-<span class="n">upper_bound</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
-
-<span class="c1"># Memperbaiki outlier dengan Capping</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_bound</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">,</span> 
-            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">,</span> <span class="n">lower_bound</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">]))</span>
-</pre></div>
-</div>
 </section>
-<hr class="docutils" />
-<section id="tahap-3-ekstraksi-fitur-menggunakan-tsfel">
-<h2>Tahap 3: Ekstraksi Fitur menggunakan TSFEL<a class="headerlink" href="#tahap-3-ekstraksi-fitur-menggunakan-tsfel" title="Permalink to this heading">#</a></h2>
-<p>Setelah data bersih dari <em>missing value</em> dan <em>outlier</em>, data siap diekstraksi. TSFEL (<em>Time Series Feature Extraction Library</em>) adalah pustaka Python yang secara otomatis mengekstrak puluhan fitur dari sinyal <em>time series</em>.</p>
-<p>Berdasarkan instruksi, kita akan mengekstrak <strong>65 fitur</strong> yang terbagi dalam tiga domain utama:</p>
-<ol class="arabic simple">
-<li><p><strong>Domain Statistik (Statistical):</strong> Mengekstrak metrik seperti Mean, Variance, Skewness, Kurtosis, Minimum, Maximum, dll.</p></li>
-<li><p><strong>Domain Temporal (Temporal):</strong> Mengekstrak fitur yang bergantung pada urutan waktu, seperti Autocorrelation, Mean Absolute Difference, Zero Crossing Rate, dll.</p></li>
-<li><p><strong>Domain Spektral (Spectral):</strong> Mengekstrak fitur berdasarkan frekuensi sinyal (menggunakan Fast Fourier Transform / FFT), seperti Spectral Entropy, FFT Mean, Wavelet Variance, dll.</p></li>
-</ol>
-<p><strong>Implementasi di Python (TSFEL):</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tsfel</span>
-
-<span class="c1"># Menggunakan konfigurasi bawaan TSFEL untuk mengekstrak semua fitur</span>
-<span class="n">cfg</span> <span class="o">=</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">get_features_by_domain</span><span class="p">()</span>
-
-<span class="c1"># Melakukan ekstraksi fitur pada kolom yang sudah bersih</span>
-<span class="n">X_features</span> <span class="o">=</span> <span class="n">tsfel</span><span class="o">.</span><span class="n">time_series_features_extractor</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">'NO2'</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>Hasil dari proses ini adalah sebuah dataset baru di mana satu deret waktu (misalnya 1 tahun data NO₂) diubah menjadi 1 baris data yang memiliki 65 kolom fitur. Fitur-fitur inilah yang nantinya akan menjadi <em>input</em> (X) untuk algoritma <em>Machine Learning</em>.</p>
+<section id="batas-jujur">
+<h2>Batas jujur<a class="headerlink" href="#batas-jujur" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Akurasi 67,7%: Sawah ↔ Lahan hijau ↔ Bangunan masih tertukar (fitur cuma mean spektral). Butuh fitur tekstur/temporal untuk naik.</p></li>
+<li><p>Kelas Danau cuma 282 sampel (proksi Waduk).</p></li>
+<li><p>Peta wall-to-wall hanya jendela demo Sidoarjo–Surabaya &#64;20 m, bukan full Jatim (full provinsi &#64;10 m ≈ 6 GB, di luar lingkup UTS).</p></li>
+</ul>
 </section>
 </section>
 
@@ -535,6 +490,15 @@ Sama seperti <em>missing value</em>, kita tidak boleh menghapus baris <em>outlie
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="6.3_peta_demo.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">6.3 Peta Hasil Klasifikasi — Jendela Demo Sidoarjo–Surabaya (Folium)</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -551,10 +515,9 @@ Sama seperti <em>missing value</em>, kita tidak boleh menghapus baris <em>outlie
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang-tujuan">Latar Belakang &amp; Tujuan</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-1-penanganan-missing-value-imputasi">Tahap 1: Penanganan Missing Value (Imputasi)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-2-deteksi-dan-perbaikan-outlier">Tahap 2: Deteksi dan Perbaikan Outlier</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-3-ekstraksi-fitur-menggunakan-tsfel">Tahap 3: Ekstraksi Fitur menggunakan TSFEL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menjalankan-aplikasi">Menjalankan aplikasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy">Deploy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batas-jujur">Batas jujur</a></li>
 </ul>
   </nav></div>
 
