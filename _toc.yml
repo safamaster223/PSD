@@ -82,3 +82,5 @@ parts:
         title: 6.3 Peta Klasifikasi + Folium
       - file: 6.4_streamlit_deploy
         title: 6.4 Streamlit + Deploy
+      - file: 6.5_klasifikasi_wonoayu
+        title: 6.5 Klasifikasi Wonoayu (Sawah vs Non-Sawah)
