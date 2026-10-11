@@ -75,4 +75,10 @@ parts:
   - caption: BAB 6 — SUPERVISED LEARNING (KLASIFIKASI)
     chapters:
       - file: 6.1_persiapan_klasifikasi
-        title: 6.1 Klasifikasi Sawah vs Non-Sawah (Sentinel-2A Kamal)
+        title: 6.1 Klasifikasi Jawa Timur (Sentinel-2A, 6 Kelas)
+      - file: 6.2_training_model
+        title: 6.2 Training & Perbandingan Model
+      - file: 6.3_peta_demo
+        title: 6.3 Peta Klasifikasi + Folium
+      - file: 6.4_streamlit_deploy
+        title: 6.4 Streamlit + Deploy

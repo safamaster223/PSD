@@ -1,0 +1,84 @@
+2026-10-05 21:48:05,900 | === MULAI download_training_data.py ===
+2026-10-05 21:48:05,901 | Download boundary GADM IDN level-1 ...
+2026-10-05 21:49:34,000 | Kolom GADM: ['geometry', 'GID_1', 'GID_0', 'COUNTRY', 'NAME_1', 'VARNAME_1', 'NL_NAME_1', 'TYPE_1', 'ENGTYPE_1', 'CC_1', 'HASC_1', 'ISO_1']
+2026-10-05 21:49:34,380 | Boundary bounds: [110.8988, -8.7804, 116.2701, -5.0489]
+2026-10-05 21:49:38,250 | Created 1 records
+2026-10-05 21:49:38,251 | Boundary Jatim tersimpan: C:\Users\ASUS\OneDrive\ドキュメント\Mata Kuliah\unduhdata\boundary_jatim.geojson (sumber: GADM v4.1 IDN_1)
+2026-10-05 21:49:38,332 | Luas AOI Jatim: 47,996 km2
+2026-10-05 21:49:44,679 | Sawah total di layer Jatim: 88347
+2026-10-05 21:49:47,135 | Sawah MOD100: 883
+2026-10-05 21:50:39,928 |   9/MapServer/22 where=[MOD(OBJECTID, 100)=0] dapat=883 exc=None
+2026-10-05 21:50:41,010 | Sawah kolom: ['geometry', 'FID', 'OBJECTID', 'Luas_CEA', 'WADMKK_1', 'WADMPR_1', 'QNAME_19', 'Shape_Leng', 'Shape_Area']
+2026-10-05 21:50:44,037 | Class 1 Sawah: 883 -> setelah clip/clean: 853
+2026-10-05 21:50:44,050 | Class 1: sampling ke 500 (seed 42)
+2026-10-05 21:50:57,181 | Mangrove Jatim count: 5109
+2026-10-05 21:51:41,539 |   N/MapServer/57 where=[prov='Jawa Timur'] offset=0 dapat=1000 total=1000 exc=True
+2026-10-05 21:52:13,782 |   N/MapServer/57 where=[prov='Jawa Timur'] offset=1000 dapat=1000 total=2000 exc=True
+2026-10-05 21:53:22,112 |   N/MapServer/57 where=[prov='Jawa Timur'] offset=2000 dapat=1000 total=3000 exc=True
+2026-10-05 21:54:15,062 |   N/MapServer/57 where=[prov='Jawa Timur'] offset=3000 dapat=1000 total=4000 exc=True
+2026-10-05 21:54:49,669 |   N/MapServer/57 where=[prov='Jawa Timur'] offset=4000 dapat=1000 total=5000 exc=True
+2026-10-05 21:54:59,327 |   N/MapServer/57 where=[prov='Jawa Timur'] offset=5000 dapat=109 total=5109 exc=None
+2026-10-05 21:55:04,187 | Mangrove unique kttj: ['Mangrove Lebat', 'Mangrove Sedang', 'Mangrove Jarang']
+2026-10-05 21:55:11,598 | Class 3 Mangrove: 5109 -> setelah clip/clean: 6000
+2026-10-05 21:55:11,619 | Class 3: sampling ke 500 (seed 42)
+2026-10-05 21:55:26,289 | C2 kat 'Kampung Jarang Tidak Teratur' Jatim count=136312
+2026-10-05 21:55:49,127 |   AN/MapServer/3 where=[ptnobjname='Kampung Jarang Tidak Teratur' AND MOD(objectid, ] offset=0 dapat=771 total=771 exc=None
+2026-10-05 21:55:55,786 | C2 kat 'Kampung Padat Tidak Teratur' Jatim count=47773
+2026-10-05 21:56:18,753 |   AN/MapServer/3 where=[ptnobjname='Kampung Padat Tidak Teratur' AND MOD(objectid, 6] offset=0 dapat=783 total=783 exc=None
+2026-10-05 21:56:21,330 | C2 kat 'Kampung Jarang Teratur' Jatim count=15632
+2026-10-05 21:56:34,765 |   AN/MapServer/3 where=[ptnobjname='Kampung Jarang Teratur' AND MOD(objectid, 20)=0] offset=0 dapat=766 total=766 exc=None
+2026-10-05 21:56:38,786 | C2 kat 'Kampung Padat Teratur' Jatim count=12699
+2026-10-05 21:57:14,599 |   AN/MapServer/3 where=[ptnobjname='Kampung Padat Teratur' AND MOD(objectid, 16)=0] offset=0 dapat=825 total=825 exc=None
+2026-10-05 21:57:23,632 | C2 kat 'Perumahan Padat' Jatim count=2883
+2026-10-05 21:57:59,528 |   AN/MapServer/3 where=[ptnobjname='Perumahan Padat' AND MOD(objectid, 4)=0] offset=0 dapat=735 total=735 exc=None
+2026-10-05 21:58:03,748 | C2 kat 'Perumahan Jarang' Jatim count=815
+2026-10-05 21:58:33,647 |   AN/MapServer/3 where=[ptnobjname='Perumahan Jarang'] offset=0 dapat=815 total=815 exc=None
+2026-10-05 21:58:33,997 | C2 unique ptnobjname terdownload: ['Kampung Jarang Tidak Teratur', 'Kampung Padat Tidak Teratur', 'Kampung Jarang Teratur', 'Kampung Padat Teratur', 'Perumahan Padat', 'Perumahan Jarang']
+2026-10-05 21:58:43,219 | Class 2 Bangunan / Permukiman: 4695 -> setelah clip/clean: 3999
+2026-10-05 21:58:43,236 | Class 2: sampling ke 500 (seed 42)
+2026-10-05 21:58:50,146 | C4 kat 'Kebun Campuran' Jatim count=54512
+2026-10-05 21:59:21,752 |   AN/MapServer/3 where=[ptnobjname='Kebun Campuran' AND MOD(objectid, 68)=0] offset=0 dapat=819 total=819 exc=None
+2026-10-05 21:59:30,818 | C4 kat 'Tegalan/Ladang' Jatim count=28099
+2026-10-05 22:00:18,036 |   AN/MapServer/3 where=[ptnobjname='Tegalan/Ladang' AND MOD(objectid, 35)=0] offset=0 dapat=754 total=754 exc=None
+2026-10-05 22:00:22,809 | C4 kat 'Semak' Jatim count=22742
+2026-10-05 22:00:48,037 |   AN/MapServer/3 where=[ptnobjname='Semak' AND MOD(objectid, 28)=0] offset=0 dapat=782 total=782 exc=None
+2026-10-05 22:00:51,914 | C4 kat 'Hutan Belukar' Jatim count=1150
+2026-10-05 22:03:28,905 |   AN/MapServer/3 where=[ptnobjname='Hutan Belukar'] offset=0 dapat=1000 total=1000 exc=True
+2026-10-05 22:05:29,940 |   AN/MapServer/3 where=[ptnobjname='Hutan Belukar'] offset=1000 dapat=150 total=1150 exc=None
+2026-10-05 22:05:48,070 | C4 kat 'Perkebunan Sudah Menghasilkan' Jatim count=2154
+2026-10-05 22:06:52,848 |   AN/MapServer/3 where=[ptnobjname='Perkebunan Sudah Menghasilkan' AND MOD(objectid,] offset=0 dapat=709 total=709 exc=None
+2026-10-05 22:07:03,740 | C4 kat 'Kebun Buah-buahan' Jatim count=120
+2026-10-05 22:07:10,466 |   AN/MapServer/3 where=[ptnobjname='Kebun Buah-buahan'] offset=0 dapat=120 total=120 exc=None
+2026-10-05 22:07:17,766 | C4 kat 'Padang Rumput' Jatim count=1567
+2026-10-05 22:08:01,293 |   AN/MapServer/3 where=[ptnobjname='Padang Rumput' AND MOD(objectid, 2)=0] offset=0 dapat=790 total=790 exc=None
+2026-10-05 22:08:04,119 | C4 kat 'Hutan Sejenis' Jatim count=1919
+2026-10-05 22:09:51,703 |   AN/MapServer/3 where=[ptnobjname='Hutan Sejenis' AND MOD(objectid, 2)=0] offset=0 dapat=956 total=956 exc=None
+2026-10-05 22:10:12,493 | C4 kat 'Perkebunan Belum Menghasilkan' Jatim count=1094
+2026-10-05 22:11:20,564 |   AN/MapServer/3 where=[ptnobjname='Perkebunan Belum Menghasilkan'] offset=0 dapat=1000 total=1000 exc=True
+2026-10-05 22:11:41,547 |   AN/MapServer/3 where=[ptnobjname='Perkebunan Belum Menghasilkan'] offset=1000 dapat=94 total=1094 exc=None
+2026-10-05 22:11:46,884 | C4 kat 'Kebun Sayuran' Jatim count=270
+2026-10-05 22:11:57,998 |   AN/MapServer/3 where=[ptnobjname='Kebun Sayuran'] offset=0 dapat=270 total=270 exc=None
+2026-10-05 22:12:02,648 | C4 kat 'Sabana' Jatim count=0
+2026-10-05 22:12:04,581 | C4 kat 'Alang – Alang' Jatim count=207
+2026-10-05 22:12:21,239 |   AN/MapServer/3 where=[ptnobjname='Alang – Alang'] offset=0 dapat=207 total=207 exc=None
+2026-10-05 22:12:25,734 | C4 kat 'Kebun Biofarmaka/Tumbuhan Obat' Jatim count=11
+2026-10-05 22:12:31,653 |   AN/MapServer/3 where=[ptnobjname='Kebun Biofarmaka/Tumbuhan Obat'] offset=0 dapat=11 total=11 exc=None
+2026-10-05 22:12:36,162 | C4 kat 'Kebun Tanaman Hias' Jatim count=0
+2026-10-05 22:12:39,425 | C4 kat 'Perkebunan' Jatim count=0
+2026-10-05 22:12:44,575 | C4 kat 'Hutan Kota' Jatim count=21
+2026-10-05 22:12:50,777 |   AN/MapServer/3 where=[ptnobjname='Hutan Kota'] offset=0 dapat=21 total=21 exc=None
+2026-10-05 22:12:50,855 | C4 unique ptnobjname terdownload: ['Kebun Campuran', 'Tegalan/Ladang', 'Semak', 'Hutan Belukar', 'Perkebunan Sudah Menghasilkan', 'Kebun Buah-buahan', 'Padang Rumput', 'Hutan Sejenis', 'Perkebunan Belum Menghasilkan', 'Kebun Sayuran', 'Alang – Alang', 'Kebun Biofarmaka/Tumbuhan Obat', 'Hutan Kota']
+2026-10-05 22:13:13,805 | Class 4 Lahan hijau: 7683 -> setelah clip/clean: 7403
+2026-10-05 22:13:13,848 | Class 4: sampling ke 500 (seed 42)
+2026-10-05 22:13:15,992 | C6 kat 'Waduk' Jatim count=93
+2026-10-05 22:13:53,109 |   AN/MapServer/3 where=[ptnobjname='Waduk'] offset=0 dapat=93 total=93 exc=None
+2026-10-05 22:13:53,574 | C6 unique ptnobjname terdownload: ['Waduk']
+2026-10-05 22:13:53,574 | CATATAN KELAS 6: memakai Waduk sbg proksi danau (layer 3 tak ada kategori danau alami; waduk != danau alami).
+2026-10-05 22:13:54,342 | Class 6 Danau: 93 -> setelah clip/clean: 323
+2026-10-05 22:13:54,346 | Download Natural Earth ocean ...
+2026-10-05 22:16:41,057 | Kandidat sel laut offshore (>1km pantai, 5x5km): 2743
+2026-10-05 22:16:42,612 | Created 2,823 records
+2026-10-05 22:16:48,880 | Created 2,823 records
+2026-10-05 22:16:48,881 | Tersimpan: C:\Users\ASUS\OneDrive\ドキュメント\Mata Kuliah\unduhdata\training_samples_jawa_timur.gpkg (2823 fitur) & C:\Users\ASUS\OneDrive\ドキュメント\Mata Kuliah\unduhdata\training_samples_jawa_timur.geojson
+2026-10-05 22:16:49,187 | Summary CSV: C:\Users\ASUS\OneDrive\ドキュメント\Mata Kuliah\unduhdata\training_samples_summary.csv
+2026-10-05 22:16:49,902 | === SELESAI ===
