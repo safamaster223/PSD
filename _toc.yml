@@ -86,3 +86,5 @@ parts:
         title: 6.4 Streamlit + Deploy
       - file: 6.5_klasifikasi_wonoayu
         title: 6.5 Klasifikasi Wonoayu (Sawah vs Non-Sawah)
+      - file: 6.6_evaluasi_poligon
+        title: 6.6 Evaluasi per Poligon (Prediksi vs Aktual)
