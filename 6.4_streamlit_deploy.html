@@ -47,7 +47,6 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -66,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '6.4_streamlit_deploy';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6.5 Klasifikasi Khusus Wonoayu: Sawah vs Non-Sawah" href="6.5_klasifikasi_wonoayu.html" />
     <link rel="prev" title="6.3 Peta Hasil Klasifikasi — Jendela Demo Sidoarjo–Surabaya (Folium)" href="6.3_peta_demo.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -186,6 +186,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="02_data_understanding/2.5_identifikasi_outlier.html">2.5 Identifikasi Outlier</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_data_understanding/2.6_kesimpulan_data_understanding.html">2.6 Kesimpulan Data Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_data_understanding/2.7_analisis_no2_aiven_knime.html">2.7 Praktikum Analisis Aiven &amp; KNIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_data_understanding/2.8_konsep_dasar_statistik.html">2.8 Konsep Dasar Statistik + Contoh Hitung</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">BAB 3 — DATA PREPROCESSING</span></p>
 <ul class="nav bd-sidenav">
@@ -220,6 +221,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="6.2_training_model.html">6.2 Training &amp; Perbandingan Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6.3_peta_demo.html">6.3 Peta Klasifikasi + Folium</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">6.4 Streamlit + Deploy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6.5_klasifikasi_wonoayu.html">6.5 Klasifikasi Wonoayu (Sawah vs Non-Sawah)</a></li>
 </ul>
 
     </div>
@@ -449,6 +451,12 @@ streamlit<span class="w"> </span>run<span class="w"> </span>streamlit_jatim.py
 <li><p><strong>Web statis (dokumentasi proses + peta):</strong> Jupyter Book ini → GitHub Pages (branch <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>, via <code class="docutils literal notranslate"><span class="pre">ghp-import</span></code>). Peta Folium interaktif: <code class="docutils literal notranslate"><span class="pre">jatim/folium_jatim_samples.html</span></code> (sebaran 2.823 sampel) dan <code class="docutils literal notranslate"><span class="pre">jatim/folium_demo_klasifikasi.html</span></code> (hasil klasifikasi + Google Satellite).</p></li>
 <li><p><strong>Aplikasi interaktif:</strong> Streamlit Community Cloud (hubungkan repo → <code class="docutils literal notranslate"><span class="pre">streamlit_jatim.py</span></code>) atau server sendiri (<code class="docutils literal notranslate"><span class="pre">streamlit</span> <span class="pre">run</span> <span class="pre">--server.port</span> <span class="pre">80</span></code>).</p></li>
 </ul>
+<p>Peta layar-penuh (folder <code class="docutils literal notranslate"><span class="pre">maps/</span></code> di situs ini):</p>
+<ul class="simple">
+<li><p><span class="xref myst">Sebaran 2.823 sampel Jatim</span></p></li>
+<li><p><span class="xref myst">Hasil klasifikasi demo Sidoarjo–Surabaya</span></p></li>
+<li><p><span class="xref myst">Hasil klasifikasi Wonoayu sawah vs non-sawah</span></p></li>
+</ul>
 </section>
 <section id="batas-jujur">
 <h2>Batas jujur<a class="headerlink" href="#batas-jujur" title="Permalink to this heading">#</a></h2>
@@ -498,6 +506,15 @@ streamlit<span class="w"> </span>run<span class="w"> </span>streamlit_jatim.py
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">6.3 Peta Hasil Klasifikasi — Jendela Demo Sidoarjo–Surabaya (Folium)</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="6.5_klasifikasi_wonoayu.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">6.5 Klasifikasi Khusus Wonoayu: Sawah vs Non-Sawah</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
